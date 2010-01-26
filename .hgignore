@@ -1,0 +1,23 @@
+syntax: glob
+*.rej
+*~
+*.o
+*.deb
+*.pdf
+*.sha256
+
+cache/*
+chroot/*
+binary/*
+images/*
+tests/*.err
+
+binary.*
+
+.bootstrap.swp
+.kde
+.lock
+.stage
+
+syntax: regexp
+.*\#.*\#$

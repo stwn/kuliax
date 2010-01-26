@@ -1,0 +1,50 @@
+#!/bin/sh
+#
+# hook script for dealing with source code and compilation 
+# 2009, 2010 Iwan Setiawan <stwn at kuliax dot org>
+
+KERNEL_VER=2.6.30-kuliax.2-686
+
+echo "Executing module-assistant..."
+m-a -t -i update
+m-a -t -i prepare
+m-a a-i -t -l $KERNEL_VER \
+acerhk-source \
+acx100-source \
+aufs-source \
+kqemu-source \
+ndiswrapper-source \
+tp-smapi-source
+
+# we should add aufs-source cause we use our custom kernel
+# or initramfs couldn't union mount the extracted compressed filesystem
+
+# kernel modules which are included in mainline
+# listed in http://kuliax.org/devel/pkg/kernel
+
+echo "Removing source packages..."
+apt-get -y remove --purge \
+acerhk-source \
+acx100-source \
+aufs-source \
+kqemu-source \
+ndiswrapper-source \
+tp-smapi-source
+
+echo "Removing build tools for source modules..."
+apt-get -y remove --purge \
+module-assistant \
+quilt \
+debhelper \
+intltool-debian \
+po-debconf \
+gettext \
+gettext-base \
+html2text \
+dpatch
+
+echo "Generating modules.dep..."
+depmod -a
+
+echo "Updating initramfs..."
+update-initramfs -u -k all

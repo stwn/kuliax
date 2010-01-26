@@ -1,0 +1,18 @@
+#!/bin/sh
+#
+# hook script for removing services
+# 2009, 2010 Iwan Setiawan <stwn at kuliax dot org>
+
+echo "Removing startup services..."
+update-rc.d -f apache2 remove
+update-rc.d -f arpwatch remove
+update-rc.d -f bluetooth remove
+update-rc.d -f cron remove
+update-rc.d -f cups remove
+update-rc.d -f hpoj remove
+update-rc.d -f mysql-ndb remove
+update-rc.d -f mysql remove
+update-rc.d -f mysql-ndb-mgm remove
+update-rc.d -f rsyslog remove
+update-rc.d -f samba remove
+update-rc.d -f ssh remove

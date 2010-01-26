@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# hook script for installing apps from backports 
+# 2009, 2010 Iwan Setiawan <stwn at kuliax dot org>
+
+echo "Installing OpenOffice.org 3.1..."
+apt-get -y -t lenny-backports install openoffice.org-base-core openoffice.org-calc \
+openoffice.org-common openoffice.org-core openoffice.org-draw openoffice.org-emailmerge \
+openoffice.org-filter-binfilter openoffice.org-impress openoffice.org-java-common \
+openoffice.org-kde openoffice.org-math openoffice.org-style-crystal openoffice.org-writer
+
+echo "Installing Pidgin 2.6..."
+apt-get -y -t lenny-backports install pidgin

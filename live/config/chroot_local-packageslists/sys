@@ -1,0 +1,7 @@
+debian-backports-keyring
+gnupg
+grub
+kdm
+lvm2
+# usplash
+xorg

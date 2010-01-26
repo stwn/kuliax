@@ -1,0 +1,30 @@
+#!/bin/sh
+
+MIRROR="http://localhost/debian/"
+
+lh_config noautoconfig \
+	--apt apt \
+	--apt-recommends disabled \
+	--debian-installer live \
+	-k 686 \
+	-a i386 \
+	--username lumpia \
+	--hostname kuliax \
+	-b iso \
+	--categories "main contrib non-free" \
+	--distribution lenny \
+	-l en_US.UTF-8 --mode debian \
+	--bootloader syslinux --initramfs live-initramfs --iso-application "Kuliax" \
+	--iso-preparer "Kuliax developers with help of live-helper" \
+	--iso-publisher "Kuliax Project: http://kuliax.org/; kuliax@googlegroups.com" \
+	--iso-volume "Kuliax-$(date +%Y%m%d)" \
+	--memtest memtest86+ \
+	--mirror-bootstrap ${MIRROR} \
+	--mirror-chroot ${MIRROR} \
+	--mirror-chroot-security ${MIRROR} \
+	--mirror-binary ${MIRROR} \
+	--mirror-binary-security ${MIRROR} \
+	--packages-lists "acpi desktop devel engineering firmware games locale multimedia net office power printing rescue source statistics sys utils wireless" \
+	--security disabled --syslinux-splash config/binary_syslinux/splash.rle --syslinux-timeout 5 --syslinux-menu disabled \
+	--win32-loader disabled --linux-packages linux-image-2.6.30-kuliax.2 \
+	${@}

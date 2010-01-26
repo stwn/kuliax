@@ -1,0 +1,14 @@
+cryptsetup*
+efibootmgr
+elilo*
+jfsutils-udeb
+libcrypto*
+lilo
+loop-aes-utils
+mkreiserfs-udeb
+openssh-*
+partman-crypto
+reiserfs-modules-*
+strace-udeb
+xfs-modules-*
+xfsprogs

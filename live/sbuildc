@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# simple build script
+# 2009, 2010 Iwan Setiawan <stwn at kuliax dot org>
+
+DIST=Kuliax
+DATE=$(date +%Y%m%d)
+RESULT=images
+
+echo "Cleaning my closet..."
+sudo lh_clean --all
+
+echo "Start building $DIST-$DATE with clean state..."
+sudo lh_config
+sudo lh_build
+
+if [ -e binary.iso ]
+then
+	echo "Moving ISO image $DIST-$DATE to $RESULT"
+	mv binary.iso $RESULT/$DIST-$DATE.iso
+	mv binary.packages $RESULT/$DIST-$DATE.packages
+	mv binary.list $RESULT/$DIST-$DATE.list
+
+	echo "Generating checksums..."
+	sha256sum $RESULT/$DIST-* > $RESULT/$DIST-$DATE.sha256
+else
+	echo "No ISO image generated."
+fi
