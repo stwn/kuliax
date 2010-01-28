@@ -1,0 +1,35 @@
+#!/bin/sh
+#
+# hook pbuilder script
+# modified version of script from "Using pbuilder to backport Debian packages"
+# 2010 Iwan Setiawan <stwn at kuliax.org>
+
+BUILDRESULT=/media/repo/kuliax
+
+apt-get install apt-utils
+
+( cd $BUILDRESULT;
+  apt-ftparchive packages . > $BUILDRESULT/Packages
+)
+
+cat<<EOF >/etc/apt/sources.list
+deb file://$BUILDRESULT ./
+deb http://localhost/debian/ stable main contrib non-free
+deb http://localhost/backports/ lenny-backports main contrib non-free
+EOF
+
+cat<<EOF >/etc/apt/preferences
+Package: *
+Pin: release o=Kuliax
+Pin-Priority: 400
+
+Package: *
+Pin: release a=lenny-backports
+Pin-Priority: 300
+
+Package: *
+Pin: release a=stable
+Pin-Priority: 200
+EOF
+
+apt-get update
