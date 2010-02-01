@@ -4,15 +4,21 @@ syntax: glob
 *.o
 *.deb
 *.pdf
-*.sha256
+SHA256
 
+binary/*
 cache/*
 chroot/*
-binary/*
+config/binary
+config/bootstrap
+config/chroot
+config/common
+config/source
 images/*
 tests/*.err
 
 binary.*
+build.log
 
 .bootstrap.swp
 .kde

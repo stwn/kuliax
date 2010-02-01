@@ -13,8 +13,10 @@ acerhk-source \
 acx100-source \
 aufs-source \
 kqemu-source \
+lirc-modules-source \
 ndiswrapper-source \
-tp-smapi-source
+tp-smapi-source \
+virtualbox-ose-source
 
 # we should add aufs-source cause we use our custom kernel
 # or initramfs couldn't union mount the extracted compressed filesystem
@@ -42,6 +44,12 @@ gettext \
 gettext-base \
 html2text \
 dpatch
+
+echo "Removing unused packages..."
+apt-get -y remove --purge \
+kbuild \
+linux-headers-2.6.26-2-common \
+linux-kbuild-2.6.26
 
 echo "Generating modules.dep..."
 depmod -a

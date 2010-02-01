@@ -2,6 +2,7 @@ apache2
 arpwatch
 ftp
 fusesmb
+icedtea-gcjwebplugin
 iceweasel
 iftop
 iptables
@@ -10,6 +11,7 @@ knetworkconf
 kppp
 krdc
 krfb
+libnspr4-0d
 macchanger
 mozilla-mplayer
 mozilla-plugin-gnash
@@ -28,3 +30,4 @@ samba
 sipcalc
 tcpdump
 wvdial
+xulrunner-1.9.1
