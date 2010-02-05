@@ -1,0 +1,19 @@
+#!/bin/sh
+
+case "$1" in
+	purge|remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+	echo "Removing fortune kernelnewbies from /etc/profile..."
+	sed -i '/echo ""/d' /etc/profile
+	sed -i '/fortune kernelnewbies/d' /etc/profile 
+	sed -i '/echo ""/d' /etc/profile
+	;;
+
+	*)
+	echo "postrm called with unknown argument \`$1'" >&2
+	exit 1
+	;;
+esac
+
+#DEBHELPER#
+
+exit 0

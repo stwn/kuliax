@@ -1,0 +1,18 @@
+Source: fortunes-kernelnewbies
+Section: games
+Priority: optional
+Maintainer: Iwan Setiawan <stwn@kuliax.org>
+Build-Depends: cdbs, debhelper (>= 7)
+Build-Depends-Indep: fortune-mod
+Standards-Version: 3.8.0
+Homepage: http://old.kernelnewbies.org
+
+Package: fortunes-kernelnewbies
+Architecture: all
+Depends: fortune-mod
+Provides: fortune-cookie-db
+Description: Linux kernel hackers' quotes for fortune
+ An official syndicated #kernelnewbies fortunes file that
+ contained quotes from Linux kernel hackers on LKML and
+ kernelnewbies community on IRC channel #kernelnewbies
+ at irc.oftc.net.

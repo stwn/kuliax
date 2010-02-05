@@ -1,0 +1,23 @@
+#!/bin/sh
+
+case "$1" in
+	configure)
+	cp /etc/profile /etc/profile.orig
+	echo "Adding fortune kernelnewbies to /etc/profile..."
+	echo 'echo ""' >> /etc/profile
+	echo "fortune kernelnewbies" >> /etc/profile
+	echo 'echo""' >> /etc/profile
+	;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+
+	*)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    	;;
+esac
+
+#DEBHELPER#
+
+exit 0
