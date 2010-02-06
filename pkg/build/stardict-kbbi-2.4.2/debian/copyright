@@ -1,0 +1,20 @@
+This package was debianized by Iwan Setiawan <stwn@kuliax.org> on
+Sat, 06 Feb 2010 04:37:03 +0700.
+
+It was downloaded from http://people.masterweb.net/steven/files/ 
+
+Upstream Author:
+
+    Steven Haryanto <steven@masterweb.net>
+
+Copyright:
+
+    Copyright (C) 2008 Pusat Bahasa Departemen Pendidikan Nasional RI 
+
+License:
+
+    Free to use and redistribute with attribution.
+    See http://steven.blogs.masterweb.net/2009/05/21/kbbi-versi-stardict/.
+
+The Debian packaging is (C) 2010, Iwan Setiawan <stwn@kuliax.org> and
+is licensed under the GPL, see `/usr/share/common-licenses/GPL'.
