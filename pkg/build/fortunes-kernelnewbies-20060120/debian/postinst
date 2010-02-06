@@ -2,11 +2,11 @@
 
 case "$1" in
 	configure)
-	cp /etc/profile /etc/profile.orig
-	echo "Adding fortune kernelnewbies to /etc/profile..."
-	echo 'echo ""' >> /etc/profile
-	echo "fortune kernelnewbies" >> /etc/profile
-	echo 'echo""' >> /etc/profile
+	cp /etc/bash.bashrc /etc/bash.bashrc.orig
+	echo "Adding fortune kernelnewbies to /etc/bash.bashrc..."
+	echo 'echo ""' >> /etc/bash.bashrc
+	echo "fortune kernelnewbies" >> /etc/bash.bashrc
+	echo 'echo""' >> /etc/bash.bashrc
 	;;
 
 	abort-upgrade|abort-remove|abort-deconfigure)

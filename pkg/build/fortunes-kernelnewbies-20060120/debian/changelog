@@ -1,3 +1,9 @@
+fortunes-kernelnewbies (20060120-0kuliax2) lumpia; urgency=low
+
+  * Change /etc/profile to /etc/bash.bashrc in debian/{postinst,postrm}
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Sat, 06 Feb 2010 14:17:34 +0700
+
 fortunes-kernelnewbies (20060120-0kuliax1) lumpia; urgency=low
 
   * Initial release

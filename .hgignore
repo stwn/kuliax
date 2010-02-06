@@ -4,6 +4,7 @@ syntax: glob
 *.o
 *.deb
 *.pdf
+chroot.tmp
 SHA256
 
 binary/*
@@ -16,6 +17,11 @@ config/common
 config/source
 images/*
 tests/*.err
+
+*.diff.gz
+*.dsc
+*.build
+*.changes
 
 binary.*
 build.log

@@ -2,10 +2,10 @@
 
 case "$1" in
 	purge|remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
-	echo "Removing fortune kernelnewbies from /etc/profile..."
-	sed -i '/echo ""/d' /etc/profile
-	sed -i '/fortune kernelnewbies/d' /etc/profile 
-	sed -i '/echo ""/d' /etc/profile
+	echo "Removing fortune kernelnewbies from /etc/bash.bashrc..."
+	sed -i '/echo ""/d' /etc/bash.bashrc
+	sed -i '/fortune kernelnewbies/d' /etc/bash.bashrc 
+	sed -i '/echo ""/d' /etc/bash.bashrc
 	;;
 
 	*)
