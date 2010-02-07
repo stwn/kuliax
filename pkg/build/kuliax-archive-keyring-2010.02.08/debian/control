@@ -1,0 +1,21 @@
+Source: kuliax-archive-keyring
+Section: misc
+Priority: optional
+Maintainer: Iwan Setiawan <stwn@kuliax.org>
+Standards-Version: 3.8.0
+
+Package: kuliax-archive-keyring
+Architecture: all
+Depends: gnupg, apt
+Description: GnuPG archive keys of the Kuliax archive
+ Kuliax Project digitally signs its Release files. This package
+ contains the archive keys used for that.
+
+Package: kuliax-archive-keyring-udeb
+Architecture: all
+Section: debian-installer
+Recommends: gpgv-udeb
+Description: GnuPG keys of the Kuliax archive
+ Kuliax Project digitally signs its Release files. This package
+ contains the archive keys used for that, in a minimal form for use
+ in the installer.

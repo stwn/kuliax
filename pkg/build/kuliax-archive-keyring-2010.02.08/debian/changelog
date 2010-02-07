@@ -1,0 +1,6 @@
+kuliax-archive-keyring (2010.02.08) lumpia; urgency=low
+
+  * Initial release based on debian-edu-archive-keyring package
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Mon, 08 Feb 2010 02:29:34 +0700
+

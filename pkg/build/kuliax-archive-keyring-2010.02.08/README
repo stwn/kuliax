@@ -1,0 +1,13 @@
+README for the kuliax-archive-keyring package
+=================================================
+
+
+Introduction
+------------
+
+Kuliax Project signs its Release files that are stored on the
+Kuliax repository server and its mirrors with the keys contained in this
+packages.
+
+
+

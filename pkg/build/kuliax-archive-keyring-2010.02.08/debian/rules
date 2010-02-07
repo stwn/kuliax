@@ -1,0 +1,74 @@
+#!/usr/bin/make -f
+# debian/rules file - for debian/keyring
+# Based on sample debian/rules file - for GNU Hello (1.3).
+# Copyright 1994,1995 by Ian Jackson.
+# Copyright 1998-2003 James Troup
+# I hereby give you perpetual unlimited permission to copy,
+# modify and relicense this file, provided that you do not remove
+# my name from the file itself.  (I assert my moral right of
+# paternity under the Copyright, Designs and Patents Act 1988.)
+# This file may have to be extensively modified
+
+install_dir=install -d -m 755
+install_file=install -m 644
+install_script=install -m 755
+install_binary=install -m 755 -s
+
+VERSION := $(shell dpkg-parsechangelog | grep ^Version: | cut -d' ' -f2)
+
+build:
+
+clean:
+	$(checkdir)
+	rm -f *.bak *~ */*~ debian/files* debian/*substvars
+	rm -rf debian/tmp debian/kuliax-archive-keyring-udeb
+
+binary-indep: checkroot
+	test -f keyrings/kuliax-archive-keyring.gpg
+	test -f keyrings/kuliax-archive-removed-keys.gpg
+
+	rm -rf debian/tmp
+	$(install_dir) debian/tmp/DEBIAN/
+	$(install_script) debian/postinst debian/tmp/DEBIAN/
+
+	$(install_dir) debian/tmp/usr/share/keyrings/
+	$(install_file) keyrings/kuliax-archive-keyring.gpg debian/tmp/usr/share/keyrings/
+	$(install_file) keyrings/kuliax-archive-removed-keys.gpg debian/tmp/usr/share/keyrings/
+
+	$(install_dir) debian/tmp/usr/share/doc/kuliax-archive-keyring/
+	$(install_file) README debian/tmp/usr/share/doc/kuliax-archive-keyring/
+	$(install_file) debian/changelog debian/tmp/usr/share/doc/kuliax-archive-keyring/changelog
+	gzip -9v debian/tmp/usr/share/doc/kuliax-archive-keyring/*
+	$(install_file) debian/copyright debian/tmp/usr/share/doc/kuliax-archive-keyring/
+
+	dpkg-gencontrol -pkuliax-archive-keyring -isp
+	chown -R root.root debian/tmp
+	chmod -R go=rX debian/tmp
+	dpkg --build debian/tmp ..
+
+	rm -rf debian/kuliax-archive-keyring-udeb
+	$(install_dir) debian/kuliax-archive-keyring-udeb/DEBIAN/
+
+	$(install_dir) debian/kuliax-archive-keyring-udeb/usr/share/keyrings/
+	$(install_file) keyrings/kuliax-archive-keyring.gpg debian/kuliax-archive-keyring-udeb/usr/share/keyrings/
+	$(install_file) keyrings/kuliax-archive-removed-keys.gpg debian/kuliax-archive-keyring-udeb/usr/share/keyrings/
+
+	# Don't let dpkg-gencontrol write incorrect guesses to debian/files.
+	# Instead, register the udeb manually.
+	dpkg-gencontrol -pkuliax-archive-keyring-udeb -Tdebian/kuliax-archive-keyring-udeb.substvars -Pdebian/kuliax-archive-keyring-udeb -isp -fdebian/files~
+	dpkg-distaddfile kuliax-archive-keyring-udeb_$(VERSION)_all.udeb debian-installer optional
+	chown -R root.root debian/kuliax-archive-keyring-udeb
+	chmod -R go=rX debian/kuliax-archive-keyring-udeb
+	dpkg --build debian/kuliax-archive-keyring-udeb ../kuliax-archive-keyring-udeb_$(VERSION)_all.udeb
+
+binary-arch:
+
+# Below here is fairly generic really
+
+binary:		binary-indep binary-arch
+
+checkroot:
+	$(checkdir)
+	test root = "`whoami`"
+
+.PHONY: binary binary-arch binary-indep clean checkroot
