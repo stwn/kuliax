@@ -1,0 +1,15 @@
+Source: stardict-quick-ind-eng
+Section: text
+Priority: optional
+Maintainer: Iwan Setiawan <stwn@kuliax.org>
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.7.3
+Homepage: http://stardict.sourceforge.net/Dictionaries_Quick.php
+
+Package: stardict-quick-ind-eng
+Architecture: all
+Depends: stardict (>= 3.0.1) | sdcv (>= 0.4.2) | stardict-gtk (>= 3.0.1) | qstardict, ${misc:Depends}
+Description: Indonesian to English *Quick dictionary for StarDict
+ This is Indonesian to English *Quick dictionary database in StarDict format.
+ The original database is from *Quick, open translation system, converted by
+ StarDict team.
