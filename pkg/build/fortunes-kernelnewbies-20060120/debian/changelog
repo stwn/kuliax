@@ -1,3 +1,9 @@
+fortunes-kernelnewbies (20060120-0kuliax3) lumpia; urgency=low
+
+  * Modify debian/{postinst,postrm}: fix absolute path fortune
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Wed, 10 Feb 2010 16:02:26 +0700
+
 fortunes-kernelnewbies (20060120-0kuliax2) lumpia; urgency=low
 
   * Change /etc/profile to /etc/bash.bashrc in debian/{postinst,postrm}

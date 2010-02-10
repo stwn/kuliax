@@ -5,7 +5,7 @@ case "$1" in
 	cp /etc/bash.bashrc /etc/bash.bashrc.orig
 	echo "Adding fortune kernelnewbies to /etc/bash.bashrc..."
 	echo 'echo ""' >> /etc/bash.bashrc
-	echo "fortune kernelnewbies" >> /etc/bash.bashrc
+	echo "/usr/games/fortune kernelnewbies" >> /etc/bash.bashrc
 	echo 'echo""' >> /etc/bash.bashrc
 	;;
 

@@ -41,7 +41,7 @@ binary-arch: build install
 	dh_testroot
 	dh_installchangelogs 
 	dh_installdocs
-	dh_install DOC/* -Xcnet.man -XMakefile  /usr/share/doc/html
+	dh_install DOC/* -Xcnet.man -XMakefile -XHTML /usr/share/doc/cnet/html
 	dh_installexamples -XMakefile EXAMPLES/*
 	dh_install cnet-examples /usr/bin
 	dh_installman

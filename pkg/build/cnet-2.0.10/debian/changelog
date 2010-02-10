@@ -1,3 +1,10 @@
+cnet (2.0.10-0kuliax2) lumpia; urgency=low
+
+  * debian/dirs: adapt doc dir to usr/share/doc/cnet/html
+  * debian/rules: adapt to dirs and exclude DOC/HTML/
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Wed, 10 Feb 2010 15:46:37 +0700
+
 cnet (2.0.10-0kuliax1) lumpia; urgency=low
 
   * Get the same version of source, but with different contents
