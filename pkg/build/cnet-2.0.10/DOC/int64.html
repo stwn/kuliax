@@ -1,0 +1,270 @@
+<HTML>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HEAD>
+<TITLE>The cnet network simulator - the CnetInt64 datatype</TITLE>
+<META NAME="description" CONTENT="cnet enables experimentation
+with various data-link layer, network layer, routing and transport
+layer networking protocols.  It has been specifically developed for
+undergraduate teaching.">
+
+<META NAME="keywords" CONTENT="network, 802.3, ethernet, WAN, simulator,
+simulation, protocol, undergraduate, teaching">
+</HEAD>
+
+<BODY BGCOLOR="white" TEXT ="black" LINK="blue" VLINK="purple">
+
+<table>
+<tr>
+<td valign="top" bgcolor="#74dbf2">
+<table cellpadding="4" cellspacing="0" border="0"><tr>
+
+<td nowrap>
+    <b><i>cnet</i> v2.0.10</b>
+    <p>
+
+    <a href="index.html">home</a>
+    <br>
+    <a href="introduction.html">introduction</a>
+    <br>
+    <a href="themodel.html">simulation model</a>
+    <p>
+    <a href="topology.html">topology files</a>
+    <br>
+    <a href="options.html">cmdline options</a>
+    <br>
+    <a href="functions.html">the API</a>
+    <p>
+    <a href="faq.html">FAQ</a>
+    <p>
+    <a href="install.html">download</a>
+</td>
+
+</td></tr></table>
+</td>
+
+<td>
+<h3>The <tt>CnetInt64</tt> datatype</h3>
+
+As of v2.0, <i>cnet</i> supports a 64-bit integer datatype
+named <tt>CnetInt64</tt> which is used to store all times (now in microseconds)
+and large statistics.
+The datatype and a number of arithmetic,
+conversion, and I/O routines are defined in the
+<tt>&lt;cnet64bits.h&gt;</tt> header file which,
+like the <tt>&lt;cnet.h&gt;</tt> header file (and included by it),
+is located via the value of <tt>CNETPATH</tt>.
+
+Some modern C compilers support 64-bit integers directly (in a variety of ways)
+and others don't.  <i>cnet</i> attempts to hide the differences with
+the <tt>CnetInt64</tt> datatype.
+<p>
+
+<i>cnet</i> uses the <tt>CnetInt64</tt> datatype extensively itself
+(internally) and defines the node and link attributes of
+<tt>nodeinfo.messagerate</tt>,
+<tt>nodeinfo.time_in_usec</tt>, and
+<tt>linkinfo[i].propagationdelay</tt>
+to be of type <tt>CnetInt64</tt>.
+The second parameter to the <tt>CNET_start_timer()</tt> function
+is also of type <tt>CnetInt64</tt>.
+<p>
+
+Invoke the <i>cnet</i> simulator without any arguments.
+If your C compiler provides native
+support for the <tt>CnetInt64</tt> datatype, then you can use the 64-bit
+integers as you would any others - in assignments,
+in arithmetic expressions, in Boolean comparisons, and in (most) I/O statements.
+<p>
+
+<table cellpadding="1" cellspacing="0" border="0" bgcolor="#000000"><tr><td>
+<table cellpadding="8" cellspacing="0" border="0" bgcolor="lightgrey"
+width="550"><tr><td>
+<pre><tt>
+prompt&gt; cnet
+.....
+
+The cnet header file is /usr/local/cnetlib/cnet.h.
+Protocols will be compiled with /usr/bin/gcc.
+<b>Your compiler provides native support for the CnetInt64 type.</b>
+Protocols will be linked with /usr/bin/gcc.
+</tt></pre></tr></td></table></td></tr></table>
+
+<p>
+
+However, if your compiler does <i>not</i> provide such native support,
+or if you wish to write portable protocol codes to be used on machines
+with and without <tt>CnetInt64</tt> support, then you'll need to be a
+bit more ``long-winded'' when dealing with the 64-bit integers.
+
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+<p>
+
+
+<h3>Functions supporting the <tt>CnetInt64</tt> datatype</h3>
+
+Without native compiler support,
+<i>cnet</i> supports the 64-bit integers using a C structure of two
+32-bit integers, and many supporting functions.
+You do not need to manipulate this structure directly;
+instead you should use the following functions to assign, convert,
+and compare values of the <tt>CnetInt64</tt> datatype.
+<p>
+
+To provide maximum portability,
+<i>cnet</i> is itself written using these exact same functions.
+If your compiler <i>does</i> provide native support for the
+<tt>CnetInt64</tt> datatype,
+you can still use these functions in your protocols
+with virtually no loss of performance, albeit with some loss of readability.
+A number of other, far less common, <tt>CnetInt64</tt> functions
+are also available in the <tt>&lt;cnet64bits.h&gt;</tt> header file.
+<p>
+
+<dl>
+<dt><b>Declarations, initialization, and constants</b></dt>
+<dd> Variables of type <tt>CnetInt64</tt> may be declared and defined in
+the same locations as all other variables,
+as fields in structures,
+passed as parameters to functions, and returned as function results.
+However, as members of structures,
+they cannot be (consistently) initialized at compile-time,
+and so it is best to initialize them at run-time.
+<p>
+
+<table cellpadding="1" cellspacing="0" border="0" bgcolor="#000000"><tr><td>
+<table cellpadding="8" cellspacing="0" border="0" bgcolor="lightgrey"
+width="510"><tr><td>
+<pre><tt>
+CnetInt64  result;    declares a 64-bit integer variable
+
+int64_INIT(hi, lo)    a constant specifying its 2x32-bit halves
+
+int64_ZERO            provides the 64-bit value for zero
+int64_ONE             provides the 64-bit value for one
+int64_MAXINT          provides the largest possible 64-bit integer
+int64_MININT          provides the smallest possible 64-bit integer
+</tt></pre></tr></td></table></td></tr></table>
+</dd>
+
+<p>
+
+<dt><b>Type conversions</b></dt>
+<dd> Each of these type conversions is called first with the variable in
+which the result will be placed, and then the expression (or variable)
+from which the initial value should be taken.
+The first example of these,
+pronouced ``int-to-long'' (32-bit integer to 64-bit integer),
+is frequently used to initialize a <tt>CnetInt64</tt> variable with
+a small constant value.
+When converting from a longer to a shorter type,
+there may be the inevitable loss of accuracy or precision.
+<p>
+
+<table cellpadding="1" cellspacing="0" border="0" bgcolor="#000000"><tr><td>
+<table cellpadding="8" cellspacing="0" border="0" bgcolor="lightgrey"
+width="510"><tr><td>
+<pre><tt>
+int64_I2L(l, i)         assigns  ((l) = (CnetInt64)(i))
+int64_L2I(i, l)         assigns  ((i) = (CnetInt32)(l))
+int64_L2F(f, l)         assigns  ((f) = (CnetFloat64)(l))
+int64_F2L(l, f)         assigns  ((l) = (CnetInt64)(f))
+</tt></pre></tr></td></table></td></tr></table>
+</dd>
+
+<p>
+
+<dt><b>Arithmetic</b></dt>
+<dd> Arithmetic must be performed as if we were dealing with a 3-register
+assembly language.
+Each function takes the variable of its eventual 64-bit result as its first
+parameter, and one or two other 64-bit integers.
+It is permissible for any or all of the parameters to be the same variable.
+<p>
+
+<table cellpadding="1" cellspacing="0" border="0" bgcolor="#000000"><tr><td>
+<table cellpadding="8" cellspacing="0" border="0" bgcolor="lightgrey"
+width="510"><tr><td>
+<pre><tt>
+int64_NEG(r, a)         performs ((r) = -(a))
+int64_ADD(r, a, b)      performs ((r) = (a) + (b))
+int64_SUB(r, a, b)      performs ((r) = (a) - (b))
+
+int64_MUL(r, a, b)      performs ((r) = (a) * (b))
+int64_DIV(r, a, b)      performs ((r) = (a) / (b))
+int64_MOD(r, a, b)      performs ((r) = (a) % (b))
+</tt></pre></tr></td></table></td></tr></table>
+
+<p>
+</dd>
+<p>
+
+
+<dt><b>Comparison</b></dt>
+<dd> The following Boolean predicates each take one or two <tt>CnetInt64</tt>
+values and return the result of the indicated comparison.
+<p>
+
+<table cellpadding="1" cellspacing="0" border="0" bgcolor="#000000"><tr><td>
+<table cellpadding="8" cellspacing="0" border="0" bgcolor="lightgrey"
+width="510"><tr><td>
+<pre><tt>
+int64_IS_ZERO(a)        tests  ((a) == 0)
+int64_EQ(a, b)          tests  ((a) == (b))
+int64_NE(a, b)          tests  ((a) != (b))
+int64_GE_ZERO(a)        tests  ((a) &gt;= 0)
+
+int64_CMP(a, op, b)     tests  ((CnetInt64)(a) op (CnetInt64)(b))
+</tt></pre></tr></td></table></td></tr></table>
+
+<p>
+
+The last one is a little tricky, as any of the 6 relational operators
+may be provided as the second parameter,
+for example <tt><b>if</b>(int64_CMP(a, &gt;, b)) ...</tt>
+
+</dd>
+<p>
+
+
+<dt><b>Input and output</b></dt>
+<dd> Without compiler support for the <tt>CnetInt64</tt> datatype,
+we cannot simply pass it to functions such as <tt>printf()</tt>.
+Instead, we use two conversion functions to convert a <tt>CnetInt64</tt>
+value either to or from a character array (a string),
+and then deal with the character array instead,
+probably with %s.
+A note of caution that <tt>int64_L2A()</tt>,
+pronounced ``long-to-alpha'',
+formats the 64-bit integer into an internal static character array.
+A copy of this array should be taken,
+with <tt>strdup()</tt>, if necessary.
+<p>
+
+<table cellpadding="1" cellspacing="0" border="0" bgcolor="#000000"><tr><td>
+<table cellpadding="8" cellspacing="0" border="0" bgcolor="lightgrey"
+width="510"><tr><td>
+<pre><tt>
+int64_A2L(string)          converts the string, returning a 64-bit int.
+
+int64_L2A(value, commas)   formats the indicated value, returning the
+                           address of the array holding the character
+                           representation.  The Boolean commas requests
+                           that commas be included every third digit.
+</tt></pre></tr></td></table></td></tr></table>
+</dd>
+<p>
+
+</dl>
+
+</td></tr></table>
+
+
+<table width="100%"><tr>
+  <td><i>cnet</i> was written and is maintained by Chris McDonald
+      <A HREF="mailto:chris@csse.uwa.edu.au">(chris@csse.uwa.edu.au)</a></td>
+  <td><img align="right" src="images/UWAsmall.gif"></td>
+</tr></table>
+
+</BODY>
+</HTML>

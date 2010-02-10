@@ -1,0 +1,25 @@
+#
+# The following #defines are for OSF/1 V4.0 on a DEC Alpha
+#
+# Uncomment the following line if you wish Tcl/Tk windowing (see config.h)
+#
+XINCLUDES	= -I/usr/local/include -I/usr/contrib/include
+XLIBS		= -ltcl -ltk -lX11 -lm
+#
+ANSICC		= gcc -ansi
+
+INCLUDES	=
+CFLAGS		= -O -Wall $(INCLUDES) $(XINCLUDES)
+
+LD		= gcc
+LDFLAGS		=
+
+LIBDIRS		= -L/usr/local/lib -L/usr/contrib/lib
+LIBS		= -lm
+STRIP		= strip
+
+
+# ---------------------- No user-serviceable code below -----------------
+
+include	Makefile.common
+

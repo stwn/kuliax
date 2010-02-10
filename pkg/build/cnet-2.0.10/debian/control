@@ -1,0 +1,23 @@
+Source: cnet
+Section: net
+Priority: optional
+Maintainer: Iwan Setiawan <stwn@kuliax.org>
+Build-Depends: debhelper (>= 7), tcl8.4-dev, tk8.4-dev
+Standards-Version: 3.7.3
+Homepage: http://www.csse.uwa.edu.au/cnet/
+
+Package: cnet
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: a network protocol simulation program
+ cnet enables experimentation with various data-link
+ layer, network layer, routing and transport layer
+ networking protocols in networks consisting of any
+ combination of point-to-point links and IEEE 802.3
+ Ethernet segments.
+ .
+ cnet has been specifically developed for, and is
+ used in, undergraduate computer networking courses
+ taken by thousands of students worldwide.
+ .
+ This package includes documentation and examples.

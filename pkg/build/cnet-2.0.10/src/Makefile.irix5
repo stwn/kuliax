@@ -1,0 +1,25 @@
+#
+# The following #defines are for SGI's IRIX (tested on IRIX-5.3)
+#
+# Uncomment the following line if you wish Tcl/Tk windowing (see config.h)
+#
+XINCLUDES	= -I/usr/include/X11
+XLIBS		= -ltcl -ltk -lX11 -lm
+
+ANSICC		= gcc -ansi -Wall
+#ANSICC		= cc -ansi -woff 636,653,740,771
+
+INCLUDES	=
+CFLAGS		= -O $(INCLUDES) $(XINCLUDES)
+
+LD		= gcc
+#LD		= cc
+LIBDIRS		= -L/usr/lib
+LIBS		= -lelf -lmld -lm 
+STRIP		= strip
+
+
+# ---------------------- No user-serviceable code below -----------------
+
+include	Makefile.common
+

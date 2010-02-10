@@ -1,0 +1,490 @@
+<HTML>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HEAD>
+<TITLE>The cnet network simulator - global, node, and link attributes</TITLE>
+<META NAME="description" CONTENT="cnet enables experimentation
+with various data-link layer, network layer, routing and transport
+layer networking protocols.  It has been specifically developed for
+undergraduate teaching.">
+
+<META NAME="keywords" CONTENT="network, 802.3, ethernet, WAN, simulator,
+simulation, protocol, undergraduate, teaching">
+</HEAD>
+
+<BODY BGCOLOR="white" TEXT ="black" LINK="blue" VLINK="purple">
+
+<table>
+<tr>
+<td valign="top" bgcolor="#74dbf2">
+<table cellpadding="4" cellspacing="0" border="0"><tr>
+
+<td nowrap>
+    <b><i>cnet</i> v2.0.10</b>
+    <p>
+
+    <a href="index.html">home</a>
+    <br>
+    <a href="introduction.html">introduction</a>
+    <br>
+    <a href="themodel.html">simulation model</a>
+    <p>
+    <a href="topology.html">topology files</a>
+    <br>
+    <a href="options.html">cmdline options</a>
+    <br>
+    <a href="functions.html">the API</a>
+    <p>
+    <a href="faq.html">FAQ</a>
+    <p>
+    <a href="install.html">download</a>
+</td>
+
+</td></tr></table>
+</td>
+
+<td>
+<h3><a name="gattrs">Global attributes</a></h3>
+
+Global attributes affect the execution of the whole simulation,
+and may not be redefined on a per-node or per-link basis.
+The global attributes are not accessible to the protocol's C code
+at runtime.
+<p>
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="black"><tr><td>
+<table cellpadding="1" cellspacing="0" border="1" bgcolor="white">
+<tr>
+    <th>Global&nbsp;attribute</th>
+    <th>Datatype</th>
+    <th>Meaning</th>
+    <th>Examples</th>
+</tr>
+<tr>
+    <td>bgimage</td>
+    <td>string</td>
+    <td>provides the name of a GIF-format image file to be centered on the
+	simulation's main window.
+	The image file is sought via the <tt>CNETPATH</tt>
+	environment variable if necessary</td>
+    <td nowrap>bgimage = "australia1.gif"</td>
+</tr>
+<tr>
+    <td>drawframes</td>
+    <td>Boolean</td>
+    <td>
+	The global <a href="drawframes.html"><tt>drawframes</tt></a>
+	attribute requests that frames traversing the Physcial Layer
+	be drawn under certain conditions.
+	By specifying a special event handler,
+	Data Link Layer protocols in a 2-node network may request that their
+	frames be drawn using different colours and lengths.</td>
+    <td nowrap>drawframes = true</td>
+</tr>
+<tr>
+    <td>showcostperbyte</td>
+    <td>Boolean</td>
+    <td>requests that each link's <tt>costperbyte</tt> attribute value be
+	displayed on the simulation's main window over each link.
+	The use of <tt>showcostperframe</tt> overrides that
+	of <tt>showcostperbyte</tt>.</td>
+    <td nowrap>showcostperbyte = false</td>
+</tr>
+<tr>
+    <td>showcostperframe</td>
+    <td>Boolean</td>
+    <td>requests that each link's <tt>costperframe</tt> attribute value be
+	displayed on the simulation's main window over each link.
+	The use of <tt>showcostperframe</tt> overrides that
+	of <tt>showcostperbyte</tt>.</td>
+    <td nowrap>showcostperframe = true</td>
+</tr>
+<tr>
+    <td>tracefile</td>
+    <td>string</td>
+    <td>requests that the <i>trace of execution</i> be mirrored in the named
+	file when the <a href="options.html#option-t">-t</a> option is given.
+	<b>Warning&nbsp;-</b> trace files can grow very large
+	(to several megabytes),
+	very quickly.</td>
+    <td nowrap>tracefile = "appl-trace"</td>
+</tr>
+</table>
+</td></tr></table>
+
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+<p>
+
+<h3><a name="nodeattrs">Node attributes</a></h3>
+
+The initial values of <i>node attributes</i>
+(global or per-node) may be specified in <i>cnet</i>'s topology files.
+Some node attributes may be modified while the simulation is running.
+Node attributes include the rate of new message generation,
+minimum and maximum message sizes,
+whether or not to trace all node activity,
+and the expected rates of node failure and repair.
+
+<p>
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="black"><tr><td>
+<table cellpadding="1" cellspacing="0" border="1" bgcolor="white">
+<tr>
+    <th>Node attribute</th>
+    <th>Datatype</th>
+    <th>Meaning</th>
+    <th>Examples</th>
+</tr>
+    <tr>
+	<td>address</td>
+	<td>integer</td>
+	<td>the unique network address of each node</td>
+	<td nowrap>address = 238</td>
+    </tr>
+    <tr>
+	<td>compile</td>
+	<td>string</td>
+	<td>a <a href="topology.html#compstrings">compilation string</a>
+		to declare the sourcefile names
+		containing the protocols for each node
+		(locally overrides the <a href="options.html#option-C">-C</a>
+		option)</td>
+	<td nowrap>compile = "protocol.c stats.c -lm"</td>
+    </tr>
+    <tr>
+	<td>messagerate</td>
+	<td>time</td>
+	<td>the rate at which the Application Layer can generate new
+		messages for delivery</td>
+	<td nowrap>messagerate = 10000usecs<br>
+		   messagerate = 2s</td>
+    </tr>
+    <tr>
+	<td>minmessagesize</td>
+	<td>bytes</td>
+	<td>the minimum size of messages generated by the Application Layer</td>
+	<td nowrap>minmessagesize = 100bytes<br>
+		   minmessagesize = 4KB</td>
+    </tr>
+    <tr>
+	<td>maxmessagesize</td>
+	<td>bytes</td>
+	<td>the maximum size of messages generated by the Application Layer
+		(bounded by <tt>MAX_MESSAGE_SIZE</tt></td>
+	<td nowrap>maxmessagesize = 200bytes<br>
+		   maxmessagesize = 8KB</td>
+    </tr>
+    <tr>
+	<td>nodemtbf</td>
+	<td>time</td>
+	<td>the expected time between node hardware failures</td>
+	<td nowrap>nodemtbf = 60000s<br>
+		   nodemtbf = 1000s</td>
+    </tr>
+    <tr>
+	<td>nodemttr</td>
+	<td>time</td>
+	<td>the expected time taken to repair a hardware failure</td>
+	<td nowrap>nodemttr = 5000s<br>
+		   nodemttr = 100s</td>
+    </tr>
+    <tr>
+	<td>ostype</td>
+	<td>string</td>
+	<td>the name of the operating system that runs on the node
+	    (only used to set the node's icon).
+	    Possible values are <i>bsd, hurd, irix,
+		linux, macintosh, nextstep, os2, solaris,</i> or
+		<i>winnt</i>. Gimmick.</td>
+	<td nowrap>ostype = "linux"</td>
+    </tr>
+    <tr>
+	<td>outputfile</td>
+	<td>string</td>
+	<td>the output file for each node.
+	    When used as a global attribute, <i>outputfile</i> is used
+	    as a filename prefix
+	    (as with the <a href="options.html#option-o">-o</a> option).
+	    When used locally,
+	    <i>outputfile</i> indicates the complete filename</td>
+	<td nowrap>outputfile = "output"</td>
+    </tr>
+    <tr>
+	<td>rebootargs</td>
+	<td>string</td>
+	<td>provide one or more white-space separated
+		<a href="eventdriven.html#argv">command-line arguments</a>
+		to be passed to the node's <tt>EV_REBOOT</tt> handler.
+		(locally overrides any arguments passed on
+		<i>cnet</i>'s own command-line)</td>
+	<td nowrap>rebootargs = "-fast -nostats"</td>
+    </tr>
+    <tr>
+	<td>rebootfunc</td>
+	<td>string</td>
+	<td>the ANSI-C function to call when the node reboots
+		(locally overrides the <a href="options.html#option-R">-R</a>
+		option)</td>
+	<td nowrap>rebootnode = "reboot_function"</td>
+    </tr>
+    <tr>
+	<td>trace</td>
+	<td>Boolean</td>
+	<td>a Boolean indicating if event tracing is required
+		(overrides the <a href="options.html#option-t">-t</a>
+		option)</td>
+	<td nowrap>trace = true</td>
+    </tr>
+    <tr>
+	<td>winopen</td>
+	<td>Boolean</td>
+	<td>Boolean attribute requesting that a node's window be
+		 opened on startup</td>
+	<td nowrap>winopen = false</td>
+    </tr>
+    <tr>
+	<td>winx, winy</td>
+	<td>integer</td>
+	<td>screen coordinates of the node's window under Tcl/Tk</td>
+	<td nowrap>winx = 100, winy = 200</td>
+    </tr>
+    <tr>
+	<td>x, y</td>
+	<td>integer</td>
+	<td>coordinates of either a node's icon, or the left-hand end of
+	    an Ethernet segment on the main window</td>
+	<td nowrap>x = 80, y = 120</td>
+    </tr>
+</table>
+</td></tr></table>
+
+<p>
+
+The
+<a href="topology.html#compstrings"><tt>compile</tt></a>
+attribute indicates which C source files are to be
+compiled and executed by <i>cnet</i>.
+In the example topology file,
+above,
+<i>an instance</i> of the source code in the single file
+<i>stopandwait.c</i> will be executed
+by each of Perth and Melbourne.
+Each node will have <i>its own copy</i> of all variables declared in
+the file <i>stopandwait.c</i>
+(globals, static globals, locals and static locals).
+<p>
+When executing,
+each node's protocol code (in C) has access to <i>its own</i>
+<tt>CnetNodeinfo</tt> structure describing the node's attributes.
+This structure is best considered <i>read-only</i>
+as its contents are ``refreshed'' as each node is scheduled for execution.
+<p>
+
+<table cellpadding="1" cellspacing="0" border="0" bgcolor="#000000"><tr><td>
+<table cellpadding="8" cellspacing="0" border="0" bgcolor="lightgrey"
+width="550"><tr><td>
+<pre><tt>
+<b>typedef struct</b> {
+  <b>char</b>          nodename[MAX_NODENAME_LEN];
+  CnetNodetype  nodetype;       <i>/* Either a NT_HOST or a NT_ROUTER */</i>
+  <b>int</b>           nodenumber;     <i>/* Ranging from 0.._NNODES-1 */</i>
+  CnetAddr      address;        <i>/* Possibly different to the nodenumber */</i>
+  <b>int</b>           nlinks;         <i>/* Ranging from 0(=LOOPBACK) .. nlinks */</i>
+  <b>int</b>           minmessagesize; <i>/* min size (in bytes) of msgs generated */ </i>
+  <b>int</b>           maxmessagesize; <i>/* max size (in bytes) of msgs generated */ </i>
+  CnetInt64     messagerate;    <i>/* rate of msg generation (in microseconds) */</i>
+  CnetInt64     time_in_usec;   <i>/* time since this node's last reboot*/</i>
+  <b>struct</b> {
+      <b>long</b>      sec;            <i>/* seconds */</i>
+      <b>long</b>      usec;           <i>/* microseconds */</i>
+  }             time_of_day;    <i>/* a reflection of the wall-clock time */</i>
+} CnetNodeinfo;
+
+CnetNodeinfo  nodeinfo;
+</tt></pre></tr></td></table></td></tr></table>
+
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+<p>
+
+<h3><a name="linkattrs">Link attributes</a></h3>
+
+The Physical Layer delivers frames between nodes on unreliable,
+bidirectional links.
+The initial values of <i>link attributes</i>
+(global or per-node) may be specified in <i>cnet</i>'s topology files.
+Some link attributes may be modified while the simulation is running.
+Link attributes include
+the propagation delay between endpoints,
+the probabilities of frame loss and corruption,
+the link bandwidth,
+the expected rates of link failure and repair,
+the transmit buffer size,
+and relative costs of frame transmission
+(these last few only concern more detailed protocols).
+
+<p>
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="black"><tr><td>
+<table cellpadding="1" cellspacing="0" border="1" bgcolor="white">
+<tr>
+    <th>Link attribute</th>
+    <th>Datatype</th>
+    <th>Meaning</th>
+    <th>Examples</th>
+</tr>
+    <tr>
+	<td>bandwidth</td>
+	<td>datarate</td>
+	<td>the bandwidth along a link</td>
+	<td nowrap>bandwidth = 1000000bps<br>
+		   bandwidth = 56Kbps</td>
+    </tr>
+    <tr>
+	<td>costperbyte</td>
+	<td>cents</td>
+	<td>the cost per byte along this link</td>
+	<td nowrap>costperbyte = 1c</td>
+    </tr>
+    <tr>
+	<td>costperframe</td>
+	<td>cents</td>
+	<td>the cost per frame along this link</td>
+	<td nowrap>costperframe = 5c</td>
+    </tr>
+    <tr>
+	<td>linkmtbf</td>
+	<td>time</td>
+	<td>the expected time between link hardware failures</td>
+	<td nowrap>linkmtbf = 60000s<br>
+		   linkmtbf = 1000s</td>
+    </tr>
+    <tr>
+	<td>linkmttr</td>
+	<td>time</td>
+	<td>the expected time taken to repair a link hardware failure</td>
+	<td nowrap>linkmttr = 5000s<br>
+		   linkmttr = 100s</td>
+    </tr>
+    <tr>
+	<td>probframecorrupt</td>
+	<td>probability</td>
+	<td>the probability that a frame on this link will be corrupted</td>
+	<td nowrap>probframecorrupt = 3  <i>/* 1 in 8 */</i></td>
+    </tr>
+    <tr>
+	<td>probframeloss</td>
+	<td>probability</td>
+	<td>the probability that a frame on this link will be lost
+		altogether</td>
+	<td nowrap>probframecorrupt = 4  <i>/* 1 in 16 */</i></td>
+    </tr>
+    <tr>
+	<td>propagationdelay</td>
+	<td>time</td>
+	<td>the propagation delay along a link</td>
+	<td nowrap>propagationdelay = 200usecs<br>
+		   propagationdelay = 1s</td>
+    </tr>
+    <tr>
+	<td>transmitbufsize</td>
+	<td>bytes</td>
+	<td>the maximum number of bytes that may be written to a link
+		in each call to <tt>CNET_write_physical</tt></td>
+	<td nowrap>transmitbufsize = 8KB<br>
+		   transmitbufsize = 200bytes</td>
+    </tr>
+</table>
+</td></tr></table>
+
+<p>
+When executing,
+each node's protocol code (in C) has access to <i>its own</i>
+<tt>CnetLinkinfo</tt> structure describing the link's attributes.
+This structure is best considered <i>read-only</i>
+as its contents are ``refreshed'' as each node is scheduled for execution.
+The global variable <tt>linkinfo</tt> is a vector of <tt>CnetLinkinfo</tt>
+structures.
+<tt>linkinfo[0]</tt> maintains attributes of the
+pseudo <tt>LOOPBACK</tt> link,
+<tt>linkinfo[1]</tt> maintains attributes of the first true physical link,
+and so on.
+<p>
+
+<table cellpadding="1" cellspacing="0" border="0" bgcolor="#000000"><tr><td>
+<table cellpadding="8" cellspacing="0" border="0" bgcolor="lightgrey"
+width="550"><tr><td>
+<pre><tt>
+<b>typedef struct</b> {
+    CnetLinktype  linktype;          <i>/* LT_LOOPBACK, LT_POINT2POINT, or LT_ETHERNET */</i>
+    CnetNicaddr   nicaddr;           <i>/* NIC address for LT_ETHERNET links*/</i>
+    <b>int</b>           linkup;            <i>/* TRUE if link not severed */</i>
+    <b>int</b>           promiscuous;       <i>/* TRUE iff LT_ETHERNET sees all frames */</i>
+
+    <b>int</b>           bandwidth;         <i>/* in bits per second */</i>
+    <b>int</b>           transmitbufsize;   <i>/* in bytes */</i>
+    CnetInt64     propagationdelay;  <i>/* in microseconds */</i>
+    <b>int</b>           costperbyte;       <i>/* in cents(?) */</i>
+    <b>int</b>           costperframe;      <i>/* in cents(?) */</i>
+} CnetLinkinfo;
+
+CnetLinkinfo *linkinfo;    <i>/* linkinfo[0]..linkinfo[nodeinfo.nlinks] */ </i>
+</tt></pre></tr></td></table></td></tr></table>
+<p>
+
+To find the propagation delay of the first ``real'' link in a 2 node
+simulation,
+each node would simply access <tt>linkinfo[1].propagationdelay</tt> .
+
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+
+<h3><a name="units">Units and their specification</a></h3>
+
+<p>
+All times are stored internally in microseconds
+though in the topology file their integral values may be followed by
+suffixes such as
+<tt>usec</tt>, <tt>msec</tt> and <tt>s</tt>.
+
+<p>
+All data sizes are stored internally in bytes
+though in the topology file their integral values may be followed by
+suffixes such as
+<tt>bytes</tt>, <tt>Kbytes</tt>, <tt>KB</tt>, and <tt>MB</tt>.
+
+<p>
+Link bandwidths are stored internally in bits-per-second
+though in the topology file their integral values may be followed by
+suffixes such as
+<tt>bps</tt>, <tt>Kbps</tt>, and <tt>Mbps</tt>.
+
+<p>
+Boolean attributes may take on the values
+<tt>true</tt>, <tt>false</tt>, and <tt>toggle</tt>.
+
+<p>
+Strings are enclosed within double quotes.
+
+<p>
+Probabilities specify a uniform distribution,
+with their value being the <tt>log-base-2</tt>
+of the chance of failure (yes, this is ugly).
+In a <a href="topology.html#file">typical topology file</a>,
+the global <tt>probframecorrupt</tt> attribute may declare
+that a frame will be corrupted with probability
+of 1 in 8 (2 to the power 3) while
+the link from Melbourne to Perth will lose (on average) every fourth frame.
+A probability of <tt>0</tt> (the default) means that no errors will
+be introduced.
+
+</td></tr></table>
+
+
+<table width="100%"><tr>
+  <td><i>cnet</i> was written and is maintained by Chris McDonald
+      <A HREF="mailto:chris@csse.uwa.edu.au">(chris@csse.uwa.edu.au)</a></td>
+  <td><img align="right" src="images/UWAsmall.gif"></td>
+</tr></table>
+
+</BODY>
+</HTML>

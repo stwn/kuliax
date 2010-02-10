@@ -1,0 +1,252 @@
+<HTML>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HEAD>
+<TITLE>The cnet network simulator - topology files</TITLE>
+<META NAME="description" CONTENT="cnet enables experimentation
+with various data-link layer, network layer, routing and transport
+layer networking protocols.  It has been specifically developed for
+undergraduate teaching.">
+
+<META NAME="keywords" CONTENT="network, 802.3, ethernet, WAN, simulator,
+simulation, protocol, undergraduate, teaching">
+</HEAD>
+
+<BODY BGCOLOR="white" TEXT ="black" LINK="blue" VLINK="purple">
+
+<table>
+<tr>
+<td valign="top" bgcolor="#74dbf2">
+<table cellpadding="4" cellspacing="0" border="0"><tr>
+
+<td nowrap>
+    <b><i>cnet</i> v2.0.10</b>
+    <p>
+
+    <a href="index.html">home</a>
+    <br>
+    <a href="introduction.html">introduction</a>
+    <br>
+    <a href="themodel.html">simulation model</a>
+    <p>
+    <a href="topology.html">topology files</a>
+    <br>
+    <a href="options.html">cmdline options</a>
+    <br>
+    <a href="functions.html">the API</a>
+    <p>
+    <a href="faq.html">FAQ</a>
+    <p>
+    <a href="install.html">download</a>
+</td>
+
+</td></tr></table>
+</td>
+
+<td>
+<h3><a name="file">Topology files</h3>
+<i>cnet</i> accepts (many)
+<a href="options.html">command line options</a>
+to control its execution.
+However, more important is <i>cnet</i>'s use of a <i>topology file</i>
+to define the attributes and connections in each network simulation.
+
+Consider the following topology file which defines a 2 node network.
+An implementation of the <i>stopandwait</i> protocol is being developed
+to provide a reliable data-link layer protocol over the
+single <i>point-to-point</i> link.
+<i>cnet</i> keywords are presented in bold font.
+<p>
+If necessary,
+the topology file is first preprocessed by the C-preprocessor,
+enabling the use of <tt>#include</tt>, <tt>#define</tt> and
+conditional ``compilation'' directives if required.
+Simple <i>/* C and C++ style comments */ </i> are also supported.
+<p>
+
+<table cellpadding="1" cellspacing="0" border="0" bgcolor="#000000"><tr><td>
+<table cellpadding="8" cellspacing="0" border="0" bgcolor="lightgrey"
+width="550"><tr><td>
+<pre><tt>
+<i>/* A simple 2 node point-to-point network topology */</i>
+
+<b>compile</b>          = "stopandwait.c"
+
+<b>bgimage</b>          = "australia1.gif"
+<b>drawframes</b>       = true
+
+<b>messagerate</b>      = 500<b>ms</b>,
+<b>propagationdelay</b> = 700<b>ms</b>,
+<b>probframecorrupt</b> = 3,
+
+<b>host</b> Perth {
+    <b>ostype</b>  = "palm"
+    <b>x</b>=100, <b>y</b>=100
+    <b>messagerate</b>  = 1000<b>ms</b>,
+
+    <b>link to</b> Melbourne
+}
+
+<b>host</b> Melbourne {
+    <b>ostype</b>  = "linux"
+    <b>east of</b> Perth
+
+    <b>link to</b> Perth
+        { <b>probframeloss</b> = 2 }
+}
+</tt></pre></tr></td></table></td></tr></table>
+
+<p>
+<a href="attributes.html#gattrs">Global attributes</a>
+may be defined in each topology file
+and affect the execution of the whole simulation.
+They may not be redefined on a per-node or per-link basis.
+In the above topology,
+the global attributes of <tt>bgimage</tt> and <tt>drawframes</tt>
+are defined.
+<p>
+
+<p>
+<a href="attributes.html#nodeattrs">Node attributes</a>
+and
+<a href="attributes.html#linkattrs">link attributes</a>
+declared before any nodes are also considered as
+<i>global</i> attributes - these will be the defaults unless redefined
+locally within a node or link definition.
+Local attributes are declared in a new ``block'',
+by opening a curly bracket (as in C).
+In the above topology,
+the default <tt>messagerate</tt>
+(the rate at which the Application Layer
+will generate a new message for delivery) is <tt>500ms</tt>.
+This becomes the default <tt>messagerate</tt> for all nodes,
+but node Perth later declares its own (local) <tt>messagerate</tt>
+as <tt>1000ms</tt>.
+<p>
+
+The following topology defines a single segment Ethernet-based network of
+6 nodes.
+The segment is named <tt>Lab1</tt> and will be drawn at the indicated
+co-ordinates on the topology map.
+Each node is connected to the segment by its Network Interface Card (NIC);
+each NIC's address, as a string of hexadecimal characters, introduces each
+node's connection to the segment.
+Although not shown in this example,
+each node could also define its own <i>local</i> node attributes between
+the <tt>{&nbsp;}</tt> characters.
+
+<p>
+<table cellpadding="1" cellspacing="0" border="0" bgcolor="#000000"><tr><td>
+<table cellpadding="8" cellspacing="0" border="0" bgcolor="lightgrey"
+width="550"><tr><td>
+<pre><tt>
+<i>/* A simple 6 node Ethernet-based network topology */</i>
+
+<b>compile</b>        = "ethertest.c"
+
+<b>minmessagesize</b> =  100<b>bytes</b>
+<b>maxmessagesize</b> = 1000<b>bytes</b>
+<b>messagerate</b>    = 1<b>s</b>
+
+<b>ethernet</b> Lab1 {
+
+    <b>x</b>=100, <b>y</b>=200
+
+    <b>nicaddr</b> 00:90:27:62:58:84  <b>host</b> budgie    { }
+    <b>nicaddr</b> 00:90:27:41:B0:BE  <b>host</b> kanga     { }
+    <b>nicaddr</b> 00:A0:C9:AF:9E:81  <b>host</b> quokka    { }
+    <b>nicaddr</b> 00:0A:27:7D:41:C6  <b>host</b> emu       { }
+    <b>nicaddr</b> 00:90:27:62:83:F5  <b>host</b> koala     { }
+    <b>nicaddr</b> 00:90:27:34:B6:D8  <b>host</b> wombat    { }
+}
+</tt></pre></tr></td></table></td></tr></table>
+<p>
+
+These two topology examples define small networks,
+one a simple <i>wide-area</i> network,
+and the other a single segment <i>Ethernet-based</i> network.
+<i>cnet</i> permits any combination of wide-area networks and Ethernet
+segments to be defined in the same topology file.
+One or more nodes,
+typically <i>routers</i> of type <tt>NT_ROUTER</tt>,
+may have connections to a combination of wide-area networks and
+IEEE&nbsp;802.3 Ethernet segments.
+
+<p>
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+<p>
+
+<h3><a name="compstrings">Compilation strings</a></h3>
+
+Because <i>cnet</i> must dynamically link compiled versions of protocols
+at run-time,
+<i>cnet</i> performs all necessary compilation and linking.
+You neither compile nor link protocols yourself,
+nor use <i>make(3)</i> to do it for you.
+Invoking <i>cnet</i> with a valid
+<a href="topology.html">topology file</a>
+will perform all necessary compilation and linking before commencing
+the simulation.
+<i>cnet</i>
+performs the rudimentary actions of
+<i>make(3)</i>,
+compiling and linking files if the required target does not exist or is
+out-of-date with respect to sourcefiles.
+
+<p>
+Strings are used to declare the location (filenames) of the source and
+shared object codes for the Application, ``Central'' and Physical layers
+used in each simulation.
+These strings may be provided on the command line,
+via the
+<a href="options.html#option-A">-A</a>,
+<a href="options.html#option-C">-C</a>,
+and
+<a href="options.html#option-P">-P</a> options.
+The compilation string to compile the ``Central'' layers may also be specified
+with the <tt>compile</tt> node attribute in the topology file.
+
+<p>
+In their simplest form, compilation strings may present just a single
+C sourcefile name, such as <tt>"protocol.c"</tt>.
+If necessary,
+<i>cnet</i>,
+will compile the file <tt>protocol.c</tt> into the object file
+<tt>protocol.o</tt> and then link this file to form the final shared object
+<tt>protocol.cnet</tt>.
+This final shared object file will then be used to provide the
+code for each node's relevant layer(s).
+
+<p>
+In its more complex form,
+a compilation string may also include compilation switches,
+a number of sourcefile names, and linker switches.
+For example, the compilation string
+<p>
+<center>
+<tt>"-DDEBUG ftp.c tables.c -lm"</tt>
+</center>
+<p>
+includes an embedded (actually preprocessor) switch which is passed onto
+the compilation process,
+two sourcefile names and a linker switch
+(in this case to link with the mathematics library).
+Each source file is compiled (if necessary) to create its object file,
+and all object files are then linked together to form a single shared object.
+The shared object's name is derived from the first sourcefile found,
+in this case it will be <i>ftp.cnet</i>.
+The embedded switches
+<tt>-l</tt> and <tt>-L</tt> are recognized as (assumed to be) linker switches;
+all other switches are assumed to be preprocessor and compiler switches.
+
+</td></tr></table>
+
+
+<table width="100%"><tr>
+  <td><i>cnet</i> was written and is maintained by Chris McDonald
+      <A HREF="mailto:chris@csse.uwa.edu.au">(chris@csse.uwa.edu.au)</a></td>
+  <td><img align="right" src="images/UWAsmall.gif"></td>
+</tr></table>
+
+</BODY>
+</HTML>

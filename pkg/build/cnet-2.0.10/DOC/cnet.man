@@ -1,0 +1,333 @@
+.ds DD /cslinux/cnetlib
+.ds WW http://www.csse.uwa.edu.au/cnet/
+.ds UX U\s-2NIX\s+2
+.ds LX L\s-2INUX\s+2
+.
+.TH cnet 1
+.SH "NAME"
+cnet (v2.0.10) \- a communications network simulation program
+.SH "SYNOPSIS"
+.BI "cnet [many options] {TOPOLOGY_FILE | \-r nnodes}"
+.SH "DESCRIPTION"
+.I cnet
+is a nwtwork simulator enabling experimentation with various data-link layer,
+network layer, routing and transport layer networking protocols.
+In addition,
+different application and physical layers may be provided which exhibit
+varying statistical characteristics of message generation and data transmission.
+Protocols are written in the ANSI-C programming language and,
+when compiled and linked by \fIcnet\fP,
+execute natively in a single \*(UX/\*(LX process.
+\fIcnet\fP either presents and enables interaction with
+its simulated network under the Tcl/Tk windowing system,
+or runs rather less visually on an ASCII terminal.
+.PP
+.I cnet
+first accepts a number of command line options and then either
+reads a network specification from a network \fItopology\ file\fP
+or generates a random network of a requested size.
+.
+Having built and checked the network topology,
+\fIcnet\fP will compile and dynamically link any source files
+specified for each node in the topology file,
+or those files provided via the \f(CW\-A\fP
+and \f(CW\-P\fP
+command-line options.
+.PP
+Each node may execute its own network protocols or protocols shared with
+other nodes,
+and will access its own set of global and local variables.
+When executing,
+each node has access to its own copy of a number of node and link
+attributes and many of these attributed may be modified,
+via the windowing interface, while a simulation is running.
+Each node's node and link attributes are available at run-time in
+ANSI-C data structures and variables
+declared in \f(CW<cnet.h>\fR.
+Each \fIcnet\fP protocol source file should include this header file.
+The data structures are initialized when each node is rebooted
+and updated as each node is scheduled for execution.
+The contents of these data structures should be considered as readonly
+values and should not be modified directly by the protocols' C code.
+They may be successfully modified via the windowing interface.
+.PP
+This manual only describes \fIcnet\fP's command-line options,
+and does not describe the format of the topology files,
+nor \fIcnet\fP programming and tracing techniques.
+All \fIcnet\fP documentation is available from the
+.I cnet
+web-page at \*(WW.
+.PP
+.SH "COMMAND-LINE OPTIONS"
+.I cnet
+supports a number of command-line options which should be presented
+before the name of the topology file or a request for a random topology.
+Options which themselves accept a following argument expect that argument
+to appear as a separate word on the command-line (i.e. after a space).
+.PP
+Specifying all of \fI\-M\ mins\fP,
+\fI\-S\ seed\fP and \fI\-T\fP enables a simulation to be replayed.
+.PP
+.IP "\-A string"
+Specify a "compilation string" declaring a new application layer to be used.
+In its simplest form,
+the \fI\-A\fP option is followed by the name of a single ANSI-C file
+providing the implementation of the application layer protocol.
+If \fI\-A\fP is not provided, a default (internal) application layer is used.
+The eventual application layer is the source and sink of all messages.
+.PP
+.IP "\-c"
+Normally the \f(CWtime_of_day\fP
+clocks in each node are initially different
+(and protocols could be developed to synchronize the clocks).
+If \fI\-c\fP is specified,
+the clocks in all nodes will initially be synchronized.
+.PP
+.IP "\-C string"
+Specify a "compilation string" which declares
+each node's "internal" layers to be used.
+In its simplest form,
+the \fI\-C\fP option is followed by the name of a single ANSI-C file
+providing the implementation of all "internal" layers.
+If \fI\-C\fP is not provided, the filename \fI``protocol.c''\fP is assumed.
+.PP
+.IP "\-d"
+Provide some diagnostic/monitoring information while \fIcnet\fP is running.
+All reported information is sent to \fIcnet\fP's \f(CWstderr\fP output stream.
+.PP
+.IP "\-e"
+Normally, corruption errors on links are not reported by the
+Physical Layer and must be detected by the receiver.
+If \fI-e\fR is specified,
+function \f(CWread_physical()\fR will detect and report
+corruption errors by returning \f(CW-1\fR and setting
+\f(CWcnet_errno\fR to \f(CWER_CORRUPTDATA\fR.
+.PP
+.IP "\-E nevents"
+Request that \fIcnet\fP only run for the indicated number of events.
+.PP
+.IP "\-f secs"
+Set the frequency of the diagnostic and statistical summary (in seconds).
+In combination with \-s and \-z,
+cumulative statistics may be periodically reported.
+All reported information is sent to \fIcnet\fP's \f(CWstdout\fP output stream.
+.PP
+.IP "\-F filename"
+If \fIcnet\fP has been compiled for Tcl/Tk,
+the indicated file will be sourced by the Tcl/Tk interpreter.
+The filename may also be provided via the CNETTCLTK environment variable.
+If the file cannot be found directly,
+CNETPATH will be searched to locate the file.
+If \fI\-F\fP is not provided, the filename \fI``cnet.tcl''\fP is assumed.
+.PP
+.IP "\-g"
+Commence execution (go) as soon as the main window appears
+(under Tcl/Tk) \- implied by
+.I \-W.
+.PP
+.IP "\-k"
+Use ``old'' Kernighan and Ritchie (K&R) C to compile the user supplied
+source files for the
+application layer (\fI\-A\fP),
+the ``central'' protocol layers (\fI\-C\fP),
+and the physical layer (\fI\-P\fP).
+The default is to use the ANSI-C compiler, \fIgcc\fP.
+.PP
+.IP "\-m mins"
+To prevent runaway processes choking our teaching machines,
+a 3 minute time limit is silently imposed on \fIcnet\fP execution.
+The \fI\-m\fP option overrides this limit.
+.PP
+.IP "\-M mins"
+Limit the length of the simulation to \fI\-M\fR minutes of 'simulated time'
+when used in combination with
+.I \-T.
+.PP
+.IP "\-n"
+Simply parse the topology file,
+compile and link all necessary C source files,
+and then exit.
+.PP
+.IP "\-N"
+Provide the number of nodes in the network in the C variable \f(CWNNODES\fR.
+Surprisingly, the default is that each node does not know
+how many nodes the network contains (\f(CWNNODES\ =\ 0\fR).
+.PP
+.IP "\-o file_prefix"
+Copy the output of each node's
+calls to \f(CWprintf(), puts()\fR and \f(CWputchar()\fR
+to a file with the indicated prefix.
+For example, the use of \fI\-o output\fP will typically create and write to the
+files \fIoutput.node0,\ output.node1,\ output.node2,\ ...\fR.
+.PP
+.IP "\-O"
+Open all node windows on startup (unless overridden by the
+\f(CWwinopen\fR topology file attribute).
+.PP
+.IP "\-p"
+After parsing, checking, and building the network topology,
+simply print it out and exit \fIcnet\fP.
+.PP
+.IP "\-P string"
+Specify a "compilation string" which declares a new physical layer to be used.
+In its simplest form,
+the \fI\-P\fP option is followed by the name of a single ANSI-C file
+providing the implementation of the physical layer protocol.
+If \fI\-P\fP is not provided, a default (internal) physical layer is used.
+The eventual physical layer is used to deliver and possibly corrupt and
+lose data frames.
+.PP
+.IP "\-q"
+Execute quietly (and more quickly) \-
+all output requested with \f(CWprintf(), puts()\fR and \f(CWputchar()\fR
+will not appear in the node output windows.
+All output produced during an \f(CWEV_DEBUG?\fP event (a button press)
+will still appear,
+as will all output ``mirrored'' in logging files.
+.PP
+.IP "\-r nnodes"
+Request that a random network be generated,
+consisting of \fInnodes\fP.
+Each node will have at least one link and the whole network is
+guaranteed to be connected.
+The \fI\-r\fP option may be used instead of providing a topology file.
+.PP
+.IP "\-R function_name"
+Use \f(CWfunction_name()\fR as the function to first invoke when rebooting
+each node.
+By default,
+the function \f(CWreboot_node()\fP will be invoked.
+.PP
+.IP "\-s"
+Print a summary of the network's activity just before \fIcnet\fP exits.
+.PP
+.IP "\-S seed"
+Provide the seed for random number generation
+(for message generation and frame corruption).
+Specifying all of \fI\-M\ mins\fP,
+\fI\-S\ seed\fP and \fI\-T\fP enables a simulation to be replayed.
+.PP
+.IP "\-t"
+Trace all events delivered to each network node.
+A description of all \fIcnet\fP function calls,
+arguments and
+return and \f(CWcnet_errno\fR values is reported via
+\fIcnet\fP's \f(CWtrace\fP stream.
+If \fIcnet\fP is running within the Tcl/Tk windowing environment,
+trace output appears in a subwindow under the network's topology map.
+Otherwise, any trace output appears via \fIcnet\fP's \f(CWstderr\fP stream.
+Any output requested with
+\f(CWCNET_trace\fR will also appear on
+\fIcnet\fP's \f(CWtrace\fP stream.
+.PP
+.IP "\-T"
+By default, \fIcnet\fP runs in ``wall-clock'' time,
+that is, the simulation performs one second of network-work in one second
+of ``wall-clock'' time.
+This works well for up to about 20 nodes beyond which \fIcnet\fP ``gets
+behind''.
+Using \fI\-T\fP forces \fIcnet\fP to ignore the ``wall-clock'' time and
+to execute as a true discrete-event simulator.
+.PP
+.IP "\-v"
+Be very verbose reporting \fIcnet\fP's actions.
+All reported information is sent to \fIcnet\fP's \f(CWstderr\fP output stream.
+.PP
+.IP "\-W"
+Disable the display of the network using the Tcl/Tk windowing environment
+(this the default for ASCII terminals!).
+.PP
+.IP "\-z"
+Display statistics and event summaries even if they are zero
+(implies \fI\-s\fR).
+.PP
+.
+.
+.SH "EXIT STATUS"
+.I cnet
+will exit with a 0 if either the ``Exit\ cnet'' button is selected
+or the time limit expires.
+Any other conditions,
+such as an error in the topology file
+or a syntax error in the protocol source files,
+will result in \fIcnet\fP exiting with a status of 1.
+.PP
+.SH "FILES AND ENVIRONMENT"
+The standard header file,
+\f(CW<cnet.h>\fR,
+which is included by \fIcnet\fP itself
+and should be included in your protocol files,
+is in
+.I \*(DD.
+.PP
+The environment variable CNETPATH may define a colon delimited list
+of directories in which to find an alternate \f(CW<cnet.h>\fR file.
+The filename of the Tcl/Tk commands may be provided via CNETTCLTK.
+CNETGCC and CNETCC provide the full pathnames of alternate
+ANSI-C and non-ANSI C compilers, respectively, to be used instead of the
+precompiled defaults.
+If defined,
+CNETCPP similarly provides the full pathname of the C preprecessor
+if your C compiler does not accept a \f(CW\-E\fP option.
+.
+.PP
+.SH "SEE ALSO"
+.in +8n
+.ta +8n
+.ti -8n
+WWW-based documentation at
+.br
+\fIhttp://www.csse.uwa.edu.au/cnet/\fP
+.sp
+.ti -8n
+[McD91]	\fI"A Network Specification Language and Execution Environment for Undergraduate Teaching"\fP,
+C.S. McDonald,
+Proc. of the ACM Computer Science Education Technical Symposium\0'91,
+San Antonio, Texas, Mar 1991,
+pp25-34.
+.br
+.ti -8n
+[McD93]	\fI"Network Simulation Using User-level Context Switching"\fR,
+C.S. McDonald,
+Proc. of the Australian UNIX Users' Group Conference\0'93,
+Sydney, Sept 1993, pp1-10.
+.\" .br
+.\" .ti -8n
+.\" [McD96]	\fI"Teaching Computer Networking Principles Using Simulation"\fR,
+.\" Handouts from Chris McDonald's ACM-SIGCSE'96 workshop,
+.\" (http://www.csse.uwa.edu.au/cnet/sigcse96.shar.gz).
+.in
+.PP
+.SH LIMITATIONS
+\fIcnet\fP refuses to compile files with the word \fIreceive\fP spelt
+incorrectly.
+.PP
+Only one application layer type
+and one physical layer type may be specified,
+with \fI\-A\fP and \fI\-P\fP respectively.
+It is not possible for each node to use a different application layer or
+physical layer.
+.PP
+As the Tcl/Tk windowing environment uses the X-windows system
+under \*(UX/\*(LX,
+the protocols should not use the following system and library functions:
+\fIalarm(3),
+getitimer(3),
+ioctl(2),
+setitimer(2),
+sigblock(2),
+sigmask(2),
+signal(3),
+sigvec(2),
+sleep(3),
+system(3),
+wait(2),
+wait3(2)\fP
+or perform any \*(UX/\*(LX I/O that may block for long periods.
+.sp
+.SH AUTHOR
+Chris McDonald (The University of Western Australia, chris@csse.uwa.edu.au)
+.br
+Many other contributors are gratefully acknowledged on the
+.I cnet
+web-page at \*(WW.

@@ -1,0 +1,91 @@
+<HTML>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HEAD>
+<TITLE>The cnet network simulator - Event handling functions</TITLE>
+<META NAME="description" CONTENT="cnet enables experimentation
+with various data-link layer, network layer, routing and transport
+layer networking protocols.  It has been specifically developed for
+undergraduate teaching.">
+
+<META NAME="keywords" CONTENT="network, 802.3, ethernet, WAN, simulator,
+simulation, protocol, undergraduate, teaching">
+</HEAD>
+
+<BODY BGCOLOR="white" TEXT ="black" LINK="blue" VLINK="purple">
+
+<table>
+<tr>
+<td valign="top" bgcolor="#74dbf2">
+<table cellpadding="4" cellspacing="0" border="0"><tr>
+
+<td nowrap>
+    <b><i>cnet</i> v2.0.10</b>
+    <p>
+
+    <a href="index.html">home</a>
+    <br>
+    <a href="introduction.html">introduction</a>
+    <br>
+    <a href="themodel.html">simulation model</a>
+    <p>
+    <a href="topology.html">topology files</a>
+    <br>
+    <a href="options.html">cmdline options</a>
+    <br>
+    <a href="functions.html">the API</a>
+    <p>
+    <a href="faq.html">FAQ</a>
+    <p>
+    <a href="install.html">download</a>
+</td>
+
+</td></tr></table>
+</td>
+
+<td>
+<h3>Event handling functions</h3>
+
+<dl>
+<dt><a name="set_handler"><tt>
+<b>int</b>
+CNET_set_handler(CnetEvent ev, <b>void</b> (*func)(), CnetData data)
+</tt>
+</a>
+</dt>
+<dd>
+<p>
+Register <tt>func</tt> as the <b>void</b> ``returning'' function to be invoked
+when the event <tt>ev</tt> occurs.
+<p>
+Possible errors: <tt>ER_BADEVENT, ER_NOTSUPPORTED.</tt>
+<p>
+</dd>
+
+<dt><a name="get_handler"><tt>
+<b>int</b>
+CNET_get_handler(CnetEvent ev, <b>void</b> (**handler)(), CnetData *data)
+</tt>
+</a>
+</dt>
+<dd>
+<p>
+Obtains the address of the <tt>void</tt> ``returning'' function which
+will be invoked when the indicated event occurs, together with the
+user-specified data value that will be passed to the handler.
+<p>
+Possible errors: <tt>ER_BADEVENT, ER_NOTSUPPORTED.</tt>
+<p>
+</dd>
+</dl>
+
+</td></tr></table>
+
+
+<table width="100%"><tr>
+  <td><i>cnet</i> was written and is maintained by Chris McDonald
+      <A HREF="mailto:chris@csse.uwa.edu.au">(chris@csse.uwa.edu.au)</a></td>
+  <td><img align="right" src="images/UWAsmall.gif"></td>
+</tr></table>
+
+</BODY>
+</HTML>

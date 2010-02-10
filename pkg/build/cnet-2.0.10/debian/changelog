@@ -1,0 +1,64 @@
+cnet (2.0.10-0kuliax1) lumpia; urgency=low
+
+  * Get the same version of source, but with different contents
+  * Rebuild against lenny, for Kuliax: lumpia distribution
+  * Adapt the package version to Kuliax standard packaging
+  * Tiny modification in DOC/cnet.man: "TH cnet 1" and ".PP"
+  * Modify Makefile: variables (PREFIX, CNETDIR, MANDIR, WEBDIR) and install:
+  * src/config.h: modify first constant of CNETPATH for non-FreeBSD
+  * src/Makefile.linux:
+    - include tcl8.4 dir
+    - adapt tcl/tk to tcl/tk8.4
+    - remove link against libX11, -lX11
+  * debian/control:
+    - change Section to net
+    - remove build-essential and libx11-dev from Build-Depends
+    - minor modification of Description
+    - move URL from Description to Homepage
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Wed, 10 Feb 2010 05:19:05 +0700
+
+cnet (2.0.10-klx-4) unstable; urgency=low
+
+  * add conditional exp for no example parameter and if example file does not
+    exist.
+
+ -- Iwan Setiawan <stwn@duniasemu.org>  Sat,  9 Dec 2006 18:59:17 +0700
+
+cnet (2.0.10-klx-3) unstable; urgency=low
+
+  * debian/control: fix short Description
+  * rebuild 
+
+ -- Iwan Setiawan <stwn@duniasemu.org>  Sat, 28 Oct 2006 21:01:13 -0400
+
+cnet (2.0.10-klx-2) unstable; urgency=low
+
+  * remove README.Debian
+  * add cnet-examples script
+  * debian/control: change Section to misc, add libx11-dev to Build-Depends
+    delete string "cnet" from short Description, add package docs+examples
+    info to long Description
+  * debian/copyright: add details of Upstream Author based on src/COPYRIGHT
+  * debian/dirs: add usr/share/doc/html
+  * debian/docs: add src/HIDENAMES
+  * debian/rules: add docs from DOC/, examples from EXAMPLES/, cnet-examples 
+    script, exclude compressed for *.c, *.html, and *.fig files
+
+ -- Iwan Setiawan <stwn@duniasemu.org>  Wed, 30 Aug 2006 15:31:27 -0400
+
+cnet (2.0.10-klx-1) unstable; urgency=low
+
+  * Initial release
+  * compiled against tcl8.4 and tk8.4
+  * adapted $PREFIX, $CNETDIR, $MANDIR, $WEBDIR to 
+    Debian-specific FS hierarchy in Makefile
+  * add $(DESTDIR) in front of destination directory in Makefile
+  * change and adapted $XINCLUDES, $XLIBDIRS, and $XLIBS 
+    in src/Makefile.linux
+  * add /usr/share/cnet to #define CNETPATH in config.h
+  * adapted include header tcl.h and tk.h to the "real" 
+    header location of tcl/tk 8.4 in cnetheader.h
+
+ -- Iwan Setiawan <stwn@duniasemu.org>  Mon, 28 Aug 2006 22:43:06 -0400
+

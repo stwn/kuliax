@@ -1,0 +1,285 @@
+<HTML>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HEAD>
+<TITLE>The cnet network simulator - Tracing functions</TITLE>
+<META NAME="description" CONTENT="cnet enables experimentation
+with various data-link layer, network layer, routing and transport
+layer networking protocols.  It has been specifically developed for
+undergraduate teaching.">
+
+<META NAME="keywords" CONTENT="network, 802.3, ethernet, WAN, simulator,
+simulation, protocol, undergraduate, teaching">
+</HEAD>
+
+<BODY BGCOLOR="white" TEXT ="black" LINK="blue" VLINK="purple">
+
+<table>
+<tr>
+<td valign="top" bgcolor="#74dbf2">
+<table cellpadding="4" cellspacing="0" border="0"><tr>
+
+<td nowrap>
+    <b><i>cnet</i> v2.0.10</b>
+    <p>
+
+    <a href="index.html">home</a>
+    <br>
+    <a href="introduction.html">introduction</a>
+    <br>
+    <a href="themodel.html">simulation model</a>
+    <p>
+    <a href="topology.html">topology files</a>
+    <br>
+    <a href="options.html">cmdline options</a>
+    <br>
+    <a href="functions.html">the API</a>
+    <p>
+    <a href="faq.html">FAQ</a>
+    <p>
+    <a href="install.html">download</a>
+</td>
+
+</td></tr></table>
+</td>
+
+<td>
+<h3>Tracing <i>cnet</i>'s execution</h3>
+
+The development and debugging of network protocols is a difficult task.
+Without the support of a development environment,
+the development of even a two-node protocol requires access to both nodes
+and, possibly, the physical communication medium.
+This is, of course, one of the proimary reasons that we use network
+simulators, such as <i>cnet</i>.
+We have the ability to ``peek'' inside each network node,
+and even the communication links,
+to see what is happening and to, hopefully, expose errors in our protocols.
+
+<p>
+Although <i>cnet</i> permits protocols to be written in ANSI-C and
+executed natively in a single operating system process,
+it does not provide traditional debugging support.
+Moreover (unfortunately) because of the way <i>cnet</i> manipulates the
+single process's data segments to schedule nodes,
+standard debuggers can't ``keep up'' with what is happening.
+
+<p>
+<i>cnet</i> aids the development and debugging of network protocols with a
+minimum of intrusion.
+<i>cnet</i> enables the delivery and execution of events and <i>cnet</i>'s
+own functions to be <i>traced</i>.
+Each event's commencement and termination, and each function's invocation,
+parameters, and return value annotated.
+The picture below shows a <i>cnet</i> simulation which was commenced with
+the <a href="options.html#option-t">-t</a> option to enable tracing.
+
+<p>
+<IMG SRC="images/tracing1.gif">
+<p>
+
+The displayed first line of the trace, above, indicates that the
+handler for the <tt>EV_APPLICATIONREADY</tt> event
+for the node Melbourne is being invoked at time <tt>728764ms</tt>.
+Five lines later, execution leaves the same handler.
+While executing the handler,
+four of <i>cnet</i>'s standard functions were invoked.
+
+<p>
+The first of these (line 2) was
+<a href="application.html#read_application"><tt>CNET_read_application</tt></a>.
+On invocation the first two parameters are addresses
+(such as requested with C's &amp; operator) to receive the destination
+address and actual contents of the next message.
+These addresses are printed as
+hexadecimal values because no interpretation can be placed on their
+initial contents, nor the memory to which these addresses refer.
+In reality, the third parameter is also passed by address,
+but we know that it represents the maximum possible length of the second
+parameter (to receive the new message), so we are able to report that the
+maximum length ``provided'' on entry to the function was <tt>8192</tt>.
+
+<p>
+The return value of <tt>CNET_read_application</tt> was <tt>0</tt>,
+indicating success,
+and the side-effects of the function,
+modifying the destination address and length of the new message are also
+reported with the new values of <tt>0</tt> and <tt>897</tt> respectively.
+If an error had been detected,
+the trace would indicate a return value of <tt>-1</tt> together with the
+new value of the <tt>CnetError</tt> type in cnet_errno</tt>.
+
+<p>
+Note that due to <i>cnet</i>'s
+<a href="eventdriven.html">event driven</a> programming style,
+that events do not interrupt or preempt one another.
+The trace stream will always show what is being executed with only one
+level of indentation.
+
+<p>
+With reference to the <i>stopandwait</i> protocol,
+we can see that the next event for Melbourne, at <tt>733274ms</tt>,
+was a timeout for the Physical Layer transmission at <tt>728764ms</tt>.
+We can see that the timer that has expired (<tt>t=168</tt>) was the one
+that was started earlier,
+and that the frame of length <tt>913</tt> bytes,
+carrying the message of <tt>897</tt> bytes (ahhh, a 16 byte header),
+is retransmitted as a result of the timeout.
+
+<p>
+The tracing of function parameters using only their hexadecimal addresses
+is error-prone and confusing.
+Moreover, different local variables in different event
+handlers will have the same hexadecimal addresses (as they'll be on the
+function's runtime stack), leading to more confusion.
+
+<p>
+<IMG SRC="images/tracing2.gif">
+<p>
+
+The picture above shows the same <i>stopandwait</i> protocol as above,
+but a few additional C statements have been added to the protocol's code,
+such as:
+<br>
+<pre><tt>      CNET_trace_name(&amp;destaddr, "dest");
+      CNET_trace_name(lastmsg,   "newmessage");
+</tt></pre>
+
+<p>
+These enable a variable's name (as a string) be be associated with the
+variable's address. If an address has a known associated name/string,
+this is printed to the trace stream instead of the hexadecimal address.
+Calls to <tt>CNET_trace_name</tt> should be placed near the entry of each
+event handler, and obviously before an address is to be traced.
+The <tt>CNET_trace_name</tt> function is not, itself, traced.
+
+<p>
+By default, a copy of <i>cnet</i>'s <i>trace stream</i> appears under the
+main window when <i>cnet</i> is invoked with
+the <a href="options.html#option-t">-t</a> option.
+Alternatively, tracing may be toggled using the windowing interface,
+by selecting a checkbox to change the default or specific node's attributes.
+When executing without the Tcl/Tk interface,
+the trace stream appears via <i>cnet</i>'s <i>standard error</i> stream.
+The complete trace stream may also be mirrored to a named file by setting the
+<a href="attributes.html#gattrs">tracefile</a> global attribute. 
+
+<p>
+From within the C code of a protocol it is possible to trace only certain
+events, possibly for only certain nodes of interest.
+For example, a call such as
+<tt>CNET_set_trace(TE_APPLICATIONREADY)</tt> will trace just
+the <tt>EV_APPLICATIONREADY</tt> event for the invoking node.
+
+The parameter to <tt>CNET_set_trace</tt> is really a bitmap of events of
+interest, and so we may add or remove particular events
+using C's bitwise operators:
+<p>
+
+<table cellpadding="1" cellspacing="0" border="0" bgcolor="#000000"><tr><td>
+<table cellpadding="8" cellspacing="0" border="0" bgcolor="lightgrey"
+width="550"><tr><td>
+<pre><tt>
+<b>if</b>(nodeinfo.nodenumber == 1) {
+
+    <b>int</b>   oldmask, newmask;
+
+    oldmask  =  CNET_get_trace();
+    newmask  =  oldmask | TE_PHYSICALREADY | TE_TIMER2;
+
+    CNET_set_trace(newmask);
+    ......
+    ......
+    CNET_set_trace(oldmask);
+}
+</tt></pre></tr></td></table></td></tr></table>
+
+<p>
+All required <tt>TE_*</tt> constants are defined in <i>cnet</i>'s header
+file, along with the useful <tt>TE_ALLEVENTS</tt> and <tt>TE_NOEVENTS</tt>.
+During the execution of an event handler that is being traced,
+an arbitrary string may also be displayed with <tt>CNET_trace</tt> function,
+which accepts a standard C <i>printf</i> format specification.
+
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+
+<h3>Tracing functions</h3>
+
+<dl>
+<dt><a name="trace"><tt>
+<b>int</b>
+CNET_trace(<b>const char</b> *format, ...)
+</tt>
+</a>
+</dt>
+<dd>
+<p>
+If tracing is requested (globally, or for certain nodes) this
+<tt>printf()</tt>-like function will produce its output on the
+<i>cnet</i>'s <tt>trace</tt> stream.
+<p>
+Possible errors: <tt>ER_BADARG.</tt>
+<p>
+</dd>
+
+<dt><a name="trace_name"><tt>
+<b>int</b>
+CNET_trace_name(<b>void</b> *addr, <b>const char</b> *name)
+</tt>
+</a>
+</dt>
+<dd>
+<p>
+If tracing is requested (globally, or for certain nodes) function parameters
+known to be addresses are annotated as (cryptic) hexademical values.
+By recording a name (string) with an address,
+the annotation is more meaningful.
+<p>
+Possible errors: <tt>ER_BADARG.</tt>
+<p>
+</dd>
+
+<dt><a name="set_trace"><tt>
+<b>int</b>
+CNET_set_trace(<b>int</b> eventmask)
+</tt>
+</a>
+</dt>
+<dd>
+<p>
+Tracing is normally an ``all-or-nothing'' situation -
+if requested, all events are annotated.
+However, tracing may be requested programatically by providing an eventmask,
+such as <tt>TE_APPLICATIONREADY|TE_PHYSICALREADY</tt>,
+which will annotate just the requested events.
+The ``all-or-nothing'' default represents
+<tt>CNET_set_trace(TE_ALLEVENTS)</tt> or
+<tt>CNET_set_trace(TE_NOEVENTS)</tt>.
+<p>
+</dd>
+
+<dt><a name="get_trace"><tt>
+<b>int</b>
+CNET_get_trace(<b>void</b>)
+</tt>
+</a>
+</dt>
+<dd>
+<p>
+Returns an integer representing the eventmask of all events currently
+being traced.
+</dd>
+<p>
+</dl>
+
+</td></tr></table>
+
+
+<table width="100%"><tr>
+  <td><i>cnet</i> was written and is maintained by Chris McDonald
+      <A HREF="mailto:chris@csse.uwa.edu.au">(chris@csse.uwa.edu.au)</a></td>
+  <td><img align="right" src="images/UWAsmall.gif"></td>
+</tr></table>
+
+</BODY>
+</HTML>

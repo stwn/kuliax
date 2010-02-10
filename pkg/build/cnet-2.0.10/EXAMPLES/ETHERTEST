@@ -1,0 +1,20 @@
+
+compile 	 = "ethertest.c"
+
+minmessagesize	 = 40bytes
+maxmessagesize	 = 1000bytes
+messagerate	 = 10ms
+
+ethernet CSSE {
+    nicaddr 00:90:27:62:58:84	host budgie	{ }
+    nicaddr 00:90:27:41:D7:42	host dibbler	{ }
+    nicaddr 00:02:B3:3C:34:C5	host dunnart	{ }
+    nicaddr 00:0A:27:7D:41:C6	host emu	{ }
+    nicaddr 00:D0:B7:83:97:E7	host galah	{ }
+    nicaddr 00:90:27:41:B0:BE	host kanga	{ }
+    nicaddr 00:AA:00:BC:C0:73	host kidna	{ }
+    nicaddr 00:90:27:62:83:F5	host koala	{ }
+    nicaddr 00:D0:B7:90:DD:85	host numbat	{ }
+    nicaddr 00:A0:C9:AF:9E:81	host quokka	{ }
+    nicaddr 00:90:27:34:B6:D8	host wombat	{ }
+}

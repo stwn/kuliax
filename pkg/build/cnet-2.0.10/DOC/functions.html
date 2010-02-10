@@ -1,0 +1,169 @@
+<HTML>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HEAD>
+<TITLE>The cnet network simulator - layers and functions - the API</TITLE>
+<META NAME="description" CONTENT="cnet enables experimentation
+with various data-link layer, network layer, routing and transport
+layer networking protocols.  It has been specifically developed for
+undergraduate teaching.">
+
+<META NAME="keywords" CONTENT="network, 802.3, ethernet, WAN, simulator,
+simulation, protocol, undergraduate, teaching">
+</HEAD>
+
+<BODY BGCOLOR="white" TEXT ="black" LINK="blue" VLINK="purple">
+
+<table>
+<tr>
+<td valign="top" bgcolor="#74dbf2">
+<table cellpadding="4" cellspacing="0" border="0"><tr>
+
+<td nowrap>
+    <b><i>cnet</i> v2.0.10</b>
+    <p>
+
+    <a href="index.html">home</a>
+    <br>
+    <a href="introduction.html">introduction</a>
+    <br>
+    <a href="themodel.html">simulation model</a>
+    <p>
+    <a href="topology.html">topology files</a>
+    <br>
+    <a href="options.html">cmdline options</a>
+    <br>
+    <a href="functions.html">the API</a>
+    <p>
+    <a href="faq.html">FAQ</a>
+    <p>
+    <a href="install.html">download</a>
+</td>
+
+</td></tr></table>
+</td>
+
+<td>
+<h3><a name="functions"><i>cnet's</i> layers and functions - the API</a></h3>
+
+Descriptions of <i>cnet's</i> core functions are available from here.
+In each section functions are presented as ANSI-C prototypes,
+often with an example of their use.
+<p>
+Most library functions return the integer <tt>0</tt> on success
+and the integer <tt>-1</tt> on failure.
+The most recent error status is reflected in
+the global variable <tt>cnet_errno</tt>.
+All values of <tt>cnet_errno</tt> will be instances of the
+enumerated type <a href="datatypes.html#cneterror"><tt>CnetError</tt></a>.
+
+Errors may be reported to <tt>stderr</tt> with
+<tt>CNET_perror()</tt> and their error message string accessed from
+<tt>cnet_errstr[(<b>int</b>)cnet_errno]</tt>.
+<p>
+<ul>
+<li> <a href="application.html">Application Layer functions</a>.
+    <ul>
+    <li><a href="application.html#read_application">
+		CNET_read_application</a>
+    <li><a href="application.html#write_application">
+		CNET_write_application</a>
+    <li><a href="application.html#enable_application">
+		CNET_enable_application</a>
+    <li><a href="application.html#disable_application">
+		CNET_disable_application</a>
+    </ul>
+<li> <a href="physical.html">Physical Layer functions</a>.
+    <ul>
+    <li><a href="physical.html#write_physical">CNET_write_physical</a>
+    <li><a href="physical.html#write_physical_reliable">
+		CNET_write_physical_reliable</a>
+    <li><a href="physical.html#write_direct">CNET_write_direct</a>
+    <li><a href="physical.html#read_physical">CNET_read_physical</a>
+    <li><a href="physical.html#set_promiscuous">CNET_set_promiscuous</a>
+    <li><a href="physical.html#set_nicaddr">CNET_set_nicaddr</a>
+    <li><a href="physical.html#parse_nicaddr">CNET_parse_nicaddr</a>
+    <li><a href="physical.html#format_nicaddr">CNET_format_nicaddr</a>
+    </ul>
+<li> <a href="timers.html">Timer functions</a>.
+    <ul>
+    <li><a href="timers.html#start_timer">CNET_start_timer</a>
+    <li><a href="timers.html#stop_timer">CNET_stop_timer</a>
+    <li><a href="timers.html#timer_data">CNET_timer_data</a>
+    </ul>
+<li> <a href="tracing.html">
+	Tracing functions</a>.
+    <ul>
+    <li><a href="tracing.html#trace">CNET_trace</a>
+    <li><a href="tracing.html#trace_name">CNET_trace_name</a>
+    <li><a href="tracing.html#set_trace">CNET_set_trace</a>
+    <li><a href="tracing.html#get_trace">CNET_get_trace</a>
+    </ul>
+<li> <a href="eventfuncs.html">
+	Event handling functions</a>.
+    <ul>
+    <li><a href="eventfuncs.html#set_handler">CNET_set_handler</a>
+    <li><a href="eventfuncs.html#get_handler">CNET_get_handler</a>
+    </ul>
+
+<li> <a href="otherfuncs.html">
+	Checksum and miscellaneous functions</a>.
+    <ul>
+    <li><a href="otherfuncs.html#checksum_internet">checksum_internet</a>
+    <li><a href="otherfuncs.html#checksum_ccitt">checksum_ccitt</a>
+    <li><a href="otherfuncs.html#checksum_crc16">checksum_crc16</a>
+    <li><a href="otherfuncs.html#checksum_crc32">checksum_crc32</a>
+
+    <li><a href="otherfuncs.html#read_keyboard">CNET_read_keyboard</a>
+    <li><a href="otherfuncs.html#set_debug_string">CNET_set_debug_string</a>
+    <li><a href="otherfuncs.html#set_time_of_day">CNET_set_time_of_day</a>
+    </ul>
+<li> <a href="#restrictions">Function restrictions</a>.
+</ul>
+
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+<p>
+<h3>
+    <a name="restrictions">Function restrictions</a>
+</h3>
+Note that calls to the functions
+<p>
+
+<pre><tt>    CNET_write_application,
+    CNET_read_application,
+    CNET_enable_application,
+    CNET_disable_application and
+    CNET_set_handler(EV_APPLICATIONLAYER,...) and
+    CNET_set_handler(EV_KEYBOARDREADY,...)
+</tt></pre>
+
+are only valid if called from a node of node type
+<a href="datatypes.html"><tt>NT_HOST</tt></a>.
+Function calls to either the Application or Physical Layers are invalid
+when <i>cnet</i> is not running
+(this can occur when the simulation is running under a windowing system,
+is paused, and a node's debug button is selected).
+<p>
+
+Calls to the functions
+<p>
+
+<pre><tt>    CNET_set_promiscuous, and
+    CNET_set_nicaddr
+</tt></pre>
+
+cannot set the attributes of link <tt>0</tt>, the <tt>LOOPBACK</tt> link,
+nor set a NIC address to either the zero address, <tt>00:00:00:00:00:00</tt>,
+or the broadcast address, <tt>ff:ff:ff:ff:ff:ff</tt>.
+
+</td></tr></table>
+
+
+<table width="100%"><tr>
+  <td><i>cnet</i> was written and is maintained by Chris McDonald
+      <A HREF="mailto:chris@csse.uwa.edu.au">(chris@csse.uwa.edu.au)</a></td>
+  <td><img align="right" src="images/UWAsmall.gif"></td>
+</tr></table>
+
+</BODY>
+</HTML>

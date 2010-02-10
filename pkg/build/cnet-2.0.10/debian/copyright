@@ -1,0 +1,38 @@
+This package was debianized by Iwan Setiawan <stwn@kuliax.org> on
+Wed, 10 Feb 2010 05:19:05 +0700.
+
+It was downloaded from http://www.csse.uwa.edu.au/cnet/
+
+Upstream Author:
+
+    Chris McDonald, chris@csse.uwa.edu.au
+    Department of Computer Science & Software Engineering
+    The University of Western Australia,
+    Crawley, Western Australia, 6009
+    PH: +61 8 9380 2533, FAX: +61 8 9380 1089.
+
+Copyright:
+
+    Copyright (C) 1992-2006, Chris McDonald
+
+License:
+
+    This package is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This package is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this package; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+
+On Debian systems, the complete text of the GNU General
+Public License can be found in `/usr/share/common-licenses/GPL'.
+
+The Debian packaging is (C) 2010, Iwan Setiawan <stwn@kuliax.org> and
+is licensed under the GPL, see above.

@@ -1,0 +1,25 @@
+#!/bin/sh
+# simple script to run cnet examples;
+# cnet need to create *.o in examples directory since 
+# $CNET_EXAMPLES_PATH is not writable, it's good idea 
+# to just copy the dir, cd to it, and run cnet.
+# after execute example, it will delete the dir.
+# created: 29082006;08:52, stwn
+# last updated: 30082006;16:36, stwn
+# 		09122006;17:58, stwn> add conditional exp for no example parameter
+#				      and if example file does not exist.
+
+CNET_EXAMPLES_PATH=/usr/share/doc/cnet/examples
+if [ -f $CNET_EXAMPLES_PATH/$1 ]; then
+	/bin/cp -r $CNET_EXAMPLES_PATH .
+	cd examples
+	/usr/bin/cnet $1
+	cd ..
+	/bin/rm -rf examples
+elif [ "$1" == "" ] ; then
+  	echo "Usage: $0 [example file]"
+  	echo "see $CNET_EXAMPLES_PATH, for the list."
+else
+     	echo "$1 example file does not exist."
+  	echo "see $CNET_EXAMPLES_PATH, for the list."
+fi

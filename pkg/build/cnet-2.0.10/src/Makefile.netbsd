@@ -1,0 +1,27 @@
+#
+# The following #defines are for NetBSD contributed by Mark Davies,
+# Victoria University of Wellington, NZ   <mark@mcs.vuw.ac.nz>
+# Wed, 15 Aug 2001.
+#
+# Uncomment the following line if you wish Tcl/Tk windowing (see config.h)
+#
+XINCLUDES	= -I/usr/pkg/include -I/usr/X11R6/include
+XLIBS		= -ltcl83 -ltk83 -lX11 -lm
+#
+ANSICC		= gcc -ansi
+
+INCLUDES	=
+CFLAGS		= -O -Wall $(INCLUDES) $(XINCLUDES)
+
+LD		= gcc -rdynamic
+LDFLAGS		=
+
+LIBDIRS		= -L/usr/pkg/lib -L/usr/X11R6/lib -Wl,-R/usr/pkg/lib:/usr/X11R6/lib
+LIBS		= -lm
+STRIP		= strip
+
+
+# ---------------------- No user-serviceable code below -----------------
+
+include	Makefile.common
+

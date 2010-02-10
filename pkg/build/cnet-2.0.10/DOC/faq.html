@@ -1,0 +1,995 @@
+<HTML>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HEAD>
+<TITLE>The cnet network simulator - faq</TITLE>
+<META NAME="description" CONTENT="cnet enables experimentation
+with various data-link layer, network layer, routing and transport
+layer networking protocols.  It has been specifically developed for
+undergraduate teaching.">
+
+<META NAME="keywords" CONTENT="network, 802.3, ethernet, WAN, simulator,
+simulation, protocol, undergraduate, teaching">
+</HEAD>
+
+<BODY BGCOLOR="white" TEXT ="black" LINK="blue" VLINK="purple">
+
+<table>
+<tr>
+<td valign="top" bgcolor="#74dbf2">
+<table cellpadding="4" cellspacing="0" border="0"><tr>
+
+<td nowrap>
+    <b><i>cnet</i> v2.0.10</b>
+    <p>
+
+    <a href="index.html">home</a>
+    <br>
+    <a href="introduction.html">introduction</a>
+    <br>
+    <a href="themodel.html">simulation model</a>
+    <p>
+    <a href="topology.html">topology files</a>
+    <br>
+    <a href="options.html">cmdline options</a>
+    <br>
+    <a href="functions.html">the API</a>
+    <p>
+    <a href="faq.html">FAQ</a>
+    <p>
+    <a href="install.html">download</a>
+</td>
+
+</td></tr></table>
+</td>
+<td>
+<a name="faq"></a>
+<b><font size="+1"><i>cnet</i> Frequently Asked Questions</font></b>
+<p>
+
+This page contains a number of Frequently Asked/Answered Questions (FAQs)
+about the <i>cnet</i> network protocol simulator.  Please read this page
+first to ensure that you fully understand what is happening and then be
+able to anticipate any errors that you may confront.
+<p>
+Please appreciate that there are thousands of students worldwide
+using <i>cnet</i>.
+I am unable to respond to individual questions about <i>cnet</i>,
+unless they are from students enrolled in a course that I'm presenting.
+In particular, I will not answer homework or assignment questions.
+Please ask <i>your</i> professor or instructor.
+
+<p>
+<b>Getting started</b>
+<ul>
+    <li> <a href="#start">How do I get started with <i>cnet</i>?</a>
+    <li> <a href="#compile">How do I compile my <i>cnet</i> protocol
+		source files?</a>
+    <li> <a href="#terminate">Why does <i>cnet</i> terminate after 3 minutes?</a>
+    <li> <a href="#multiple">How can I develop my <i>cnet</i> protocols
+		in multiple files?</a>
+</ul>
+
+<p>
+<b>Developing protocols</b>
+<ul>
+    <li> <a href="#debug">How can I debug my <i>cnet</i> programs?</a>
+    <li> <a href="#tricks">Are there any simple tricks that can
+		help my understanding?</a>
+    <li> <a href="#check">What is the <tt>CHECK</tt> function
+		that appears in most examples?</a>
+    <li> <a href="#addrs">What is the difference between a node's number
+			    and its node address?</a>
+    <li> <a href="#drawframes">Can <i>cnet</i> display my protocol's
+			    data frames?</a>
+</ul>
+
+<p>
+<b>Managing time and periodic activity</b>
+<ul>
+    <li> <a href="#timenow">How do I determine the current time?</a>
+    <li> <a href="#timers">What are timers and <tt>CnetTimer</tt>s?</a>
+    <li> <a href="#timers10">Why does <i>cnet</i> provide 10 distinct
+			    timer queues?</a>
+    <li> <a href="#timerdata">What is the third parameter to
+			    <tt>CNET_start_timer</tt> ever used for?</a>
+    <li> <a href="#ownevents">Can I add my own <tt>CnetEvent</tt> events?</a>
+</ul>
+
+<p>
+<b>Hidden meanings</b>
+<ul>
+    <li> <a href="#efficiency">What is the meaning of the statistic
+		``Efficiency (bytes AL/PL)''?</a>
+    <li> <a href="#toobusy">What is the meaning of the error
+		``Function is too busy/congested to handle request''?</a>
+    <li> <a href="#spelling">What is the meaning of
+		"spelling mistake on line 83 of protocol.c"?</a>
+    <li> <a href="#signals">What is the meaning of
+	    "caught signal number &lt;??&gt; while (last) handling ......."?</a>
+</ul>
+
+<p>
+<b>Getting some real protocol simulation done</b>
+<ul>
+    <li> <a href="#speedup">How can I speed up <i>cnet</i>?</a>
+    <li> <a href="#plotting">How do I collate <i>cnet</i> statistics
+		for plotting?</a>
+</ul>
+
+<p>
+Please email
+<a href="mailto:chris@csse.uwa.edu.au"><i>chris@csse.uwa.edu.au</i></a>
+if you find any errors here,
+or think that some additional material should be added.
+
+<!-- ===================================================================== -->
+
+<a name="start"></a>
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+
+<h3>How do I get started with <i>cnet</i>?</h3>
+
+There are a number of on-line WWW pages to help you to get
+started with <i>cnet</i>.  Allow about an hour to read all of these:
+<p>
+<ul>
+    <li><a href="introduction.html">
+	    An introduction to <i>cnet</i></a> (with some screenshots).
+    <li><a href="themodel.html">
+		    The <i>cnet</i> simulation model</a>.
+    <li><a href="topology.html">
+		    Topology files</a>.
+    <li><a href="attributes.html">
+		    Global, node, and link attributes</a>.
+    <li><a href="eventdriven.html">The event driven programming style</a>.
+    <li><a href="walkthrough.html">Walk through some introductory protocols</a>.
+</ul>
+<p>
+If your copy of <i>cnet</i> has been installed (correctly)
+by someone else, you should read the Linux/Unix manual entry for <i>cnet</i>.
+You can read this by issuing the command:
+<tt>
+<pre>
+                       man cnet
+</pre>
+</tt>
+<p>
+on your machine, taking note of any ``local conditions''
+such as the location of <i>cnet</i>'s files and examples.
+The manual entry briefly outlines the capabilities of <i>cnet</i>
+and lists the many command-line options available.
+<p>
+
+Having read the manual entry,
+read the <i>cnet</i> specific header file
+(typically installed at <tt>/usr/local/include/cnet.h</tt>).
+All <i>cnet</i> programs must include the line
+<p>
+<tt>
+<pre>
+                       #include &lt;cnet.h&gt;
+</pre>
+</tt>
+<p>
+to include the contents of this file.
+In particular,
+it is important that you understand the <tt>CnetNodeinfo</tt>
+and <tt>CnetLinkinfo</tt> structures,
+the <tt>CnetEvent</tt> and <tt>CnetError</tt> enumerated types
+and all function prototypes.
+These are all described in much greater detail in another set of
+web-pages:
+<p>
+
+<ul>
+<li> <a href="functions.html"><i>cnet's</i> layers and functions -
+		the API</a>.
+<li> <a href="options.html"><i>cnet's</i> many command line options</a>.
+<li> <a href="datatypes.html"><i>cnet's</i>
+		datatypes, event types, and error types</a>.
+<li> <a href="tracing.html">Tracing <i>cnet's</i> execution</a>.
+<li> <a href="drawframes.html">Drawing data frames in <i>cnet</i></a>.
+</ul>
+
+<!-- ===================================================================== -->
+
+<a name="compile"></a>
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+
+<h3>How do I compile my <i>cnet</i> protocol source files?</h3>
+
+You do not need to compile your protocol files yourself.
+Simply executing
+<p><center>
+<tt>cnet TOPOLOGY</tt>
+</center><p>
+will cause <i>cnet</i> to locate and compile your
+ANSI-C files and produce a shared object file in your working directory
+(e.g. <tt>protocol.cnet</tt>).
+This shared object is then dynamically linked with
+the <i>cnet</i> simulator at run-time.
+<p>
+The system's standard C compiler is used, preferably GNU's <i>gcc</i>.
+All C error messages are reported by the compiler (not <i>cnet</i>).
+All fatal and warning messages should be eliminated before your protocol
+code can be considered syntactically correct.
+You will probably receive many more error
+messages than you've experienced before - the reason being that
+the compiler  is invoked with extra compilation switches to be very
+pedantic (this is good for your soul and in fact is how you should
+always compile C code).
+If you are concerned about any ``black magic'' destroying your code,
+observe what happens by invoking <i>cnet</i> as:
+<p>
+<center>
+<tt>cnet <a href="options.html#option-d">-d</a> TOPOLOGY</tt>
+</center>
+
+<!-- ===================================================================== -->
+
+<a name="terminate"></a>
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+
+<h3>Why does <i>cnet</i> terminate after 3 minutes?</h3>
+
+Errors in your protocols which prevent an event handler from returning
+when expected, prevent the <i>cnet</i> scheduler from performing correctly.
+In particular,
+the scheduler cannot service events from the windowing
+system - for example your requests to kill <i>cnet</i> itself when you detect
+a problem.
+To overcome this major problem, <i>cnet</i> itself times-out after
+3 minutes just in case you have written incorrect protocols which have
+become 'stuck'.
+Once you are confident that your protocols are working
+as expected you can easily extend this 3 minute period with, for example,
+
+<center>
+<tt>cnet <a href="options.html#option-m">-m</a> 10 TOPOLOGY</tt>
+</center>
+<p>
+where the command line option indicates the required number of minutes.
+
+<!-- ===================================================================== -->
+
+<a name="multiple"></a>
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+
+<h3>How can I develop my <i>cnet</i> protocols in multiple files?</h3>
+
+As <i>cnet</i> projects become larger,
+it's naturally wise to develop protocols in a number of different source files.
+A natural method to partition the files is based on their responsibilities.
+C (and of course many other programming languages) allow you to place
+relatively independent sections of source code in separate files,
+compile each source file individually, and to then link the resulting
+object files to form a single executable file.
+
+<p>
+<i>cnet</i> also allows you to do this, but simplifies the activity. In your
+topology file, replace a line such as
+
+<pre><tt>        compile = "protocol.c"
+with	compile = "dll.c nl.c routing.c queueing.c fragments.c"
+</tt></pre>
+
+(or whatever) and <i>cnet</i> will quietly compile and link all of the pieces.
+Only one of the C source files needs to have a <tt>reboot_node()</tt> function.
+
+<p>
+<i>cnet</i> handles the compilation and linking quite happily,
+unless it is interrupted.
+If individual files appear to be not being compiled,
+just remove all object files with
+<tt>rm *.o</tt> and re-run <i>cnet</i>.
+If you're interested in what's going on, invoke <i>cnet</i> with its
+<a href="options.html#option-v"><tt>-v</tt></a>
+switch to see the executed compilation and linking commands.
+
+<!-- ===================================================================== -->
+
+<a name="debug"></a>
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+
+<h3>How can I debug my <i>cnet</i> programs?</h3>
+
+Because many things appear to be happening simultaneously in <i>cnet</i>,
+debugging <i>cnet</i> protocols can be difficult.
+However, it is far easier than debugging protocols on different computers
+in different geographic locations!
+All output to C's implicit standard output
+stream appears on each node's output window.  Output to C's standard
+error stream will appear on the invoking shell window (tty or pty).
+<p>
+Each node's standard output stream can be copied to an individual file
+using the
+<a href="options.html#option-o"><tt>-o</tt></a> option to <i>cnet</i>.
+For example, if running a two node network with
+<center>
+<tt>cnet <a href="options.html#option-o">-o</a> debug TOPOLOGY</tt>
+</center>
+<p>
+all output will be copied (typically) to the files <i>debug.node0</i>
+and <i>debug.node1</i>.
+<p>
+
+Most importantly, most <i>cnet</i> functions return an integer indicating
+their success or failure (0 for success, -1 for failure).
+<i>IT IS ESSENTIAL</i>
+that you examine the function's return value to ensure that
+it performed as expected.  If you ignore this return value your
+protocols may fail at a much later stage in their execution and it will
+be extremely difficult to track down your error.  If a function detects
+an error (and returns -1) it will also set the node-specific variable
+<tt>cnet_errno</tt>
+to reflect what went wrong.
+The most recent error detected
+by <i>cnet</i> may then be printed from each node (to <tt>stderr</tt>)
+with the function
+<a href="functions.html"><tt>CNET_perror</tt></a>
+or you may construct your own error messages
+using the error descriptions in
+<tt>*cnet_errname[]</tt> or
+<tt>*cnet_errstr[]</tt>.
+
+<p>
+It is also helpful to trace your protocols to see the exact ordering
+and arguments of <i>cnet</i> function calls.
+Tracing may be selected with the
+<a href="options.html#option-t"><tt>-t</tt></a> command line option,
+setting the trace node attribute to true for
+all or individual nodes in the topology file or by selecting the trace
+checkbox on either the default or specific node panels under
+the windowing system.
+Tracing will appear on the <tt>trace</tt> stream of <i>cnet</i>
+(either the separate Tcl/Tk trace window or the shell's tty)
+and shows each node's event handling
+functions being invoked (and returned from) and, within each handler,
+all function calls, their arguments and the function return values.
+Any function arguments that are modified by the functions (arguments passed
+by reference) are also shown after the function return values.
+If any errors are detected by the functions themselves, these will be
+reported within the trace.
+See <a href="tracing.html">Tracing <i>cnet</i>'s execution</a>.
+
+<p>
+As a special case,
+networks of only 2-nodes may request that all data frames traversing the
+Physical Layer be drawn in a special window.
+Drawing frames requires a small addition to the protocol's topology file,
+and a special event handler to describe how the frames are to be drawn.
+A careful choice of colours and frame (field) lengths can assist in the
+debugging of Data Link layer protocols.
+See <a href="drawframes.html">Drawing data frames in <i>cnet</i></a>.
+
+<!-- ===================================================================== -->
+
+<a name="tricks"></a>
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+
+<h3>Are there any simple tricks that can help my understanding?</h3>
+
+Many people get confused with <i>cnet</i>'s apparent ability to manage
+multiple nodes simultaneously within a single process
+(which is, in fact, one of its unique features).
+In addition,
+it can be initially confusing to understand how a single protocol can
+act as both a sender and receiver simultaneously.
+A simple trick to ease this confusion is
+to only allow one node to transmit and the other to receive
+(in a network of just 2 nodes).
+As nodes have nodenumbers of 0, 1, 2, ...  adding the lines
+<p>
+<tt>
+<pre>
+    if(nodeinfo.nodenumber == 0)
+	(void)CNET_enable_application(ALLNODES);
+</pre>
+</tt>
+<p>
+to your handler for <tt>EV_REBOOT</tt>,
+typically <tt>reboot_node()</tt>,
+will only permit node <tt>#0</tt> to generate messages for delivery.
+
+<!-- ===================================================================== -->
+
+<a name="check"></a>
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+
+<h3>What is the <tt>CHECK</tt> function that appears in most examples?</h3>
+
+CHECK is actually not a function provided by
+<i>cnet</i> (or UNIX) but a C macro
+defined in the <i>cnet</i> header file.
+<p>
+Most of <i>cnet's</i> library (builtin) functions return
+<tt>0</tt> on success and something else,
+typically <tt>-1</tt>, on failure.
+In fact, if any of these
+functions fail, it probably indicates a serious error in a protocol
+(there are a few exceptions to this generalization, such as cancelling a
+timer that has already expired).
+Moreover, all functions will set the global error variable
+<tt>cnet_errno</tt>
+on failure and this may be used as a index into the globally accessible
+array of error strings,
+<tt>cnet_errstr</tt>.
+This is similar to the use of
+<tt>errno</tt> and <tt>sys_errlist</tt> in ANSI-C.
+<p>
+By enveloping most calls to <i>cnet's</i>
+library routines we can get an accurate
+and immediate report on the location (source file + line number + nodename)
+and type of each error.
+If using the GNU C compiler,
+we can also determine the function name in which the error occurred.
+These helpful values are passed to <i>cnet's</i> function <tt>CNET_exit</tt>
+which, if able, pops up a window highlighting the file and line number of
+the runtime error.
+Looking at the definition of <tt>CHECK</tt> in &lt;cnet.h&gt;
+may expose the "black magic":
+<p>
+<table cellpadding="1" cellspacing="0" border="0" bgcolor="#000000"><tr><td>
+<table cellpadding="8" cellspacing="0" border="0" bgcolor="lightgrey"
+width="550"><tr><td>
+<pre><tt>
+#if	defined(__GNUC__)
+#define CHECK(call)   if((call) != 0) { \
+                        CNET_exit(__FILE__,__FUNCTION__,__LINE__);}
+#else
+#define CHECK(call)   if((call) != 0) { \
+                        CNET_exit(__FILE__,(char *)NULL,__LINE__);}
+#endif
+</tt></pre></tr></td></table></td></tr></table>
+<p>
+<tt>CHECK</tt> may not strictly belong in <i>cnet's</i> header file,
+but it's such a useful macro, it saves everyone from re-inventing the wheel.
+
+<!-- ===================================================================== -->
+
+<a name="addrs"></a>
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+
+<h3>What is the difference between a node's number and its node address?</h3>
+
+Nodes have both a number and an address -
+node numbers (available in <tt>nodeinfo.nodenumber</tt>)
+range from 0,1,2,.....NNODES-1,
+whereas each node's address (available in <tt>nodeinfo.nodeaddress</tt>)
+can be any unique non-negative value.
+<i>By default</i>
+node numbers and node addresses are the same (0,1,2,....).
+<p>
+Setting a node address attribute in the topology file,
+as with
+<tt>
+<pre>
+    <b>host</b> Perth {
+        <b>address</b>     = 351
+        ....
+    }
+</pre>
+</tt>
+should reveal a problem if your protocols are assuming that
+node numbers and node addresses are always the same.
+In particular,
+the destination node addresses provided by
+<a href="application.html"><tt>CNET_read_application</tt></a>
+and expected by
+<a href="physical.html"><tt>CNET_write_direct</tt></a>
+are node addresses and not node numbers.
+
+<!-- ===================================================================== -->
+
+<a name="drawframes"></a>
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+
+<h3>Can <i>cnet</i> display my protocol's data frames?</h3>
+
+You're in luck!
+As of version 1.7, <i>cnet</i> can present a limited visualization of data
+frames traversing the Physical Layer.
+Using just colours and lengths, it is possible to display both data and
+acknowledgment frames, and the contents of some of their fields.
+In combination, these features may be used to debug
+implementations of Data Link Layer protocols.
+See <a href="drawframes.html">Drawing data frames in <i>cnet</i></a>.
+
+<!-- ===================================================================== -->
+
+<a name="timenow"></a>
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+
+<h3>How do I determine the current time?</h3>
+
+Do not attempt to use Unix's <tt>time</tt> or <tt>gettimeofday</tt>
+functions.
+<p>
+
+In <i>cnet</i> each node's "system-time" is provided in
+the global integer variable <tt>nodeinfo.time_in_usec</tt>,
+which measures the time, in microseconds, since the node was last rebooted.
+This value will (usually) have increased <i>between</i> calls to event
+handlers, but its value will not change <i>during</i> the execution of an
+event handler.
+<p>
+
+The current time of day, i.e. the "wall clock time",
+of each node is available via the structure <tt>nodeinfo.time_of_day</tt>,
+i.e. in <tt>nodeinfo.time_of_day.sec</tt> and <tt>nodeinfo.time_of_day.usec</tt>.
+The integer value in <tt>nodeinfo.time_of_day.sec</tt>
+represents the number of seconds elapsed since 00:00:00 on January 1, 1970,
+and can thus be used as an argument to standard Unix
+functions such as <tt>ctime()</tt>.
+<p>
+
+Unless <i>cnet</i> is invoked with the
+<a href="options.html#option-c"><tt>-c</tt></a> option,
+the wall clock time of all nodes is initially different on each node.
+If <a href="options.html#option-c"><tt>-c</tt></a> is specified,
+the clocks in all nodes will initially be synchronized.
+Protocols may be developed, which call
+<a href="otherfuncs.html#set_time_of_day"><tt>CNET_set_time_of_day</tt></a>
+to synchronize the clocks.
+<p>
+
+<i>cnet</i> provides no support for timezones.
+
+<!-- ===================================================================== -->
+
+<a name="timers"></a>
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+
+<h3>What are timers and <tt>CnetTimers</tt>?</h3>
+
+The event-driven nature of <i>cnet</i> means that your protocols cannot simply
+'wait' for something to happen.  The <i>cnet</i> scheduler will inform your
+protocols when important things need doing (messages to deliver, frames
+to receive, etc).
+In particular, your protocols cannot simply wait a
+nominated period of time and then do something appropriate after that
+time.
+<p>
+<b>YOUR PROTOCOLS SHOULD NOT CALL <tt>sleep()</tt></b>
+or any similar functions.
+Instead, <i>cnet</i> provides timers so that the scheduler may inform your
+protocol when a nominated period of time has elapsed.
+You may have an almost unlimited number timers quietly ``ticking away'' -
+they are each uniquely identified by a <tt>CnetTimer</tt>.
+<p>
+When you create a new timer you must indicate one of 10 timer events
+<tt>EV_TIMER1..EV_TIMER10</tt>
+and a period of time (in microseconds) in the future.
+The function
+<a href="timers.html"><tt>CNET_start_timer</tt></a>
+will return to you a <tt>CnetTimer</tt>
+so that you may keep track of which timer has expired
+when your timer event handler is invoked.
+For example:
+<p>
+<tt>
+<pre>
+    CnetInt64  when;
+    CnetTimer  saved_timer;
+
+    int64_I2L(when, 1000000);
+    saved_timer = CNET_start_timer(EV_TIMER1, when, 0);
+</pre>
+</tt>
+<p>
+will cause the event handler for <tt>EV_TIMER1</tt> to be called in 1 second.
+The value of <tt>saved_timer</tt> will be passed as the second parameter to the
+handler so that you can see which timer expired. You can have as many
+outstanding timers on the <tt>EV_TIMER1</tt> <i>queue</i> as you want.
+<b>PLEASE NOTE:</b> there are not only 10 timers available -
+however, each timer must be tagged with one of the 10 available timer events.
+
+<p>
+If you decide that you no longer want to be informed when a timer
+expires, you should call
+<a href="timers.html"><tt>CNET_stop_timer</tt></a>
+with the <tt>CnetTimer</tt> in which you are no longer interested.
+For example,
+<p>
+<tt>
+<pre>
+    (<b>void</b>)CNET_stop_timer(saved_timer);
+</pre>
+</tt>
+<p>
+If the <i>cnet</i> scheduler invokes your timer handler,
+then you do not need to cancel the corresponding timer
+(it will be done for you).
+However, if you wish a timer event to be raised periodically,
+then you'll need to start a new timer in the handler of an expiring timer,
+i.e. timers only expire once, not repeatedly.
+
+<!-- ===================================================================== -->
+
+<a name="timers10"></a>
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+
+<h3>Why does <i>cnet</i> provide 10 distinct timer queues?</h3>
+
+When writing protocols in multiple layers, it's a nice separation of
+concerns to use different timers in each layer.
+For example, in a Data-Link layer protocol, we could use <tt>EV_TIMER1</tt>
+for a retransmission timer,
+and <tt>EV_TIMER2</tt> for a piggyback timer.
+At the same time, the Network layer may use <tt>EV_TIMER3</tt> to flush any
+queued messages if it uses a leaky bucket for congestion control,
+and <tt>EV_TIMER4</tt> to periodically exchange routing table
+information with neighbours.
+
+Using a distinct timer queue for each activity allows us to use
+a separate handler to manage the requirements of each activity,
+and to ``hide'' the handler in the protocol layer or source file of concern.
+
+<!-- ===================================================================== -->
+
+<a name="timerdata"></a>
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+
+<h3>What is the third parameter to <tt>CNET_start_timer</tt> ever used for?</h3>
+
+Any value passed as
+the third parameter to <tt>CNET_start_timer</tt> is remembered,
+internally, along with the timer.
+When the timer expires, this saved value is passed as the third parameter
+to the handler for the timer's event.
+This parameter is of type <tt>CnetData</tt> (a long integer in C)
+which allows it to store integral values or a pointer to a variable or
+dynamically allocated data structure.
+Typical uses for this parameter are to pass a sequence number used in a
+protocol,
+or perhaps a pointer to a list or tree structure,
+to the timer event's handler.
+
+<p>
+If the parameter is used to store a pointer,
+care must be taken to ensure that the pointer is still valid at the time
+the timer's event handler is called.
+In particular,
+the parameter should never be used to store the address of any variable or
+structure on C's runtime stack.
+
+It is reasonable to pass a pointer to dynamically allocated storage
+to <tt>CNET_start_timer</tt> (i.e. allocated with <tt>malloc</tt>),
+and then have the timer's event handler deallocate this storage
+(i.e.  deallocated with <tt>free</tt>).
+
+<p>
+If you need to call <tt>CNET_stop_timer</tt> before a timer expires,
+take care to first deallocate any dynamic storage associated with the timer
+as a <tt>CnetData</tt> value.
+You can ``recover'' the <tt>CnetData</tt> value
+by calling the function <tt>CNET_timer_data</tt>.
+
+<!-- ===================================================================== -->
+
+<a name="ownevents"></a>
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+
+<h3>Can I add my own <tt>CnetEvent</tt> events?</h3>
+
+No, not unless you wish to change and recompile the source code of <i>cnet</i>
+itself.
+However, there are a few ``spare'' standard <tt>EV_TIMER</tt> events that
+could be re-used or ``renamed'' to suit your purpose.
+For example,
+if you'd like a new event for the Data Link Layer to signal the Network
+Layer, you could (ab)use the C-preprocessor and say:
+<p>
+
+<table cellpadding="1" cellspacing="0" border="0" bgcolor="#000000"><tr><td>
+<table cellpadding="8" cellspacing="0" border="0" bgcolor="lightgrey"
+width="550"><tr><td>
+<pre><tt>
+#define  EV_DLL_2_NL                 EV_TIMER8
+#define  raise_dll_2_nl_event(data)  CNET_start_timer(EV_DLL_2_NL, 1LL, data)
+</tt></pre></tr></td></table></td></tr></table>
+<p>
+
+and then simply call <tt>raise_dll_2_nl_event()</tt>
+with an instance of <tt>CnetData</tt> when you want to raise the pseudo-event.
+
+<!-- ===================================================================== -->
+
+<a name="spelling"></a>
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+
+<h3>What is the meaning of "spelling mistake on line 83 of protocol.c"?</h3>
+
+There is a spelling mistake on line 83 of <tt>protocol.c</tt>
+
+<!-- ===================================================================== -->
+
+<a name="signals"></a>
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+
+<h3>What is the meaning of "caught signal number &lt;??&gt; while (last) handling Perth.EV_APPLICATIONREADY"?</h3>
+
+Old tricks for young players.
+<p>
+Fatal error messages of this form generally indicate a major problem
+with your protocols.
+The number (typically 2, 10 or 11) refers to a
+Unix signal number intercepted by <i>cnet</i>
+(see <tt>/usr/include/signal.h</tt>).
+For example,
+signal number 2 will be caught and reported by <i>cnet</i> if you
+<i>interrupt</i> <i>cnet</i> from the shell level
+(<tt>signal 2 = SIGINT</tt>).
+The other common signals,
+10 and 11, reveal significant flaws in the implementation of your protocols.
+<p>
+Signal 10 (<tt>SIGBUS</tt>, a bus error)
+occurs when the CPU attempts to execute
+an instruction not on an instruction boundary
+(on many architectures,
+you've requested to execute an instruction whose address is not a
+multiple of 4).
+This error will generally occur when your programming
+corrupts your program's stack and,
+in particular, you corrupt the
+return address of the currently executing function.
+When the current
+function attempts to return (to a now incorrect address) and then fetches
+an instruction whose address is invalid, signal 10 will result.
+<p>
+Signal 11 (<tt>SIGSEGV</tt>, segmentation violation)
+occurs when your program
+attempts to address memory that has not been mapped into your address
+space.  Typically, by accessing a pointer that has not been correctly
+initialized or has been modified/overwritten incorrectly, that pointer
+will point to memory that you do not ``own'',
+it being owned by either
+the operating system or another (person's) process.
+When attempting to
+access outside of your memory segment, you will get a segmentation
+violation.
+Operating systems that do not provide memory protection
+(segmentation), for example DOS, will not report this error as the
+(single) process on those operating systems "own" all of the address
+space.  Your program there will still (maybe!) exhibit errors but these
+may not be reported to you.
+Unix is in fact doing you a favour.
+<p>
+Signals 10 and 11 spell disaster for your programs - there is obviously
+something seriously wrong with your program if they happen.  Both forms
+of error most frequently occur when you are incorrectly managing
+pointers and/or dynamic memory.
+<p>
+Such problems are very difficult to diagnose - your first action should
+be to check your programming logic.  By their nature, errors which
+often *cause* signals 10 and 11 to be reported, do not necessarily
+raise the signal immediately.  You may do the wrong thing many
+instructions or even seconds before the signal is reported.  For this
+reason, the best <i>cnet</i> can do is state which event handler it was
+executing (or it was most recently executing) when the signal occurs.
+This <i>does not necessarily</i> indicate that your programming error is in
+that event handler though experience shows that this is likely.
+
+<!-- ===================================================================== -->
+
+<a name="efficiency"></a>
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+
+<h3>What is the meaning of the statistic ``Efficiency (bytes AL/PL)''?</h3>
+
+Here, AL stands for Application Layer, and PL for Physical Layer.
+This statistic divides the number of bytes generated by the
+Application Layers, by the number of bytes traversing the Physical Layer.
+Our protocols will require headers for their frames and packets,
+re-transmit data frames,
+and generate acknowledgments and other control packets,
+and so this ratio is expected to be less than 100%
+(the price we pay for reliable message delivery).
+The statistic is not updated until a message is successfully written ``up''
+to an Application Layer.
+<p>
+
+Keep in mind that this ratio is not the only desirable measure of
+protocol efficiency (but retains this name for historical reasons).
+Protocols may also strive to minimize average delivery time,
+or the total (monetary) cost of delivering frames.
+
+<!-- ===================================================================== -->
+
+<a name="toobusy"></a>
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+
+<h3>What is the meaning of the error
+	``Function is too busy/congested to handle request''?</h3>
+
+The function <tt>CNET_write_physical()</tt> will 'trap' the situation
+when a <i>large</i> number of frames have been written to the Physical Layer,
+and when the receiving node has not read any of them off.
+This trap is currently set at the large value of 1000,
+which surely indicates an error in a protocol.
+<p>
+
+Your protocol may have some unbounded loop,
+or a very short timeout-and-retransmission sequence,
+resulting in many calls to <tt>CNET_write_physical()</tt> at the sender,
+before any <tt>EV_PHYSICALREADY</tt> events are handled at the receiver.
+
+<!-- ===================================================================== -->
+
+<a name="speedup"></a>
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+
+<h3>How can I speed up <i>cnet</i>?</h3>
+
+<ol>
+<li> Don't print out volumes of debug information to each node's output
+window. The printing of large amounts of text and scrolling these
+windows obviously slows down <i>cnet</i>. Print out bad news, not good news.
+</li>
+
+<li> Disable all printing, altogether -
+invoke <i>cnet</i> with the
+<a href="options.html#option-q"><tt>-q</tt></a> option.
+</li>
+
+<li> If you think your protocol works ``for a few minutes''
+but then dies a death,
+change a few attributes to speed up the <i>cnet</i> world.
+For example:
+
+<pre>
+<tt>
+    messagerate      = 3ms
+    propagationdelay = 1ms
+</tt>
+</pre>
+should make your protocol ``work for a few seconds''.
+Hmmmm, much better.
+</li>
+
+<li> If you'd rather not wait a full second for <i>cnet</i>
+to complete one second of network activity, run with the
+<a href="options.html#option-T"><tt>-T</tt></a> option
+to force events to be scheduled
+immediately (<tt>nodeinfo.time_in_usec</tt> is updated as you'd hope).
+</li>
+
+<li> You don't always need to work with <i>cnet</i>'s graphical display;
+it'll run ``within'' an ASCII terminal window without its display if you
+invoke cnet with its
+<a href="options.html#option-W"><tt>-W</tt></a> option.
+You can also use the
+<a href="options.html#option-o"><tt>-o</tt></a> option
+or explicitly send output to <tt>stdout</tt>,
+<tt>stderr</tt> or a file rather than
+expecting it to appear in its own <tt>stdout</tt> window.
+After a while
+the gimmick of the ``network map'' should've worn off and you should
+only be debugging bad news,
+ala <tt>cnet_errno</tt> and <tt>CNET_perror()</tt>.
+</li>
+</ol>
+
+<!-- ===================================================================== -->
+
+<a name="plotting"></a>
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+
+<h3>How do I collate <i>cnet</i> statistics for plotting?</h3>
+
+<i>cnet</i> centrally collates statistics on behalf of all
+nodes, and displays these on the 'Statistics' popup window or at the
+end of a simulation run if <i>cnet</i> is invoked with the
+<a href="options.html#option-s"><tt>-s</tt></a> option
+(or the
+<a href="options.html#option-z"><tt>-z</tt></a> option
+to also get zero-valued statistics).
+<p>
+We can also print statistics more frequently (periodically) with the correct
+choice of
+<a href="options.html">command line options</a>.
+These are:
+
+<center>
+<table border=0>
+<tr>
+    <td width=50>-W</td>
+    <td>no need for the windowing interface</td>
+</tr>
+<tr>
+    <td>-T</td>
+    <td>run the simulation as fast as possible</td>
+</tr>
+<tr>
+    <td>-M 5</td>
+    <td>run for 5 minutes of simulation time</td>
+</tr>
+<tr>
+    <td>-s</td>
+    <td>yes, we want statistics</td>
+</tr>
+<tr>
+    <td>-f 10</td>
+    <td>print statistics with a frequency (period) of 10 seconds</td>
+</tr>
+</table>
+</center>
+<p>
+This will produce volumes of output to <i>cnet</i>'s
+standard output stream,
+so we need to both capture this and probably filter only what we need.
+So, to capture the Efficiency measure (bytes AL/PL) every second
+(in the hope that it improves), we issue:
+<p>
+<table cellpadding="1" cellspacing="0" border="0" bgcolor="#000000"><tr><td>
+<table cellpadding="8" cellspacing="0" border="0" bgcolor="lightgrey"
+width="550"><tr><td>
+<pre><tt>
+  #!/bin/sh
+  #
+  cnet -W -T -M 5 -s -f 1 topologyfile     | \
+  grep Efficiency                          | \
+  cut -d: -f 2                             | \
+  cat -n              &gt; result.file
+</tt></pre></tr></td></table></td></tr></table>
+<p>
+The last line takes its input (a column of 300 efficiencies) and places a
+line number at the beginning of each line.
+This is fine if we really want statistics every single second, but slowly
+adapting protocols may take several minutes to reach their optimum.
+We could develop a shellscript which accepts arguments
+indicating the topology file and the frequency of collection:
+<p>
+<table cellpadding="1" cellspacing="0" border="0" bgcolor="#000000"><tr><td>
+<table cellpadding="8" cellspacing="0" border="0" bgcolor="lightgrey"
+width="550"><tr><td>
+<pre><tt>
+  #!/bin/sh
+  #
+  TOPFILE=$1
+  FREQ=$2 
+  #
+  cnet -W -T -M 5 -s -f $FREQ $TOPFILE      | \
+  grep Efficiency                           | \
+  cut -d: -f 2                              | \
+  awk '{ printf("%d %s\n", n+=freq, $0); }' freq=$FREQ  &gt; result.file
+</tt></pre></tr></td></table></td></tr></table>
+<p>
+Of course,
+other shellscript arguments could indicate the required
+statistic, resultfile, etc.
+
+<!-- ===================================================================== -->
+
+</td></tr></table>
+
+
+
+<table width="100%"><tr>
+  <td><i>cnet</i> was written and is maintained by Chris McDonald
+      <A HREF="mailto:chris@csse.uwa.edu.au">(chris@csse.uwa.edu.au)</a></td>
+  <td><img align="right" src="images/UWAsmall.gif"></td>
+</tr></table>
+
+</BODY>
+</HTML>

@@ -1,0 +1,354 @@
+<HTML>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HEAD>
+<TITLE>The cnet network simulator - installation</TITLE>
+<META NAME="description" CONTENT="cnet enables experimentation
+with various data-link layer, network layer, routing and transport
+layer networking protocols.  It has been specifically developed for
+undergraduate teaching.">
+
+<META NAME="keywords" CONTENT="network, 802.3, ethernet, WAN, simulator,
+simulation, protocol, undergraduate, teaching">
+</HEAD>
+
+<BODY BGCOLOR="white" TEXT ="black" LINK="blue" VLINK="purple">
+
+<table>
+<tr>
+<td valign="top" bgcolor="#74dbf2">
+<table cellpadding="4" cellspacing="0" border="0"><tr>
+
+<td nowrap>
+    <b><i>cnet</i> v2.0.10</b>
+    <p>
+
+    <a href="index.html">home</a>
+    <br>
+    <a href="introduction.html">introduction</a>
+    <br>
+    <a href="themodel.html">simulation model</a>
+    <p>
+    <a href="topology.html">topology files</a>
+    <br>
+    <a href="options.html">cmdline options</a>
+    <br>
+    <a href="functions.html">the API</a>
+    <p>
+    <a href="faq.html">FAQ</a>
+    <p>
+    <a href="install.html">download</a>
+</td>
+
+</td></tr></table>
+</td>
+
+<td>
+<h3><a name="install">Downloading and installing <i>cnet</i></a></h3>
+
+The most recent release of <i>cnet</i> is available from:
+
+<p>
+<center>
+<font size="+1">
+<a href="http://www.csse.uwa.edu.au/cnet/cnet-2.0.10.tgz">
+    http://www.csse.uwa.edu.au/cnet/cnet-2.0.10.tgz</a>
+</font>
+(7th March 2006)
+</center>
+
+<p>
+The full distribution (about 1.2MB)
+includes all source code, Makefiles, documentation,
+sub-directories for each of the supported operating systems,
+and a few representative protocol examples.
+
+<p>
+<i>cnet</i>'s version number changes when a change to its source
+code affects <i>cnet</i>'s execution semantics.
+The version number does not change if cosmetic changes are made to the
+source code, or if the documentation changes.
+
+<p>
+<b>NOTE:</b> that on a multi-user Linux or Unix system
+that <i>cnet</i> only needs to be installed once.
+Students on such systems do not need to install their own copies unless
+they wish to modify and experiment with the <i>cnet</i> implementation
+itself.
+
+<p>
+<i>cnet</i> is supported <i>only</i> on the following platforms:
+
+<p>
+<center>
+Linux (kernel 2.x, ELF only),
+DEC-OSF/1 (v4.0),
+FreeBSD,
+NetBSD (1.5 onwards),
+<br>
+SunOS 4.x,
+Solaris 5.x,
+and SGI IRIX (Rel. 5 or 6).
+</center>
+
+<p>
+In particular,
+<b><i>cnet</i> does not run on either Windows or the Apple Macintosh</b>.
+
+<p>
+Thanks to Jordan Hubbard &lt;jkh@freebsd.org&gt; and
+Michael Haro &lt;mharo@area51.fremont.ca.us&gt; for making the FreeBSD
+port available.
+
+<p>
+Thanks to Mark Davies, Victoria University of Wellington, NZ
+&lt;mark@mcs.vuw.ac.nz&gt; for contributing his patches for NetBSD.
+
+<p>
+Please appreciate that there are thousands of students worldwide
+using <i>cnet</i>.
+I am unable to respond to individual questions about <i>cnet</i>,
+unless they are from students enrolled in a course that I'm presenting.
+In particular, I will not answer homework or assignment questions.
+Please ask <i>your</i> professor or instructor.
+<p>
+If you find these instructions confusing,
+but eventually get <i>cnet</i> installed,
+please email
+<a href="mailto:chris@csse.uwa.edu.au"><i>chris@csse.uwa.edu.au</i></a>
+with any suggestions on how the instructions could be clearer.
+
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+<p>
+
+The cnet network simulator (v2.0.10)
+<br>
+&copy; Copyright (C) 1992-2006, Chris McDonald
+<p>
+This program is free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation; either version 2 of the License, or (at your
+option) any later version.
+<p>
+This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE.
+See the
+<a href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</a>
+for more details.
+<p>
+You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+<p>
+
+<h3>Requirements</h3>
+To install <i>cnet</i> you should be prepared and able to:
+
+<ul>
+<li> Be able to create a publically-accessible directory (for a shared
+installation) or a private directory (for a private installation).
+The recommended publically-accessible locations are places like
+<tt>/usr/local/cnetlib</tt> or <tt>/usr/lib/cnet</tt>.
+
+<li> Know the full pathname of your system's ANSI-C compiler and standard
+linker. If your system has the preferred <i>gcc</i>,
+use <i>gcc</i> for both compiling and linking.
+
+<li> Know whether your ANSI-C compiler provides native support for
+<a href="int64.html">64-bit integer variables</a>,
+and the size (in bytes) of
+<tt>int</tt> and <tt>long</tt> variables supported by your computer
+(no, just using <tt>sizeof()</tt> will not be enough).
+
+<li> Ensure that you have the X11 window system development resources
+(include files and libraries) installed.
+For example, Redhat Linux users will require the <tt>XFree86-devel</tt> RPM.
+
+<li> Have Tcl/Tk correctly installed, preferably version 8.0 or
+beyond, and know where its header files and libraries are installed.
+
+Note that you'll need both 
+the Tcl/Tk <i>runtime</i> facilities (i.e. their shared libraries), and
+the Tcl/Tk <i>development</i> facilities (i.e. their C header files).
+Most "out-of-the-box" Linux distributions have the runtime facilities
+installed, but do not install the development facilities.
+If installing on a Linux machine using RPMs, you'll require
+both the <i>runtime</i> RPM and the <i>development</i> RPM
+for both Tcl and Tk.
+
+</ul>
+
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+<p>
+
+<h3>Installation</h3>
+<ol>
+    <li> To begin installation,
+	    copy the distribution file and unpack it with the command:
+<br>
+<p>
+	<center>
+	    <tt>tar zpxvf cnet-2.0.10.tgz</tt>
+	</center>
+    </li>
+<p>
+    <li> Change to the newly created directory <tt>cnet-2.0.10</tt>
+    </li>
+<p>
+    <li> Edit the <tt>Makefile</tt> to change the constants local to your
+	 installation:
+	<tt>BINDIR</tt>,
+	<tt>CNETDIR</tt>,
+	<tt>MANDIR</tt>,
+	<tt>MANEXT</tt>, and
+	<tt>WEBDIR</tt>.
+    </li>
+<p>
+    <li> Change directory to <tt>./src</tt>.
+    </li>
+<p>
+    <li> Read and modify the C <tt>#defines</tt> in <i>config.h</i>,
+	such as the full pathname of the C compiler and linker on your system.
+	
+	In particular, ensure that you have set values for 
+	<tt>HAVE_LONG_LONG</tt>, <tt>SIZEOF_INT</tt>, and <tt>SIZEOF_LONG</tt>,
+	and that the value you gave to <tt>CNETDIR</tt>
+	in the top-level <tt>Makefile</tt>
+	is recorded in the string constant <tt>CNETPATH</tt>.
+    </li>
+<p>
+    <li> Read and change site-specific constants in the <i>Makefile</i>
+	for the operating system you'll be using
+	(<i>Makefile.linux, Makefile.sunos</i> ...)
+	Typically, you'll need to modify (or uncomment)
+	<tt> CC, CFLAGS, INCLUDES, XINCLUDES,
+	LIBDIRS, LIBS, XLIBS, BINDIR</tt>
+	and <tt>MANDIR</tt>.
+    </li>
+<p>
+    <li> If running a Linux(ELF) system and your system doesn't provide the
+	 <i>libelf</i> package, you'll need the <i>libelf</i> package
+	 provided in the distribution.
+	 The <i>libelf</i> archive library and header files should already
+	 be in their correct locations for successful compilation and
+	 linking, but you may with to uncompress, untar and build
+	 the <i>libelf-0.6.4</i> package yourself (as a last resort!).
+    </li>
+<p>
+    <li> Change directory back (up) to the top-level cnet-2.0.10 directory.
+    </li>
+<p>
+    <li> Type 'make' to build <i>cnet</i> for your system
+	    (it should compile and link without error).
+    </li>
+<p>
+    <li> Type 'make install' (perhaps as root)
+	 to copy the <i>cnet</i> binary, Tcl/Tk, and GIF files
+	to their required (global) locations.
+    </li>
+</ol>
+
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+<p>
+
+<h3>Installation restrictions</h3>
+
+You should note the following requirements and restrictions for various
+systems:
+<ul>
+    <li> If using a Linux(ELF) system,
+	    the freely-available <i>libelf</i> package is required.
+	    Most Linux(ELF) systems (with at least version 2.0 kernels) now
+	    provide a copy of <i>libelf</i>, but if yours doesn't it
+	    greatly simplifies things if you can install <i>libelf</i>
+	    globally on your system.  A full copy of <i>libelf</i>
+	    is included in the <i>cnet</i> distribution.
+    </li>
+
+    <li> If using SunOS you should be using Release 4.1.2 or beyond.
+	    If still using Release 4.1.1 you must obtain and install
+	    Sun-Patch-ID#100257-03 (4-Oct-91) -
+	    whoa! welcome to the 21st century.
+    </li>
+
+    <li> If using an SGI-IRIX machine, you must be using
+	    Release 5 or 6 (Release 4 is not supported).
+    </li>
+
+    <li> Older Linux systems with a.out formats are no longer supported.
+    </li>
+
+    <li> <i>cnet</i> has been tested with most Tcl/Tk versions,
+	    (Tcl7.X+Tk3.X),
+	    (Tcl7.X+Tk4.X),
+	    (Tcl8.0+Tk8.0), and.
+	    (Tcl8.3+Tk8.3).
+    </li>
+</ul>
+
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+<p>
+
+<h3>Testing</h3>
+<p>
+There are some introductory examples
+(such as may be used as student introductions to <i>cnet</i>)
+in the <tt>EXAMPLES</tt> directory.
+A few of these examples are described in detail by making a
+<a href="walkthrough.html">walkthrough</a> of the code.
+
+These are the sort of things an academic staff member may set as
+introductory exercises,
+or to assist students to "get up to speed" quickly.
+You should now be able to execute these examples from the command-line
+with the commands:
+<pre>
+    cnet TICKTOCK
+    cnet CLICK
+    cnet ETHERTEST
+    cnet STOPANDWAIT
+    cnet FLOODING1</pre>
+<p>
+Each example has its own topology file defining the network to be simulated,
+for example <tt>CLICK</tt> and <tt>FLOODING1</tt>.
+<p>
+When <i>cnet</i> appears to work,
+the example files such as
+<i>{TICKTOCK + ticktock.c},</i>
+<i>{CLICK + click.c},</i>
+<i>{KEYBOARD + keyboard.c},</i>
+<i>{ETHERTEST + ethertest.c},</i>
+<i>{LINKSTATE + linkstate.c},</i> and
+<i>{STOPANDWAIT + stopandwait.c}</i>
+in the <tt>EXAMPLES</tt> directory should all be placed in a system-wide
+examples directory for everyone to copy and run.
+
+<p>
+<dl>
+<dt><b>REMEMBER:</b></dt>
+    <dd>
+    If you can demonstrate that you are a member of academic staff somewhere
+    (business card, FAX on University letterhead, or official Web page),
+    I'll email some more detailed examples to you -
+    ones that may typically be set for student projects.
+    </dd>
+</dl>
+
+</td></tr></table>
+
+
+<table width="100%"><tr>
+  <td><i>cnet</i> was written and is maintained by Chris McDonald
+      <A HREF="mailto:chris@csse.uwa.edu.au">(chris@csse.uwa.edu.au)</a></td>
+  <td><img align="right" src="images/UWAsmall.gif"></td>
+</tr></table>
+
+</BODY>
+</HTML>

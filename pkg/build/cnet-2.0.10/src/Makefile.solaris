@@ -1,0 +1,24 @@
+#
+# The following #defines are for Sun's Solaris 5.x
+
+# Uncomment the following line if you wish Tcl/Tk windowing (see config.h)
+#
+XINCLUDES	=
+XLIBS		= -ltcl -ltk -lX11 -lm
+# or you may need:
+#XLIBS		= -ltcl8.3 -ltk8.3 -lX11 -lm
+
+ANSICC		= gcc -ansi
+
+INCLUDES	=
+CFLAGS		= -O -Wall $(INCLUDES) $(XINCLUDES)
+
+LD		= gcc
+LIBDIRS		= -L/usr/local/lib
+LIBS		= -ldl -lelf -lgen -lm
+STRIP		= strip
+
+# ---------------------- No user-serviceable code below -----------------
+
+include	Makefile.common
+

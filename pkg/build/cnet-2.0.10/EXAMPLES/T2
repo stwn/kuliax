@@ -1,0 +1,20 @@
+compile			= "stopandwait.c"
+
+messagerate		= 500ms,
+propagationdelay	=  20ms,
+bandwidth		= 56Kbps,
+probframecorrupt	= 2
+
+host perth {
+    x=80,    y=50
+    winx=10, winy=200
+    ostype = "linux"
+    link to melbourne {
+	propagationdelay = 40ms
+    }
+}
+host melbourne {
+    winx=580, winy=200
+    east east of perth
+    link to perth
+}

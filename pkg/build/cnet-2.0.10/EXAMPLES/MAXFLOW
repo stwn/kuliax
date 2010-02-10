@@ -1,0 +1,52 @@
+
+messagerate      = 200ms,
+propagationdelay = 100ms,
+bandwidth	 = 56Kbps,
+
+compile		 = "maxflow.c"
+ostype           = "palm"
+
+showcostperframe = true
+
+host A {
+    x=50, y=150
+    link to B	{ costperframe = 3 }
+    link to C	{ costperframe = 5 }
+}
+
+host B {
+    x=150, y=50
+    link to A	{ costperframe = 3 }
+    link to C	{ costperframe = 3 }
+    link to D	{ costperframe = 4 }
+}
+
+host C {
+    x=150, y=250
+    link to A	{ costperframe = 5 }
+    link to B	{ costperframe = 3 }
+    link to D	{ costperframe = 2 }
+    link to E	{ costperframe = 1 }
+}
+
+host D {
+    x=300, y=50
+    link to B	{ costperframe = 4 }
+    link to C	{ costperframe = 2 }
+    link to E	{ costperframe = 3 }
+    link to F	{ costperframe = 6 }
+}
+
+host E {
+    x=300, y=250
+    link to C	{ costperframe = 1 }
+    link to D	{ costperframe = 3 }
+    link to F	{ costperframe = 8 }
+}
+
+host F {
+    x=400, y=150
+    link to D	{ costperframe = 6 }
+    link to E	{ costperframe = 8 }
+}
+

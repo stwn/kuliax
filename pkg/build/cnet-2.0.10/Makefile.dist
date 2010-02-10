@@ -1,0 +1,46 @@
+NAME		= cnet
+VERSION		= 2.0.10
+SHELL		= /bin/sh
+#
+# Change the following 5 constants to suit your local site.
+#
+# It is presumed that BINDIR and MANDIR exist, so you may need
+# to create them, and set their permissions, if necessary.
+#
+PREFIX		= /usr/local
+#
+BINDIR		= $(PREFIX)/bin
+CNETDIR		= $(PREFIX)/cnetlib
+MANDIR		= $(PREFIX)/man/man1
+MANEXT		= 1
+MANFILE		= $(MANDIR)/$(NAME).$(MANEXT)
+WEBDIR		= /home/httpd/html/cnet
+
+# ---------------------------------------------------------------------
+
+it:
+	(cd src && make)
+
+install:
+	(cd src && make)
+	cp $(NAME) $(BINDIR)/$(NAME)  && chmod 755 $(BINDIR)/$(NAME)
+	mkdir -p $(CNETDIR)           && chmod 755 $(CNETDIR)
+	cp cnetlib/* $(CNETDIR)       && chmod 644 $(CNETDIR)/*
+	cp DOC/$(NAME).man $(MANFILE) && chmod 644 $(MANFILE)
+
+web:
+	mkdir -p $(WEBDIR)            && chmod 755 $(WEBDIR)
+	mkdir -p $(WEBDIR)/images     && chmod 755 $(WEBDIR)/images
+	cp DOC/*.* $(WEBDIR)
+	cp DOC/images/* $(WEBDIR)/images
+	chmod 644 $(WEBDIR)/*.* $(WEBDIR)/images/*
+
+# ---------------------------------------------------------------------
+
+clean:
+	(cd src && make clean)
+	(cd DOC		    && make clean)
+	(cd EXAMPLES	    && make clean)
+
+uninstall:
+	rm -rf $(BINDIR)/$(NAME) $(MANFILE) $(CNETDIR) $(WEBDIR)

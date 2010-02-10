@@ -1,0 +1,35 @@
+#
+#OLD='2\.0\.9'
+#NEW=2.0.10
+#
+OLD="1992-2004"
+NEW="1992-2006"
+#
+TMP=.blah$$
+#
+for i in * */* */*/*
+do
+#   skip this very script
+    if echo $0 | grep -q $i
+    then	
+	continue
+    fi
+#   skip the changelog
+    if echo $i | grep -q "changelog.html"
+    then	
+	continue
+    fi
+
+    if [ -f $i ]
+    then
+	if grep -q "$OLD" $i
+	then
+	    echo $i
+	    rm -rf $TMP
+	    sed "s/$OLD/$NEW/g" < $i > $TMP
+	    cp $TMP $i
+	fi
+    fi
+done
+
+rm -rf $TMP

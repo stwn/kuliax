@@ -1,0 +1,15 @@
+
+compile = "click.c"
+winopen = true
+probframecorrupt = 2
+
+host canberra {
+    propagationdelay = 100ms
+    link to sydney
+}
+
+host sydney {
+    east east of canberra
+    propagationdelay = 2s
+    link to canberra
+}

@@ -1,0 +1,35 @@
+#
+#  The following #defines are for FreeBSD
+#  Thanks to Jordan Hubbard <jkh@freebsd.org> and
+#  Michael Haro <mharo@area51.fremont.ca.us> for making this port available,
+#  and to Rohan Joyce <joycer01@tartarus.uwa.edu.au> for submitting a patch.
+#
+XINCLUDES	= -I${X11BASE}/include
+XLIBS		= -lXpm -lX11 -lm -L${X11BASE}/lib
+
+ANSICC		= ${CC}
+
+LOCALBASE	= /usr/local
+
+INCLUDES	= -I${LOCALBASE}/include \
+		  -I${LOCALBASE}/include/tcl8.3 \
+		  -I${LOCALBASE}/include/tk8.3
+
+CFLAGS		= -fPIC 
+CFLAGS		+= $(INCLUDES) $(XINCLUDES)
+
+LD		= ${CC} -rdynamic
+LIBDIRS		= -L${LOCALBASE}/lib
+LIBS		= -ltcl83 -ltk83 -lm -lgnuregex
+STRIP		= strip
+
+BINDIR		= ${PREFIX}/bin
+MANDIR		= ${PREFIX}/man/manl
+MANEXT		= 1
+INCDIR		= ${PREFIX}/include
+
+
+# ---------------------- No user-serviceable code below -----------------
+
+include	Makefile.common
+

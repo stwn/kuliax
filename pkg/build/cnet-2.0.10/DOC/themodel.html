@@ -1,0 +1,221 @@
+<HTML>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HEAD>
+<TITLE>The cnet network simulator - the simulation model</TITLE>
+<META NAME="description" CONTENT="cnet enables experimentation
+with various data-link layer, network layer, routing and transport
+layer networking protocols.  It has been specifically developed for
+undergraduate teaching.">
+
+<META NAME="keywords" CONTENT="network, 802.3, ethernet, WAN, simulator,
+simulation, protocol, undergraduate, teaching">
+</HEAD>
+
+<BODY BGCOLOR="white" TEXT ="black" LINK="blue" VLINK="purple">
+
+<table>
+<tr>
+<td valign="top" bgcolor="#74dbf2">
+<table cellpadding="4" cellspacing="0" border="0"><tr>
+
+<td nowrap>
+    <b><i>cnet</i> v2.0.10</b>
+    <p>
+
+    <a href="index.html">home</a>
+    <br>
+    <a href="introduction.html">introduction</a>
+    <br>
+    <a href="themodel.html">simulation model</a>
+    <p>
+    <a href="topology.html">topology files</a>
+    <br>
+    <a href="options.html">cmdline options</a>
+    <br>
+    <a href="functions.html">the API</a>
+    <p>
+    <a href="faq.html">FAQ</a>
+    <p>
+    <a href="install.html">download</a>
+</td>
+
+</td></tr></table>
+</td>
+
+<td>
+<h3>The <i>cnet</i> simulation model</h3>
+
+<i>cnet</i> supports a model of networking in which <i>nodes</i>
+are connected by either <i>point-to-point</i> links
+or <i>Ethernet</i> segments.
+Nodes may be either <i>hosts</i> or <i>routers</i>;
+introductory protocols will only use hosts and <i>point-to-point</i> links.
+Hosts are like workstations,
+with each having an Application Layer which generates messages for delivery
+to the Application Layers on other hosts.
+Hosts never generate messages for themself,
+and routers never generate messages at all.
+<p>
+The <i>cnet</i> simulation model appears in the following diagram:
+<p>
+
+<center>
+<IMG SRC="images/layers.gif">
+</center>
+
+<p>
+Each node, from 2 to hundreds, is connected to other nodes by one or more
+physical point-to-point links or IEEE&nbsp;802.3 Ethernet segments.
+Links are numbered within each node
+from <tt>0</tt> to the number of physical links that the node has.
+Link number <tt>0</tt> is always the node's <tt>LOOPBACK</tt> link,
+which simply delivers anything transmitted to it straight back to the same host.
+The first ``real'' link is number <tt>1</tt> and every node will have
+a link number <tt>1</tt>.
+Each node's link attributes may be accessed, at runtime,
+via elements of the C structure variables
+<tt>linkinfo[1]</tt>,
+<tt>linkinfo[2]</tt>, and so on.
+<p>
+
+<i>cnet</i> itself provides each node with an
+<a href="application.html">Application Layer</a>
+and a
+<a href="physical.html">Physical Layer</a>.
+In addition, a <i>hidden</i> Error Layer resides above the Physical Layer,
+and causes transmitted data frames to become corrupted or lost according
+to specified probabilities.
+Note that the standard OSI/ISO model does not provide an Error Layer!
+
+<p>
+Perhaps surprisingly,
+the nodes initially have very little knowledge of the network.
+Nodes do not know how many other nodes there are,
+what the other nodes are called,
+nor the attributes of any nodes or links other than their own.
+All inter-node communication necessary to learn this information
+must traverse the Physical Layer.
+<p>
+
+<h3><a name="layers">Protocol layers</h3>
+
+<p>
+<i>cnet</i> protocols are written from the point of view of each node,
+that is, we imagine that we are writing our protocols <i>inside</i> each node.
+We have the ability to write all of the <i>interior protocols</i>
+(or <i>student protocols</i>) between
+the Application and Physical Layers (and even to rewrite these two layers
+if we need).
+The protocols may be as simple or as complex as desired,
+and should follow a layered approach to isolate distinct responsibilities.
+For example:
+
+<ul>
+<li> a network of only 2 nodes will only need a single layer
+between the Application and Physical Layers (usually termed the Data-Link
+Layer).  This protocol will simply have the responsibility of reliably
+moving frames across the single bidirectional link between the two nodes.
+
+<li> a network consisting of more than two nodes,
+will (ideally) require an additional layer between the Application and
+Data-Link Layers (usually termed the Network Layer) to manage packet
+routing, possibly congestion- and flow-control, and message
+fragmentation (and possibly some other responsibilities).
+
+<li> a network in which the nodes may crash or the links may be severed
+will (ideally) require an additional layer between the Network and
+Application Layers (usually termed the Session Layer) to ensure that old
+packets that have been ``floating'' around the network between crashes
+are not considered as part of the <i>current</i> communication sequence, and
+
+<li> a network in which we are conscious of limited bandwidth and security
+may require an additional layer between the Session and
+Application Layers (usually termed the Presentation Layer) to provide
+compression and/or encryption of our data before it is transmitted.
+</ul>
+<p>
+
+Of course,
+these ideas and the responsibilities of each layer are not
+peculiar to <i>cnet</i> protocols and are
+very well motivated and described in many undergraduate textbooks on
+data communications and computer networking.
+However, <i>cnet</i> supports these ideas by <i>not getting in the way</i>,
+by <i>not</i> imposing particular methodologies or data structures on your
+protocols.
+
+<p>
+Protocols are written using an
+<a href="eventdriven.html"> event-driven programming style</a>
+as if we were writing the protocols as part of an operating system's kernel.
+As well as handling network-related events,
+a traditional operating system must handle other events for its file-system,
+devices, and to let user-level processes execute.
+For this reason, our protocols must execute as quickly as possible,
+and then relinquish control to <i>cnet</i> (as if an operating system)
+to permit other activities.
+<i>cnet</i> is unaware of your using one or ten interior layers -
+<i>cnet</i> only provides the highest and lowest layers,
+and an <a href="functions.html">application programming interface (API)</a>
+to interact with these layers.
+<p>
+
+<h3>The lifetime of a message</h3>
+
+It is instructive to consider the <i>lifetime of a message</i> in <i>cnet</i>.
+A message is first generated in the Application Layer of, say, <tt>node0</tt>
+for delivery to the Application Layer of <tt>node1</tt>.
+The Application Layer informs our interior protocol layer(s), via an event,
+that a message requires delivery.
+Our interior protocols do not know, nor care, about the contents of this
+message, and simply treat it as a block of bytes.
+Because the nodes are simulating distinct computers,
+we must use the provided Physical Layer,
+accessible via each node's link number 1, to deliver the message.
+From the point of view of the <i>message</i>, this is what happens,
+assuming that all goes well:
+
+<ol>
+<li> node0's Application Layer generates and announces the message,
+<li> node0's interior protocol calls <tt>CNET_read_application</tt> to read
+	(and thereafter own) the message and its intended destination (node1),
+<li> node0's interior protocol does whatever it wants with the message,
+<li> node0 calls <tt>CNET_write_physical</tt> to transmit a block of bytes
+	(presumably including the message) via its link 1,
+<p>
+<li> after a short transmission delay, the bytes arrive at node1's
+	Physical Layer via its link 1,
+<li> node1's Physical Layer announces, via an event, the arrival,
+<li> node1's interior protocol calls <tt>CNET_read_physical</tt> to read
+	the bytes,
+<li> node1's interior protocol does whatever it wants with the message,
+<li> node1's interior protocol finally calls
+	<tt>CNET_write_application</tt> to deliver the message to its
+	Application Layer.
+</ol>
+
+<p>
+As stated, the above sequence assumes that nothing goes wrong - and if
+nothing went wrong, writing network protocols would be no fun!
+We must obviously call the
+<a href="functions.html"><i>cnet</i> functions</a> correctly,
+but more importantly our interior protocols must detect and manage errors
+in the network itself because
+<i>cnet</i>'s Error Layer randomly corrupts and loses frames.
+If we wish to only develop higher-layer protocols,
+we can bypass <i>cnet</i>'s Error Layer entirely by calling
+<tt>CNET_write_physical_reliable</tt>,
+or get a frame to the correct destination node in a single action
+by calling <tt>CNET_write_direct</tt>.
+
+</td></tr></table>
+
+
+<table width="100%"><tr>
+  <td><i>cnet</i> was written and is maintained by Chris McDonald
+      <A HREF="mailto:chris@csse.uwa.edu.au">(chris@csse.uwa.edu.au)</a></td>
+  <td><img align="right" src="images/UWAsmall.gif"></td>
+</tr></table>
+
+</BODY>
+</HTML>

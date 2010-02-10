@@ -1,0 +1,319 @@
+<HTML>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HEAD>
+<TITLE>The cnet network simulator - changelog</TITLE>
+<META NAME="description" CONTENT="cnet enables experimentation
+with various data-link layer, network layer, routing and transport
+layer networking protocols.  It has been specifically developed for
+undergraduate teaching.">
+
+<META NAME="keywords" CONTENT="network, 802.3, ethernet, WAN, simulator,
+simulation, protocol, undergraduate, teaching">
+</HEAD>
+
+<BODY BGCOLOR="white" TEXT ="black" LINK="blue" VLINK="purple">
+
+<table>
+<tr>
+<td valign="top" bgcolor="#74dbf2">
+<table cellpadding="4" cellspacing="0" border="0"><tr>
+
+<td nowrap>
+    <b><i>cnet</i> v2.0.10</b>
+    <p>
+
+    <a href="index.html">home</a>
+    <br>
+    <a href="introduction.html">introduction</a>
+    <br>
+    <a href="themodel.html">simulation model</a>
+    <p>
+    <a href="topology.html">topology files</a>
+    <br>
+    <a href="options.html">cmdline options</a>
+    <br>
+    <a href="functions.html">the API</a>
+    <p>
+    <a href="faq.html">FAQ</a>
+    <p>
+    <a href="install.html">download</a>
+</td>
+
+</td></tr></table>
+</td>
+
+<td>
+<h3><a name="file"><i>cnet</i> Changelog</h3>
+
+<i>cnet</i>'s version number changes when a change to its source
+code affects <i>cnet</i>'s execution semantics.
+The version number does not change if cosmetic changes are made to the
+source code, or if the documentation changes.
+
+<h3>Version 2.0 - from February 2002</h3>
+
+<ul>
+<li> v2.0.10 - many modifications to source code to provide clean compilation
+     of cnet and examples with new, more rigorous, versions of gcc.
+
+<li> v2.0.9 - another attempt to correct a bug which permitted events
+     to be delivered after a node had crashed.
+
+<li> v2.0.8 - corrected a bug in the <tt>&lt;cnet64bits.h&gt;</tt> header file
+     which permitted only constants to be passed as arguments to
+     <tt>int64_INIT</tt>.
+
+<li> v2.0.8 - corrected a bug which permitted timer events to still expire
+     after a node had crashed.
+
+<li> v2.0.8 - improved installation on FreeBSD (5.1-RELEASE) -
+    thanks to Rohan Joyce
+    &lt;joycer01(at)tartarus.uwa.edu.au&gt; for submitting a patch.
+
+<li> v2.0.8 - corrected the detection of PowerPC architectures.
+
+<li> v2.0.7 - corrected the detection of SPARC architectures and some
+    compiler warnings when using gcc and ANSI-C - thanks to Peter Neubert
+    &lt;neubert(at)mcs.sci.kuniv.edu.kw&gt; for reporting the problem.
+
+<li> v2.0.6 - fixed an off-by-one error in handling changing linkstates
+    (re)reported by Donald Gordon.
+
+<li> v2.0.5 - added facility for a short string to be drawn on animated
+    frames - thanks to Alex Feldman
+    &lt;alex(at)alexandrite.boisestate.edu&gt; for the suggestion.
+
+<li> v2.0.4 - compilations with <i>gcc</i> now have the <tt>-Werror</tt>
+    flag added by default.
+
+<li> v2.0.4 - improved the <tt>CHECK()</tt> macro in <tt>cnet.h</tt>
+
+<li> v2.0.4 - improvements to installation scripts -
+    thanks to John Murdie &lt;john(at)cs.york.ac.uk&gt; for these.
+
+<li> v2.0.4 - fixed an off-by-one error in handling changing linkstates -
+    thanks to Donald Gordon &lt;Donald.Gordon(at)mcs.vuw.ac.nz&gt; for this.
+
+<li> v2.0.3 - small change to the scheduling of Ethernet segments -
+    thanks to Klaus Doerrscheidt &lt;kdoerrscheidt(at)web.de&gt; for this.
+
+<li> v2.0.2 - small event scheduler problem corrected.
+
+<li> Support for 10Mbps IEEE&nbsp;802.3 Ethernet segments has been added;
+    physical links are now each of the new type
+    <a href="datatypes.html#linktype"><tt>CnetLinkType</tt></a>.
+
+<li> Network Interface Cards (NICs) connect nodes to Ethernet segments;
+    the new datatype <a href="datatypes.html#nicaddr"><tt>CnetNicaddr</tt></a>
+    provides support for each NIC's hardware address.
+
+    The address may be set with the new function
+    <a href="physical.html#set_nicaddr"><tt>CNET_set_nicaddr</tt></a>,
+    and the new functions
+    <a href="physical.html#parse_nicaddr"><tt>CNET_parse_nicaddr</tt></a> and
+    <a href="physical.html#format_nicaddr"><tt>CNET_format_nicaddr</tt></a>
+    convert between character strings and the <tt>CnetNicaddr</tt> datatype.
+    <br>
+
+    NICs may be set into <i>promiscuous mode</i> with the new function
+    <a href="physical.html#promiscuous"><tt>CNET_set_promiscuous</tt></a>.
+
+<li> 64-bit integers are now used to store all times (now in microseconds)
+	and large statistics.
+	A new datatype, <a href="int64.html"><tt>CnetInt64</tt></a>,
+	and a number of arithmetic, conversion, and I/O routines are defined
+	in the new header file
+	<tt>&lt;cnet64bits.h&gt;</tt>.
+	The new header file is included by the standard header file
+	<tt>&lt;cnet.h&gt;</tt>.
+
+<li> The values of <tt>nodeinfo.messagerate</tt>,
+	<tt>nodeinfo.time_in_usec</tt>, and
+	<tt>linkinfo[i].propagationdelay</tt>
+	are now of type <tt>CnetInt64</tt>.
+
+<li> The 2nd argument of
+	<a href="timers.html#start_timer"><tt>CNET_start_timer()</tt></a>
+	is now of type <tt>CnetInt64</tt> and requests a time in microseconds,
+	not milliseconds.
+
+<li> Three new constants,
+	<tt>HAVE_LONG_LONG</tt>, <tt>SIZEOF_INT</tt>, and <tt>SIZEOF_LONG</tt>
+	must now be specified in the <tt>config.h</tt> file.
+
+<li> Nodes are now provided with
+	<a href="eventdriven.html#argv">command-line arguments</a>
+	when they reboot.
+
+<li> The Application Layer is now consulted to check that user-requested
+	message sizes are neither too big nor too small.
+
+<li> Documentation extended, including some much-requested
+	<a href="walkthrough.html">protocol walkthroughs</a>.
+
+<li> Tcl/Tk scripts corrected to capture WM_DELETE_WINDOW messages for all
+	top-level windows.
+
+<li> Corrected the values displayed on each node's Tcl/Tk radiobuttons
+	used to modify the node's attributes at run-time.
+
+<li> Output via stdio functions (to Tcl/Tk windows) simplified and improved
+	so that scrollbars do not ``jump back'' to bottom of the window
+	on every output.
+
+<li> All statistics are now ``flushed'' via a single Tcl/Tk periodic event,
+	rather than via <i>cnet</i>'s main scheduler.
+
+<li> Statistics windows are now only updated if they have changed values.
+
+<li> Improved documentation.
+
+</ul>
+
+<p>
+
+
+<h3>Version 1.7 - August 2001</h3>
+
+<ul>
+<li> The data-link frames of 2-node simulations may now be
+	<a href="drawframes.html">animated</a>.
+	A new <tt>EV_DRAWFRAME</tt> event provides the user's protocol code
+	with the opportunity to specify how the each individual data-Link
+	frame is to be drawn.  The protocols themselves do not need to
+	provide any special windowing/drawing code.
+	Up to 6 fields of each frame may be drawn in colours specified in
+	the standard header file <tt>&lt;cnet.h&gt;</tt>.
+
+<li> Event tracing now appears in a separate scrollable Tcl/Tk window
+	under the main map window (rather than just to <tt>stderr</tt>).
+	A separate file may also be specified via the new global
+	<a href="attributes.html">attribute</a>
+	<tt>tracefile</tt> (specified in the topology file),
+	to receive a full copy of the simulation's trace.
+
+<li> The link attributes of <tt>costperframe</tt> or <tt>costperbyte</tt>
+	may now be drawn on each link on the topology map by setting the
+	new Boolean <a href="attributes.html">attributes</a>
+	<tt>costperframe</tt> or <tt>costperbyte</tt>
+	to <tt>true</tt> in the topology file.
+	<tt>costperframe</tt> is shown in preference to <tt>costperbyte</tt>.
+
+<li> Added facility for protocol source and object files to be specified
+	with full pathnames.
+
+<li> Physical Layer corruption now only modifies two bytes of a frame
+	to guarantee detection by the provided checksum functions.
+
+<li> The Physical Layer may now to asked to corrupt frames by truncating
+	them, by setting <tt>MAY_TRUNCATE_FRAMES</tt> in <tt>config.h</tt>.
+
+<li> A background image (GIF) may now be displayed on the toplogy map under
+	Tcl/Tk by specifying the new <tt>bgimage</tt>
+	<a href="attributes.html">attribute</a> in the topology file.
+
+<li> Support added for the FreeBSD platform -
+	thanks to Jordan Hubbard &lt;jkh(at)freebsd.org&gt;
+	and Michael Haro &lt;mharo(at)area51.fremont.ca.us&gt;
+
+<li> Support added for the NetBSD platform -
+	thanks to Mark Davies, &lt;mark(at)mcs.vuw.ac.nz&gt;
+
+<li> Corrected a bug where any output to a node's window produced by
+	an <tt>EV_DEBUG?</tt> event handler did not appear if using the
+	<tt>-q</tt> comand-line option.
+
+<li> Each node's statistics' window is now only updated if that window if
+	displayed.
+
+<li> The values of <tt>CnetTimer</tt> returned by <tt>CNET_start_timer()</tt>,
+	are now an independent property of each node.
+
+<li> A number of internal global variables consolidated into the
+	<tt>gattr</tt> structure.
+
+<li> Each node's name, in <tt>nodeinfo.nodename</tt>, is now stored in a
+	fixed sized array of <tt>MAX_NODENAME_LEN</tt> (=32) bytes,
+	rather than via a character pointer.
+
+<li> Improved documentation.
+
+</ul>
+<p>
+
+
+<h3>Version 1.6 - May 2000</h3>
+
+<ul>
+<li> The <i>cnet</i> functions
+	<tt>CNET_set_cursor()</tt>,
+	<tt>CNET_get_cursor()</tt>,
+	<tt>CNET_clear_to_eoln()</tt>, and
+	<tt>CNET_clear_to_eos()</tt> are no longer supported.
+
+<li> When tracing events, arbitrary addresses/variables may now be traced
+	by name (instead of their hexadecimal addresses) by calling
+	<tt>CNET_trace_name()</tt> at the top of an event's handler.
+
+<li> The link attributes of <tt>propagationdelay</tt> and
+	<tt>bandwidth</tt> may no longer be changed at run-time via the
+	windowing interface.
+
+<li> A new function, <tt>CNET_timer_data()</tt>, enables a protocol to
+	retrieve a timer's user-data before the timer expires.
+	This permits a protocol to retrive and deallocate dynamically
+	allocated storage before it calls <tt>CNET_stop_timer()</tt>.
+
+<li> No ``raw'' X-window API functions called.
+	All windowing, mouse tracking, fonts etc, are provided by Tcl/Tk.
+	No special support provided for monochrome-only displays.
+
+<li> All windowing for statistics, etc, ``pushed'' into the Tck/Tk code.
+
+<li> Support added for Tcl/Tk v8.0 and beyond.
+
+<li> A warning message is porduced if a provided topology file is not
+	connected.  Random topologies, requested via the <tt>-r&nbsp;nnodes</tt>
+	command-line option, are now guaranteed to be connected.
+
+<li> Node icons are now located in a directory via the value of
+	<tt>CNETPATH</tt>, rather than as statically-compiled XPM structures.
+	XPM operating system support is no longer required.
+
+<li> Both <i>recieve</i> and <i>interupt</i> now recognized spelling errors.
+
+<li> Improved documentation.
+
+</ul>
+
+<p>
+
+
+<h3>Version 1.5 - April 1999</h3>
+
+<ul>
+<li> Support for Linux <i>a.out</i> format dropped
+	(now only <i>ELF</i> format).
+<li> Support for Motif and XView windowing dropped
+	(now only Tcl/Tk).
+<li> Improved documentation.
+
+</ul>
+
+
+<h3>Version 1.4 - February 1997</h3>
+
+<p>
+<h3>Version 1.3 - July 1996</h3>
+
+</td></tr></table>
+
+
+<table width="100%"><tr>
+  <td><i>cnet</i> was written and is maintained by Chris McDonald
+      <A HREF="mailto:chris@csse.uwa.edu.au">(chris@csse.uwa.edu.au)</a></td>
+  <td><img align="right" src="images/UWAsmall.gif"></td>
+</tr></table>
+
+</BODY>
+</HTML>

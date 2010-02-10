@@ -1,0 +1,167 @@
+<HTML>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HEAD>
+<TITLE>The cnet network simulator - checksum and miscellaneous functions</TITLE>
+<META NAME="description" CONTENT="cnet enables experimentation
+with various data-link layer, network layer, routing and transport
+layer networking protocols.  It has been specifically developed for
+undergraduate teaching.">
+
+<META NAME="keywords" CONTENT="network, 802.3, ethernet, WAN, simulator,
+simulation, protocol, undergraduate, teaching">
+</HEAD>
+
+<BODY BGCOLOR="white" TEXT ="black" LINK="blue" VLINK="purple">
+
+<table>
+<tr>
+<td valign="top" bgcolor="#74dbf2">
+<table cellpadding="4" cellspacing="0" border="0"><tr>
+
+<td nowrap>
+    <b><i>cnet</i> v2.0.10</b>
+    <p>
+
+    <a href="index.html">home</a>
+    <br>
+    <a href="introduction.html">introduction</a>
+    <br>
+    <a href="themodel.html">simulation model</a>
+    <p>
+    <a href="topology.html">topology files</a>
+    <br>
+    <a href="options.html">cmdline options</a>
+    <br>
+    <a href="functions.html">the API</a>
+    <p>
+    <a href="faq.html">FAQ</a>
+    <p>
+    <a href="install.html">download</a>
+</td>
+
+</td></tr></table>
+</td>
+
+<td>
+<h3><i>cnet's</i> checksum and miscellaneous functions</a></h3>
+
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+<p>
+
+<dl>
+<dt><a name="checksum_internet"><tt>
+
+<h3>Checksum functions</h3>
+
+<b>int</b>
+checksum_internet(<b>unsigned short</b> *addr, <b>int</b> nbytes)
+</tt>
+</a>
+<p>
+</dt>
+
+<dt><a name="checksum_ccitt"><tt>
+<b>unsigned short</b>
+checksum_ccitt(<b>unsigned char</b> *addr, <b>int</b> nbytes)
+</tt>
+</a>
+<p>
+</dt>
+
+<dt><a name="checksum_crc16"><tt>
+<b>unsigned short</b>
+checksum_crc16(<b>unsigned char</b> *addr, <b>int</b> nbytes)
+</tt>
+</a>
+<p>
+</dt>
+
+<dt><a name="checksum_crc32"><tt>
+<b>unsigned int</b>
+checksum_crc32(<b>unsigned char</b> *addr, <b>int</b> nbytes)
+</tt>
+</a>
+<p>
+</dt>
+<dd>
+These four checksum
+functions each take a memory address and perform the specified checksum
+calculation on the indicated number of bytes starting from that address.
+</dd>
+</dl>
+
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+<p>
+
+<h3>Miscellaneous functions</h3>
+
+<dl>
+<dt><a name="read_keyboard"><tt>
+<b>int</b>
+CNET_read_keyboard(<b>char</b> *line, <b>int</b> *len)
+</tt>
+</a>
+</dt>
+<dd>
+<p>
+Requests the specified maximum number of bytes from the keyboard
+buffer placing them in the address pointed to by <tt>line</tt>.
+On invocation, <tt>len</tt> will point to an integer indicating the maximum
+number of bytes that may be copied into <tt>line</tt>.
+On return, <tt>line</tt> will be NULL-byte terminated
+(and not include a newline)
+and the integer pointed to by <tt>len</tt> will contain <tt>strlen(line)+1</tt>.
+<p>
+Possible errors: <tt>ER_BADSIZE, ER_NOTREADY, ER_NOTSUPPORTED.</tt>
+<p>
+</dd>
+
+<dt><a name="set_debug_string"><tt>
+<b>int</b>
+CNET_set_debug_string(CnetEvent ev, <b>char</b> *str)
+</tt>
+</a>
+</dt>
+<dd>
+<p>
+Change the string on the indicated windowing debug button
+(for <tt>EV_DEBUG1..EV_DEBUG5</tt>) to <tt>str</tt>.
+If <tt>str</tt> is <tt>NULL</tt> or the empty string,
+the indicated button is removed.
+<p>
+Possible errors: <tt>ER_BADEVENT.</tt>
+<p>
+</dd>
+
+<dt><a name="set_time_of_day"><tt>
+<b>int</b>
+CNET_set_time_of_day(<b>long</b> newsec, <b>long</b> newusec)
+</tt>
+</a>
+</dt>
+<dd>
+<p>
+Change the node's notion of the wall-clock time of day.
+As nodeinfo should be considered a read-only structure, this is
+the only method to set <tt>time_of_day.sec</tt> and <tt>time_of_day.usec</tt> .
+(<tt>time_of_day.sec</tt> is the number of seconds since Jan. 1, 1970,
+and may be used in a call to <i>ctime(3c)</i>).
+<p>
+Possible errors: <tt>ER_BADARG.</tt>
+<p>
+</dd>
+</dl>
+
+</td></tr></table>
+
+
+<table width="100%"><tr>
+  <td><i>cnet</i> was written and is maintained by Chris McDonald
+      <A HREF="mailto:chris@csse.uwa.edu.au">(chris@csse.uwa.edu.au)</a></td>
+  <td><img align="right" src="images/UWAsmall.gif"></td>
+</tr></table>
+
+</BODY>
+</HTML>

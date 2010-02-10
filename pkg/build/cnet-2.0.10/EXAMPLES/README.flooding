@@ -1,0 +1,54 @@
+
+This directory contains cnet implementations of 3 Network Layer flooding
+algorithms (flooding1..flooding3) of increasing complexity and efficiency.
+Read the block comment at the top of each source protocol file for an
+explanation of that file's implementation.
+
+As we are trying to demonstrate Network Layer concepts here, we assume
+that a reliable Data Link Layer will deliver all packets. A minimal Data
+Link Layer is provided which defines a basic DLL_FRAME type and transmits
+frames using CNET_write_physical_reliable(), which never experiences
+frame loss nor corruption.  A more detailed implementation would require
+a full Data Link Layer implementation and call CNET_write_physical().
+
+All 3 implementations share a lot of common code, whose functions are
+declared in nltable.h and implemented in nltable.c These include a simple
+implementation of a Network Layer routing table, implemented as an array
+of structures that grows each time a new remote address is discovered.
+A hash-table is another possible implementation.  The table maintains
+information including each remote host's address and the sequence numbers
+used in a NL stop-and-wait protocol between ourselves and each remote
+node.  In later protocols, flooding2 and flooding3, additional fields
+are employed so that each NL remembers the best_link on which to transmit
+packets for the remote node, and how many hops away we believe it to be.
+
+Isolating most of the Network Layer "housekeeping" functions in the
+separate file, nltable.c, allows us to concentrate on the flooding
+algorithms.  More detailed implementations would likely isolate the
+management of sequence numbers and routing functions into further files.
+
+A simple encoding "trick" is used in flooding2 and flooding3 in which we
+use an integer variable to store a Boolean bitmap.  A field of the table
+records the link known to offer the minimum number of hops to the remote
+destination.  If we don't know the link of minimum hops, the constant
+ALL_LINKS (value = 0xFFFFFFFF) is used, as its binary representation
+of "all ones" indicates that all possible links should be used (full
+flooding).  Over time, the single best_link is learnt, and is be stored
+as an integer with the value (1 << BEST_LINK).  For example, if the best
+link to use is link number 3, the value 8 (i.e. 1<<3) will be stored.
+When we wish to broadcast a packet via all necessary links, the function
+selective_flood() accepts a bitmap indicating which links should be used.
+
+As we are assuming 32-bit integers, the function init_NL_table() checks
+that this encoding trick may be used.
+
+Each implementation attempts to quash unnecessary packets by limiting
+the number of hops they may travel.  The constant MAX_HOPS is set
+to 4 (in nltable.h) and is appropriate for the simple topology
+in AUSTRALIA.MAP.  MAX_HOPS may need to be set to a larger value for
+topologies with a greater diameter, else nodes at the periphery will
+never be able to communicate with each other because they are too far
+away and all of their packets will be silently discarded!
+
+--------------------------------------
+Chris McDonald (chris@csse.uwa.edu.au)

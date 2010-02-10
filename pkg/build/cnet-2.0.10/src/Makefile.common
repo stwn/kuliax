@@ -1,0 +1,61 @@
+NAME	= cnet
+VERSION	= 2.0.2
+
+OBJ	= applicationlayer.o checksums.o cnetmain.o cnet64bits.o\
+	    compile.o drawframes.o ethernet.o events.o exit.o error.o\
+	    globals.o images.o lexical.o\
+	    link_menu.o link_windows.o load.o main_window.o motd.o\
+	    node_menu.o node_windows.o\
+	    parser.o physicallayer.o poisson.o scheduler.o\
+	    statistics.o std_application.o std_physical.o\
+	    stdio.o timers.o topology.o trace.o tcltk_notifier.o\
+	    win32.o
+
+
+DOTH	= cnet.h cnetheader.h cnet64bits.h config.h externs.h hidenames.h
+
+# -------------------------------------------------------------------------
+
+$(NAME):	$(OBJ)
+		$(LD) $(LDFLAGS) -o $(NAME) $(OBJ) $(LIBDIRS) $(XLIBS) $(LIBS)
+		@$(STRIP) $(NAME)
+		@chmod 755 $(NAME)
+
+
+cnetmain.o:	$(DOTH) statistics.h tcltk_notifier.h cnetmain.c
+	$(ANSICC) $(CFLAGS) -c cnetmain.c
+
+compile.o:	$(DOTH) compile.c \
+			compile/freebsd.c \
+			compile/irix5.c \
+			compile/netbsd.c \
+			compile/linux.c \
+			compile/osf1.c \
+			compile/solaris.c \
+			compile/sunos.c \
+			compile/win32.c
+	$(ANSICC) $(CFLAGS) -c compile.c
+
+ethernet.o:	$(DOTH) statistics.h ethernet.c
+	$(ANSICC) $(CFLAGS) -c ethernet.c
+
+lexical.o:	$(DOTH) lexical.h lexical.c
+	$(ANSICC) $(CFLAGS) -c lexical.c
+
+parser.o:	$(DOTH) lexical.h parser.c
+	$(ANSICC) $(CFLAGS) -c parser.c
+
+physicallayer.o:	$(DOTH) statistics.h physicallayer.c
+	$(ANSICC) $(CFLAGS) -c physicallayer.c
+
+scheduler.o:	$(DOTH) statistics.h scheduler.c
+	$(ANSICC) $(CFLAGS) -c scheduler.c
+
+statistics.o:	$(DOTH) statistics.h statistics.c
+	$(ANSICC) $(CFLAGS) -c statistics.c
+
+tcltk_notifier.o:	$(DOTH) tcltk_notifier.h tcltk_notifier.c
+	$(ANSICC) $(CFLAGS) -c tcltk_notifier.c
+
+%.o : %.c $(DOTH)
+	$(ANSICC) $(CFLAGS) -c $<

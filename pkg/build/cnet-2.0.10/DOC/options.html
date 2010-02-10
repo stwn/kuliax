@@ -1,0 +1,282 @@
+<HTML>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HEAD>
+<TITLE>The cnet network simulator - command line options</TITLE>
+<META NAME="description" CONTENT="cnet enables experimentation
+with various data-link layer, network layer, routing and transport
+layer networking protocols.  It has been specifically developed for
+undergraduate teaching.">
+
+<META NAME="keywords" CONTENT="network, 802.3, ethernet, WAN, simulator,
+simulation, protocol, undergraduate, teaching">
+</HEAD>
+
+<BODY BGCOLOR="white" TEXT ="black" LINK="blue" VLINK="purple">
+
+<table>
+<tr>
+<td valign="top" bgcolor="#74dbf2">
+<table cellpadding="4" cellspacing="0" border="0"><tr>
+
+<td nowrap>
+    <b><i>cnet</i> v2.0.10</b>
+    <p>
+
+    <a href="index.html">home</a>
+    <br>
+    <a href="introduction.html">introduction</a>
+    <br>
+    <a href="themodel.html">simulation model</a>
+    <p>
+    <a href="topology.html">topology files</a>
+    <br>
+    <a href="options.html">cmdline options</a>
+    <br>
+    <a href="functions.html">the API</a>
+    <p>
+    <a href="faq.html">FAQ</a>
+    <p>
+    <a href="install.html">download</a>
+</td>
+
+</td></tr></table>
+</td>
+
+<td>
+<h3><a name="options"><i>cnet's</i> many command line options</a></h3>
+
+<i>cnet</i>
+supports a number of options which should be presented before the name
+of the topology file or a request for a random topology.
+Specifying all of
+<a href="#option-M">-M mins</a>,
+<a href="#option-S">-S seed</a>,
+and
+<a href="#option-T">-T</a>
+enables a simulation to be replayed.
+
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+<p>
+
+<dl>
+
+<dt><a name="option-A"><b>-A string</b></a></dt>
+<dd>
+Specify a <a href="topology.html#compstrings">compilation string</a>
+which declares a new application layer to be used.
+If <i>-A</i> is not provided, a default (internal) application layer is used.
+The eventual application layer is used as the source and sink of all
+messages.
+</dd>
+
+<dt><a name="option-c"><b>-c</b></a></dt>
+<dd>
+Normally the <tt>time_of_day</tt> clocks in each node are initially different
+(and protocols could be developed to synchronize the clocks).
+If <i>-c</i> is specified,
+the clocks in all nodes will initially be synchronized.
+</dd>
+
+<dt><a name="option-C"><b>-C string</b></a></dt>
+<dd>
+Specify a <a href="topology.html#compstrings">compilation string</a>
+which declares each node's "internal" layers to be used.
+If <i>-C</i> is not provided, the string <i>``protocol.c''</i> is assumed.
+</dd>
+
+<dt><a name="option-d"><b>-d</b></a></dt>
+<dd>
+Provide some diagnostic/monitoring information while <i>cnet</i> is running.
+</dd>
+
+<dt><a name="option-e"><b>-e</b></a></dt>
+<dd>
+Normally, corruption errors on links are not reported by the
+Physical Layer and must be detected by the receiver.
+If <i>-e</i> is specified,
+function <tt>CNET_read_physical</tt> will detect and report
+corruption errors by returning <tt>-1</tt> and setting
+<tt>cnet_errno</tt> to <tt>ER_CORRUPTDATA</tt>.
+</dd>
+
+<dt><a name="option-E"><b>-E nevents</b></a></dt>
+<dd>
+Request that <i>cnet</i> only run for the indicated number of events.
+</dd>
+
+<dt><a name="option-f"><b>-f secs</b></a></dt>
+<dd>
+Set the frequency (in seconds) of the diagnostic and statistical summary.
+In combination with -s and -z,
+cumulative statistics may be periodically reported.
+</dd>
+
+<dt><a name="option-F"><b>-F filename</b></a></dt>
+<dd>
+If <i>cnet</i> has been compiled for TclTk,
+the indicated file will be sourced by the Tcl interpreter.
+If the file cannot be found directly,
+CNETPATH will be searched to locate the file.
+</dd>
+
+<dt><a name="option-g"><b>-g</b></a></dt>
+<dd>
+Commence execution (go) as soon as the main window appears (under X-windows);
+implied by <a href="#option-W">-W</a>.
+</dd>
+
+<dt><a name="option-k"><b>-k</b></a></dt>
+<dd>
+Use ``old'' Kernighan and Ritchie (K&amp;R) C to compile the user supplied
+source files for the
+application layer (<a href="#option-A">-A</a>),
+the ``central'' protocol layers (<a href="#option-C">-C</a>),
+and the physical layer (<a href="#option-P">-P</a>).
+The default is to use the ANSI-C compiler, <i>gcc</i>.
+</dd>
+
+<dt><a name="option-m"><b>-m mins</b></a></dt>
+<dd>
+To prevent runaway processes choking our teaching machines,
+a 3 minute time limit is silently imposed on <i>cnet</i> execution.
+The <i>-m</i> option overrides this limit.
+</dd>
+
+<dt><a name="option-M"><b>-M mins</b></a></dt>
+<dd>
+Limit the length of the simulation to <i>-M</i> minutes of 'simulated time'
+when used in combination with <a href="#option-T">-T</a>.
+</dd>
+
+<dt><a name="option-n"><b>-n</b></a></dt>
+<dd>
+Simply parse the topology file, compile and link all necessary C source files
+and then exit.
+</dd>
+
+<dt><a name="option-N"><b>-N</b></a></dt>
+<dd>
+Provide the number of nodes in the network in the C variable <tt>NNODES</tt>.
+Surprisingly, the default is that each node does not know
+how many nodes the network contains (<tt>NNODES = 0</tt>).
+</dd>
+
+<dt><a name="option-o"><b>-o file_prefix</b></a></dt>
+<dd>
+Copy the output of each node's <tt>printf(), puts()</tt> and <tt>putchar()</tt>
+to a file with the indicated prefix.
+For example, the use of <i>-o output</i> will typically create and write to the
+files <i>output.node0, output.node1, output.node2, ...</i>.
+</dd>
+
+<dt><a name="option-O"><b>-O</b></a></dt>
+<dd>
+Open all node windows on startup (unless overridden by the
+<tt>winopen</tt> attribute).
+</dd>
+
+<dt><a name="option-p"><b>-p</b></a></dt>
+<dd>
+After building and checking the network topology,
+simply print it out and exit <i>cnet</i>.
+</dd>
+
+<dt><a name="option-P"><b>-P string</b></a></dt>
+<dd>
+Specify a <a href="topology.html#compstrings">compilation string</a>
+which declares a new physical layer to be used.
+If <i>-P</i> is not provided, a default (internal) physical layer is used.
+The eventual physical layer is used to deliver and possibly corrupt and
+lose data frames.
+</dd>
+
+<dt><a name="option-q"><b>-q</b></a></dt>
+<dd>
+Execute quietly (and more quickly) -
+all output requested with <tt>printf(), puts()</tt> and <tt>putchar()</tt>
+will not appear in the output windows.
+All output produced during an <tt>EV_DEBUG?</tt> event (a button press)
+will still appear,
+as will all output ``mirrored'' in logging files.
+</dd>
+
+<dt><a name="option-r"><b>-r nnodes</b></a></dt>
+<dd>
+Request that a random network be generated,
+consisting of <i>nnodes</i>.
+The topology is guaranteed to be connected.
+The <i>-r</i> option may be used instead of providing a topology file,
+and must be the last option before the appearance of each node's optional
+<a href="eventdriven.html#argv">command-line arguments</a>.
+</dd>
+
+<dt><a name="option-R"><b>-R function_name</b></a></dt>
+<dd>
+Use <tt>function_name()</tt> as the function to first invoke when rebooting
+each node.
+By default,
+the function <tt>reboot_node()</tt> will be invoked.
+</dd>
+
+<dt><a name="option-s"><b>-s</b></a></dt>
+<dd>
+Print a summary of the network's activity just before <i>cnet</i> exits.
+</dd>
+
+<dt><a name="option-S"><b>-S seed</b></a></dt>
+<dd>
+Provide the seed for random number generation
+(for message generation and frame corruption).
+</dd>
+
+<dt><a name="option-t"><b>-t</b></a></dt>
+<dd>
+Trace all events delivered to each network node.
+An annotation of all <i>cnet</i> function calls,
+arguments and
+return and <tt>cnet_errno</tt> values is reported via <i>cnet</i>'s
+tracing stream.
+Any output requested with <tt>CNET_trace</tt> will also appear.
+</dd>
+
+<dt><a name="option-T"><b>-T</b></a></dt>
+<dd>
+By default, <i>cnet</i> runs in ``wall-clock'' time,
+that is, the simulation performs one second of network-work in one second
+of ``wall-clock'' time.
+This works well for up to about 20 nodes beyond which <i>cnet</i> ``gets
+behind''.
+Using <i>-T</i> forces <i>cnet</i> to ignore the ``wall-clock'' time and
+to execute as a true discrete-event simulator.
+</dd>
+
+<dt><a name="option-v"><b>-v</b></a></dt>
+<dd>
+Be very verbose reporting <i>cnet</i>'s actions.
+</dd>
+
+<dt><a name="option-W"><b>-W</b></a></dt>
+<dd>
+Disable support for windowing using Tcl/Tk (the default for ASCII terminals!).
+</dd>
+
+<dt><a name="option-z"><b>-z</b></a></dt>
+<dd>
+Display statistics and event summaries even if they are zero
+(implies <a href="#option-s">-s</a>).
+</dd>
+
+</dl>
+
+</td></tr></table>
+
+
+<table width="100%"><tr>
+  <td><i>cnet</i> was written and is maintained by Chris McDonald
+      <A HREF="mailto:chris@csse.uwa.edu.au">(chris@csse.uwa.edu.au)</a></td>
+  <td><img align="right" src="images/UWAsmall.gif"></td>
+</tr></table>
+
+</BODY>
+</HTML>

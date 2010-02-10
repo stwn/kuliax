@@ -1,0 +1,47 @@
+#
+# The following #defines are for:
+#	Linux ELF systems (1.2.13 onwards)
+#	gcc (2.7.0 onwards)
+#	binutils 2.5.2, and
+#	libelf (0.6.4 onwards)
+
+#
+# This implementation of cnet requires the libelf library.
+# If not installed globally, specify here where libelf may be found.
+#
+#LIBELFDIR	= -L/usr/lib
+LIBELFDIR	= -Llibelf
+
+#
+# Similarly, you may need to specify where libelf's include files are found.
+#
+#LIBELFINC	= -I/usr/include/libelf
+LIBELFINC	= -Ilibelf
+
+# Uncomment the following line if you wish Tcl/Tk windowing (see config.h)
+#
+XINCLUDES	= -I/usr/X11R6/include -I/usr/include/tcl8.4
+XLIBDIRS	= -L/usr/X11R6/lib
+XLIBS		= -ltcl8.4 -ltk8.4
+
+# Cannot use the -pedantic option if requiring 'long long' syntax.
+#ANSICC		= gcc -ansi -pedantic
+ANSICC		= gcc -ansi
+INCLUDES	= $(LIBELFINC)
+
+CFLAGS		= -O -Wall -fPIC $(INCLUDES) $(XINCLUDES)
+
+LD		= gcc -rdynamic
+LIBDIRS		= -L/usr/X11R6/lib $(XLIBDIRS) $(LIBELFDIR)
+LIBS		= -lelf -ldl -lm
+STRIP		= strip
+
+# ---------------------- No user-serviceable code below -----------------
+
+DOTH	= cnet.h cnetheader.h cnet64bits.h config.h externs.h hidenames.h
+
+stdio.o:	$(DOTH) stdio.c
+	$(ANSICC) -Wall -fPIC $(INCLUDES) $(XINCLUDES) -c stdio.c
+
+include	Makefile.common
+

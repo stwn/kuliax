@@ -1,0 +1,65 @@
+
+Dear All,					31st March 2004.
+
+I am pleased to announce the next release of my cnet network simulator.
+cnet v2.0.10 enables experimentation with various data-link layer,
+network layer, routing and transport layer networking protocols in networks
+consisting of any combination of point-to-point links and Ethernet segments.
+cnet has been specifically developed for, and is used in, undergraduate
+computer networking courses taken by thousands of students worldwide.
+
+The full distribution (about 1.1MB) includes all source code, Makefiles,
+documentation, sub-directories for each of the supported operating
+systems, and a few representative protocol examples, and is freely
+available under the GPL from:
+
+	http://www.csse.uwa.edu.au/cnet/
+
+A quick overview, including some screenshots, may be found at:
+
+	http://www.csse.uwa.edu.au/cnet/introduction.html
+
+
+The main improvements of this version are:
+
+- Added support for Ethernet segments as well as the traditional WAN
+  point-to-point links.  Ethernet NICs have the standard 6-byte hardware
+  addresses;  built-in cnet functions help set addresses on links,
+  convert NIC addresses to and from character strings, and set NICs into
+  promiscuous mode.
+
+- All times and rates are now maintained in microseconds (not milliseconds).
+  This is supported by using 64-bit integers wherever necessary, including
+  cnet's internally managed statistics.  cnet provides built-in to support
+  64-bit integer arithmetic, comparison, and conversion for platforms/compilers
+  not supporting 64-bit integers directly.
+
+- Nodes may now receive command-line arguments when they are rebooted.
+  Typical uses are to specify the node's role, default routes, etc.
+
+- The frames of 2-node point-to-point simulations may now be animated.
+  This greatly assists students in their understanding and debugging
+  of their first Data-Link layer protocols.
+
+- Fixes for some well-hidden bugs.
+
+- Improved documentation, with some much-requested protocol walkthroughs
+  of a few example protocols.
+
+
+This announcement will hopefully arrive in time for you to consider
+cnet's new features for the forthcoming semester (well, in Australia and
+New Zealand at least).
+
+A big thanks to all those who continue to contribute to cnet with your
+ideas and bug finding.  Since being cited in Stalling's "Data and Computer
+Communications", 6th ed., the interest has been a bit overwhelming, though
+I'd love cnet to receive mention in Tanenbaum's forthcoming 4th ed. too.
+
+As ever, feedback about your use of cnet in your teaching is welcomed.
+
+_______________________________________________________________________________
+                  Dr Chris McDonald   EMAIL:  chris@csse.uwa.edu.au
+         School of Computer Science & Software Engineering
+The University of Western Australia   WWW: http://www.csse.uwa.edu.au/~chris
+   Crawley, Western Australia, 6009   PH: +61 8 9380 2533, FAX: +61 8 9380 1089

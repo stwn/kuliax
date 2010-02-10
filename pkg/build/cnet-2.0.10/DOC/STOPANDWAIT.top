@@ -1,0 +1,20 @@
+compile			= "stopandwait.c"
+
+drawframes		= true
+
+messagerate		= 1000ms,
+propagationdelay	= 1500ms,
+
+probframecorrupt	= 2
+probframeloss   	= 2
+
+host perth {
+    x=80,    y=50
+    winx=10, winy=200
+}
+
+host melbourne {
+    winx=580, winy=200
+    east east east east of perth
+    link to perth
+}

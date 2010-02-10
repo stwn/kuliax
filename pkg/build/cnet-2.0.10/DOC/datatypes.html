@@ -1,0 +1,394 @@
+<HTML>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HEAD>
+<TITLE>The cnet network simulator - datatypes, event types, and errors</TITLE>
+<META NAME="description" CONTENT="cnet enables experimentation
+with various data-link layer, network layer, routing and transport
+layer networking protocols.  It has been specifically developed for
+undergraduate teaching.">
+
+<META NAME="keywords" CONTENT="network, 802.3, ethernet, WAN, simulator,
+simulation, protocol, undergraduate, teaching">
+</HEAD>
+
+<BODY BGCOLOR="white" TEXT ="black" LINK="blue" VLINK="purple">
+
+<table>
+<tr>
+<td valign="top" bgcolor="#74dbf2">
+<table cellpadding="4" cellspacing="0" border="0"><tr>
+
+<td nowrap>
+    <b><i>cnet</i> v2.0.10</b>
+    <p>
+
+    <a href="index.html">home</a>
+    <br>
+    <a href="introduction.html">introduction</a>
+    <br>
+    <a href="themodel.html">simulation model</a>
+    <p>
+    <a href="topology.html">topology files</a>
+    <br>
+    <a href="options.html">cmdline options</a>
+    <br>
+    <a href="functions.html">the API</a>
+    <p>
+    <a href="faq.html">FAQ</a>
+    <p>
+    <a href="install.html">download</a>
+</td>
+
+</td></tr></table>
+</td>
+
+<td>
+<h3><i>cnet</i>'s datatypes, event types, and error types</a></h3>
+<i>cnet's</i> provides a small number of data- and enumerated types,
+each defined in the <tt>&lt;cnet.h&gt;</tt> header file.
+
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+<p>
+
+<h3>The <tt>CnetNodeType</tt> enumerated type</h3>
+Each node is either a host (a workstation) or a router.
+The type of a node may be determined by examining its value of
+<tt>nodeinfo.nodetype</tt>.
+For example:
+
+<tt>
+<pre>
+    <b>if</b>(nodeinfo.nodetype == NT_HOST)
+        (<b>void</b>)CNET_set_handler(EV_APPLICATIONREADY, appl_ready, 0);
+
+</pre>
+</tt>
+
+<p>
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#aaaaaa"><tr><td>
+<table cellpadding="1" cellspacing="0" border="1" bgcolor="white">
+<tr>
+    <th>CnetNodeType</th>
+    <th>meaning</th>
+</tr>
+<tr>
+    <td>NT_HOST</td>
+    <td>this node is a host with an Application Layer and keyboard</td>
+</tr>
+<tr>
+    <td>NT_ROUTER</td>
+    <td>this node is a router without an Application Layer or keyboard</td>
+</tr>
+</table>
+</td></tr></table>
+
+<p>
+Note that calls to the functions
+<p>
+<pre><tt>    CNET_write_application,
+    CNET_read_application,
+    CNET_enable_application,
+    CNET_disable_application and
+    CNET_set_handler(EV_APPLICATIONLAYER,...) or
+    CNET_set_handler(EV_KEYBOARDREADY,...)
+</tt></pre>
+<p>
+are only valid if called from a node of node type <tt>NT_HOST</tt>.
+
+<a name="linktype"></a>
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+<p>
+
+<h3>The <tt>CnetLinkType</tt> enumerated type</h3>
+Each node's link is either a <tt>LOOPBACK</tt>,
+an <i>Ethernet</i>, or a <i>point-to-point</i> link.
+The type of a link may be determined by examining the value of
+<tt>linkinfo[link].linktype</tt>.
+For example:
+
+<tt>
+<pre>
+    <b>if</b>(linkinfo[link].linktype == LT_ETHERNET)
+        (<b>void</b>)CNET_set_promiscuous(link, 1);
+
+</pre>
+</tt>
+
+<p>
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#aaaaaa"><tr><td>
+<table cellpadding="1" cellspacing="0" border="1" bgcolor="white">
+<tr>
+    <th>CnetNodeType</th>
+    <th>meaning</th>
+</tr>
+<tr>
+    <td>LT_LOOPBACK</td>
+    <td>this link (which will always be link <tt>0</tt>) is used to quickly
+	deliver data from a node to <i>itself</i></td>
+</tr>
+<tr>
+    <td>LT_ETHERNET</td>
+    <td>this link connects this node to other nodes via a shared Ethernet
+	segment</td>
+</tr>
+<tr>
+    <td>LT_POINT2POINT</td>
+    <td>this link connects this node to one other node via a dedicated
+	(``private'') link as in a wide-area network</td>
+</tr>
+</table>
+</td></tr></table>
+
+<p>
+Calls to the functions
+<p>
+
+<pre><tt>    CNET_set_promiscuous, and
+    CNET_set_nicaddr
+</tt></pre>
+
+cannot set the attributes of link <tt>0</tt>, the <tt>LOOPBACK</tt> link,
+nor set a NIC address to either the zero address, <tt>00:00:00:00:00:00</tt>,
+or the broadcast address, <tt>ff:ff:ff:ff:ff:ff</tt>.
+
+<a name="nicaddr"></a>
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+<p>
+
+<h3>The <tt>CnetNicaddr</tt> datatype</h3>
+Each Physical Layer link of type <tt>LT_ETHERNET</tt> or
+<tt>LT_POINT2POINT</tt> has a specific Network Interface Card (NIC) address.
+<i>cnet</i> provides the <tt>CnetNicaddr</tt> datatype to represent the
+addresses of its NICs,
+as an array of <tt>LEN_NICADDR</tt> (=6) unsigned characters.
+<p>
+Frames written to Ethernet links are ``expected'' to carry the
+address of their destination Network Interface Card (NIC) at the very
+beginning of the frame.
+<i>cnet</i> interprets the leading <tt>LEN_NICADDR</tt> bytes of each frame
+on an Ethernet segment to be an address.
+The special address, whose string representation is <tt>ff:ff:ff:ff:ff:ff</tt>,
+is interpreted as the Ethernet <i>broadcast address</i>.
+Any frame carrying the broadcast address as its destination address will be
+delivered to all NICs on the Ethernet segment, except the sender.
+<i>cnet</i> does not support multicast or group addressing.
+<p>
+<i>cnet</i> provides the functions
+<a href="physical.html#parse_nicaddr"><tt>CNET_parse_nicaddr</tt></a> and
+<a href="physical.html#format_nicaddr"><tt>CNET_format_nicaddr</tt></a>
+to convert between character strings and the <tt>CnetNicaddr</tt> datatype.
+
+
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+<p>
+
+<h3>The <tt>CnetInt64</tt> datatype</h3>
+
+As of v2.0, <i>cnet</i> supports a 64-bit integer datatype
+named <tt>CnetInt64</tt> which is used to store all times (now in microseconds)
+and large statistics.
+The datatype and a number of arithmetic,
+conversion, and I/O routines are defined in the
+<tt>&lt;cnet64bits.h&gt;</tt> header file which,
+like the <tt>&lt;cnet.h&gt;</tt> header file (and included by it),
+is located via the value of <tt>CNETPATH</tt>.
+
+The <a href="int64.html"><tt>CnetInt64</tt></a> datatype is fully described on 
+<a href="int64.html">its own webpage</a>.
+
+
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+<p>
+
+<h3>The <tt>CnetEvent</tt> enumerated type</h3>
+Events occur in <i>cnet</i> when
+a node reboots,
+the Application Layer has a message for delivery,
+the Physical Layer receives a frame on a link,
+the keyboard provides a line of input,
+a link changes state (either up or down),
+a timer event expires,
+a debugging button (under X-windows) is selected, and
+a node is (politely) shutdown
+(no event is delivered if a node pauses, crashes or suffers a hardware failure).
+All such events are of type <tt>CnetEvent</tt>.
+Interest may be registered in each event with
+<tt>CNET_set_handler</tt>;
+events are received as the first parameter of each event handler,
+and their invocation may be traced with
+<tt>CNET_set_trace</tt>.
+<p>
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#aaaaaa"><tr><td>
+<table cellpadding="1" cellspacing="0" border="1" bgcolor="white">
+<tr>
+    <th>CnetEvent</th>
+    <th>meaning</th>
+</tr>
+<tr>
+    <td>EV_NULL</td>
+    <td>this event is used internally and is never seen by your protocols</td>
+</tr>
+<tr>
+    <td>EV_REBOOT</td>
+    <td>raised as reboot_node(EV_REBOOT, ... , ...)</td>
+</tr>
+<tr>
+    <td>EV_SHUTDOWN</td>
+    <td>raised before cnet is (cleanly) terminated</td>
+</tr>
+<tr>
+    <td>EV_APPLICATIONREADY</td>
+    <td>raised when there is a message ready for delivery</td>
+</tr>
+<tr>
+    <td>EV_PHYSICALREADY</td>
+    <td>raised when a frame arrives at one of the links</td>
+</tr>
+<tr>
+    <td>EV_KEYBOARDREADY</td>
+    <td>raised when an input line is entered from the keyboard</td>
+</tr>
+<tr>
+    <td>EV_LINKSTATE</td>
+    <td>raised when a link changes state (either up or down)</td>
+</tr>
+<tr>
+    <td>EV_DRAWFRAME</td>
+    <td>raised when a frame is to be drawn in 2-node world</td>
+</tr>
+<tr>
+    <td>EV_DEBUG1..EV_DEBUG5</td>
+    <td>raised when one of the debug buttons (under X-windows) is pressed</td>
+</tr>
+<tr>
+    <td>EV_TIMER1..EV_TIMER10</td>
+    <td>raised when a timer on any of the 10 timer queues expires</td>
+</tr>
+</table>
+</td></tr></table>
+
+<p>
+<IMG SRC="images/purple-line.gif" ALT="line" WIDTH="100%" HEIGHT=8 ALIGN=bottom>
+<p>
+
+<a name="cneterror"></a>
+<h3>The <tt>CnetError</tt> enumerated type</h3>
+Most <i>cnet</i> library functions return the integer <tt>0</tt> on success
+and the integer <tt>-1</tt> on failure.
+The most recent error status is reflected in
+the global variable <tt>cnet_errno</tt>.
+All values of <tt>cnet_errno</tt> will be instances of the
+enumerated type <tt>CnetError</tt>.
+
+Errors may be reported to <tt>stderr</tt> with
+<tt>CNET_perror()</tt> and their error message string accessed from
+<tt>cnet_errstr[(<b>int</b>)cnet_errno]</tt>.
+For example:
+
+<tt>
+<pre>
+    <b>if</b>(CNET_write_application(msgbuffer, &msglength) != 0) {
+        /* an error has occured */
+        <b>if</b>(cnet_errno == ER_BADSESSION) {
+            /* handle this special case */
+            ....
+        }
+        <b>else</b> {
+            CNET_perror("writing to application");
+        }
+    }
+</pre>
+</tt>
+
+<p>
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="#aaaaaa"><tr><td>
+<table cellpadding="1" cellspacing="0" border="1" bgcolor="white">
+<tr>
+    <th>CnetError</th>
+    <th>meaning</th>
+</tr>
+<tr>
+    <td>ER_OK</td>
+    <td>No error</td>
+</tr>
+<tr>
+    <td>ER_BADARG</td>
+    <td>Invalid argument passed to a function</td>
+</tr>
+<tr>
+    <td>ER_BADEVENT</td>
+    <td>Invalid event passed to a function</td>
+</tr>
+<tr>
+    <td>ER_BADLINK</td>
+    <td>Invalid link number passed to a function</td>
+</tr>
+<tr>
+    <td>ER_BADNODE</td>
+    <td>Invalid node passed to a function</td>
+</tr>
+<tr>
+    <td>ER_BADSENDER</td>
+    <td>Application Layer given message from an unknown node</td>
+</tr>
+<tr>
+    <td>ER_BADSESSION</td>
+    <td>Application Layer given message from incorrect session</td>
+</tr>
+<tr>
+    <td>ER_BADSIZE</td>
+    <td>Indicated length is of incorrect size</td>
+</tr>
+<tr>
+    <td>ER_BADTIMER</td>
+    <td>Invalid CnetTimer passed to a function</td>
+</tr>
+<tr>
+    <td>ER_CORRUPTDATA</td>
+    <td>Attempt to transfer corrupt data
+	(only seen if <a href="options.html#option-e">-e</a> provided)</td>
+</tr>
+<tr>
+    <td>ER_LINKDOWN</td>
+    <td>Attempt to transmit on a link which is down</td>
+</tr>
+<tr>
+    <td>ER_NOTFORME</td>
+    <td>Application Layer given a message for another node</td>
+</tr>
+<tr>
+    <td>ER_NOTREADY</td>
+    <td>Function called when service not available</td>
+</tr>
+<tr>
+    <td>ER_NOTSUPPORTED</td>
+    <td>Invalid operation for this node type</td>
+</tr>
+<tr>
+    <td>ER_OUTOFSEQ</td>
+    <td>Application Layer given message out of sequence</td>
+</tr>
+<tr>
+    <td>ER_TOOBUSY</td>
+    <td>link is too busy/congested to handle request</td>
+</tr>
+</table>
+</td></tr></table>
+
+</td></tr></table>
+
+
+<table width="100%"><tr>
+  <td><i>cnet</i> was written and is maintained by Chris McDonald
+      <A HREF="mailto:chris@csse.uwa.edu.au">(chris@csse.uwa.edu.au)</a></td>
+  <td><img align="right" src="images/UWAsmall.gif"></td>
+</tr></table>
+
+</BODY>
+</HTML>
