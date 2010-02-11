@@ -1,0 +1,16 @@
+Source: gkamus
+Section: utils
+Priority: optional
+Maintainer: Iwan Setiawan <stwn@kuliax.org>
+Build-Depends: debhelper (>= 7), autotools-dev, libgtk2.0-dev
+Standards-Version: 3.7.3
+Homepage: http://gkamus.sourceforge.net/
+
+Package: gkamus
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: English-Indonesian dictionary written in GTK+
+ gKamus is English-Indonesian dictionary with simple UNIX
+ <LF> ASCII text format for the database. Thus, it is easy
+ to add and modify words in various editors or in the
+ application itself.
