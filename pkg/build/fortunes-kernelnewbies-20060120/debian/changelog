@@ -1,3 +1,9 @@
+fortunes-kernelnewbies (20060120-0kuliax4) lumpia; urgency=low
+
+  * Modify debian/postinst: fix echo ""
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Fri, 12 Feb 2010 11:06:45 +0700
+
 fortunes-kernelnewbies (20060120-0kuliax3) lumpia; urgency=low
 
   * Modify debian/{postinst,postrm}: fix absolute path fortune

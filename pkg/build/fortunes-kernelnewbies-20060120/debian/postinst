@@ -6,7 +6,7 @@ case "$1" in
 	echo "Adding fortune kernelnewbies to /etc/bash.bashrc..."
 	echo 'echo ""' >> /etc/bash.bashrc
 	echo "/usr/games/fortune kernelnewbies" >> /etc/bash.bashrc
-	echo 'echo""' >> /etc/bash.bashrc
+	echo 'echo ""' >> /etc/bash.bashrc
 	;;
 
 	abort-upgrade|abort-remove|abort-deconfigure)

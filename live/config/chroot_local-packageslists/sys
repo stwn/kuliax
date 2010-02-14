@@ -1,7 +1,9 @@
 debian-backports-keyring
+gdebi-core
 gnupg
 grub
 kdm
+kuliax-archive-keyring
 lvm2
 # usplash
 xorg

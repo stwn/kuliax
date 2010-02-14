@@ -5,6 +5,8 @@ eject
 file
 fortunes-min
 fortunes-kernelnewbies
+freemind
+gkamus
 gnupg
 gparted
 kdebluetooth
@@ -22,8 +24,11 @@ psmisc
 speedcrunch
 stardict
 stardict-kbbi
+stardict-quick-eng-ind
+stardict-quick-ind-eng
 synaptic
-unrar
+unrar-free
 unzip
+usb-modeswitch
 util-linux
 zip
