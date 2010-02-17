@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+log () {
+	logger -t kuliax_late_cmd "$@"
+}
+
+log "Removing empty xorg.conf files"
+rm -f /target/etc/X11/xorg.conf*
+
+log "Setting up GRUB splash for Kuliax"
+ln -s /target/boot/grub/splashimages/splash_kuliax.xpm.gz /target/boot/grub/splash.xpm.gz
+in-target update-grub
+sed -i -e 's|//grub/splash.xpm.gz|/boot/grub/splash.xpm.gz|' /target/boot/grub/menu.lst
+sed -i -e 's|Debian GNU/Linux|Kuliax 7.0|g' /target/boot/grub/menu.lst
+
+log "Copying sources.list"
+cp /cdrom/install/sources.list /target/etc/apt/
+
+log "Flushing filesystem buffers"
+sync
