@@ -9,7 +9,7 @@ RESULT=images
 
 echo "Cleaning my closet..."
 sudo lh_clean --all
-rm $RESULT/$DIST*
+rm -f $RESULT/$DIST*
 
 echo "Start building $DIST-$DATE with clean state..."
 sudo lh_config
