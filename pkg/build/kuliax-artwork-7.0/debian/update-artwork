@@ -1,0 +1,84 @@
+#! /bin/sh
+
+set -e
+
+editini=/usr/share/kuliax-artwork/edit-ini
+
+kdmrc=/etc/kde3/kdm/kdmrc
+
+change_ldm_background() {
+    update-alternatives --install /usr/share/ldm/themes/default \
+        ldm-theme /usr/share/ldm/themes/kuliax 80
+}
+
+restore_ldm_background() {
+    update-alternatives --remove ldm-theme /usr/share/ldm/themes/kuliax
+}
+
+# switch kdm theme to kuliax
+change_kdm_theme() {
+    if [ -f $kdmrc ] ; then
+	if grep -q '^UseTheme=true' $kdmrc; then
+	    if grep -q '^Theme=/usr/share/apps/kdm/themes/kuliax' $kdmrc; then
+		echo "KDM theme for Kuliax already enabled, not touching kdmrc."
+	    else
+		echo "KDM theme already customized, not touching kdmrc."
+	    fi
+	else
+	    echo "Installing and enabling Kuliax KDM theme ..."
+            # This is not policy compilant, as $kdmrc is a conffile in
+            # the kdm package, and we are editing it in a package
+            # maintainer script.  Need to come up with a better way to
+            # do it.  See also
+            # http://release.debian.org/etch_rc_policy.txt
+
+            # First update the KDM theme
+
+	    $editini $kdmrc 'X-*-Greeter' UseTheme true
+	    $editini $kdmrc 'X-*-Greeter' Theme \
+		/usr/share/apps/kdm/themes/kuliax
+
+            # Next, update the background used after the KDM theme is
+            # removed and before kdesktop insert the selected background.
+	    bgrc=/etc/kde3/kdm/backgroundrc
+	    if [ -f $bgrc ] ; then
+		$editini $bgrc 'Desktop0' Wallpaper wallpaper-7.0-wide-1440x900.png
+	    fi
+	fi
+    else
+	echo "KDM not installed, not enabling KDM theme."
+    fi
+}
+
+# switch kdm theme away from kuliax
+restore_kdm_theme() {
+    defaulttheme=@@@ToBeReplacedByDesktopBase@@@
+    defaultwallpaper=default_blue.jpg
+    if [ -f $kdmrc ] ; then
+	if grep -q '^Theme=/usr/share/apps/kdm/themes/kuliax' $kdmrc &&
+	    grep -q '^UseTheme=true' $kdmrc; then
+
+	    echo "Removing and disabling Kuliax KDM theme ..."
+	    $editini $kdmrc 'X-*-Greeter' UseTheme false
+	    $editini $kdmrc 'X-*-Greeter' Theme $defaulttheme
+
+	    bgrc=/etc/kde3/kdm/backgroundrc
+	    if grep -q '^Wallpaper=wallpaper-7.0-wide-1440x900.png' $bgrc ; then
+		$editini $bgrc 'Desktop0' Wallpaper $defaultwallpaper
+	    fi
+	else
+	    echo "KDM theme customised or not enabled, not touching kdmrc ..."
+	fi
+    else
+	echo "KDM not installed, not disabling KDM theme."
+    fi
+}
+
+case "$1" in
+  configure)
+    change_kdm_theme
+    ;;
+  remove)
+    restore_kdm_theme
+    ;;
+esac

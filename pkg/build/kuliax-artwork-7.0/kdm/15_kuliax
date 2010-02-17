@@ -1,0 +1,4 @@
+USETHEME=true
+THEME=/usr/share/apps/kdm/themes/kuliax
+USEBACKGROUND=true
+WALLPAPER=/usr/share/apps/kdm/themes/kuliax/background.svg

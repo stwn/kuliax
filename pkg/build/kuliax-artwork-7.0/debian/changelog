@@ -1,0 +1,7 @@
+kuliax-artwork (7.0-0kuliax1) lumpia; urgency=low
+
+  * Initial release, with some files modified from 
+    debian-edu-artwork and kuliax-artwork_6.0-8
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Mon, 15 Feb 2010 14:55:49 +0700
+

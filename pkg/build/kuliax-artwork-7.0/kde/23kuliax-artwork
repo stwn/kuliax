@@ -1,0 +1,2 @@
+KDEDIRS="/usr/share/kuliax-artwork/kde-profile:$KDEDIRS"
+export KDEDIRS

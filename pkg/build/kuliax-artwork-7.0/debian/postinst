@@ -1,0 +1,14 @@
+#! /bin/sh
+
+set -e
+
+case "$1" in
+	configure)
+	/usr/share/kuliax-artwork/update-artwork configure
+	ln -s /boot/grub/splashimages/splash-kuliax.xpm.gz /boot/grub/splash.xpm.gz
+	;;
+esac
+
+#DEBHELPER#
+
+exit 0

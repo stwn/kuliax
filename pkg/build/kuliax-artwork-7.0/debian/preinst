@@ -1,0 +1,30 @@
+#!/bin/sh
+# preinst script for kuliax-artwork
+
+KSIDE=/usr/share/apps/kicker/pics/kside.png
+GSPLASH=/boot/grub/splash.xpm.gz
+
+case "$1" in
+    install|upgrade)
+	if [ -e $KSIDE ]; then
+		mv $KSIDE $KSIDE.orig
+	fi
+	if [ -L /boot/grub/splash.xpm.gz ]; then
+		rm /boot/grub/splash.xpm.gz 
+	elif [ -e /boot/grub/splash.xpm.gz ]; then
+		mv /boot/grub/splash.xpm.gz /boot/grub/splash.xpm.gz.orig
+	fi
+    ;;
+
+    abort-upgrade)
+    ;;
+
+    *)
+        echo "preinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

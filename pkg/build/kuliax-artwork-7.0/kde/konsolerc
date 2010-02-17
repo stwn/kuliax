@@ -1,0 +1,34 @@
+[Desktop Entry]
+ActiveSession=0
+AllowResize=false
+AutoResizeTabs=false
+BlinkingCursor=true
+CtrlDrag=true
+CutToBeginningOfLine=false
+DefaultSession=shell.desktop
+DynamicTabHide=false
+EnableBidi=false
+EncodingName=Default
+Fullscreen=false
+LineSpacing=0
+MatchTabWinTitle=false
+SilenceSeconds=10
+TabColor=0,0,0
+TabViewMode=0
+TerminalSizeHint=false
+WarnQuit=true
+XonXoff=false
+bellmode=0
+class=konsole-mainwindow#1
+defaultfont=Monospace,10,-1,2,50,0,0,0,0,0
+has frame=true
+history=1000
+historyenabled=true
+keytab=default
+schema=Transparent_darkbg.schema
+scrollbar=2
+tabbar=2
+wordseps=:@-./_~
+
+[TipOfDay]
+RunOnStart=false

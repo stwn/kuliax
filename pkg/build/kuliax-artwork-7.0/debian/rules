@@ -1,0 +1,36 @@
+#!/usr/bin/make -f
+
+clean:
+	dh_testdir
+	dh_testroot
+	dh_clean
+
+binary-indep: build install
+	dh_clean
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs 
+	dh_installdocs
+	dh_install kicker/kside.png /usr/share/apps/kicker/pics
+	dh_install ksplash/kuliax /usr/share/apps/ksplash/Themes
+	dh_install wallpapers/* /usr/share/wallpapers
+	dh_install logo/* /usr/share/icons/
+	dh_install kde/23kuliax-artwork /etc/X11/Xsession.d
+	dh_install kdm/15_kuliax /etc/default/kdm.d
+	dh_install kdm/kuliax /usr/share/apps/kdm/themes
+	dh_install grub/splash-kuliax.xpm.gz /boot/grub/splashimages
+	dh_install debian/update-artwork /usr/share/kuliax-artwork
+	dh_install debian/edit-ini /usr/share/kuliax-artwork
+	dh_install -X23kuliax-artwork kde/* /usr/share/kuliax-artwork/kde-profile/share/config
+	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install configure

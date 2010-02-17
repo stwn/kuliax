@@ -1,0 +1,24 @@
+#!/bin/sh
+# postrm script for kuliax-artwork
+
+KSIDE=/usr/share/apps/kicker/pics/kside.png
+
+case "$1" in
+    purge|remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+	if [ -e $KSIDE.orig ]; then
+                mv $KSIDE.orig $KSIDE
+        fi
+	if [ -e /boot/grub/splash.xpm.gz.orig ]; then
+		mv /boot/grub/splash.xpm.gz.orig /boot/grub/splash.xpm.gz
+	fi
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

@@ -1,0 +1,16 @@
+Source: kuliax-artwork
+Section: graphics
+Priority: optional
+Maintainer: Iwan Setiawan <stwn@kuliax.org>
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.7.3
+
+Package: kuliax-artwork
+Architecture: all
+Replaces: kicker
+Depends: kde-icons-crystalkuliax, libconfig-inifiles-perl, ${misc:Depends}
+Description: Kuliax artwork and themes
+ This package is a collection of Kuliax artwork and themes
+ that contains banner & gtkrc for g-i, grub & syslinux 
+ splash, KDE config, kside for kicker, kdm & ksplash
+ themes, Kuliax logo, and wallpapers.
