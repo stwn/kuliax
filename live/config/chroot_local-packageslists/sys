@@ -4,6 +4,7 @@ gnupg
 grub
 kdm
 kuliax-archive-keyring
+kuliax-base-files
 lvm2
 # usplash
 xorg

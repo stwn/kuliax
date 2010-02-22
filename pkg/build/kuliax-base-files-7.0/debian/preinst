@@ -1,0 +1,30 @@
+#!/bin/sh
+# preinst script for kuliax-base-files
+
+set -e
+
+case "$1" in
+    install|upgrade)
+	if [ -e /etc/issue ]; then
+		mv /etc/issue /etc/issue.orig
+	fi
+	if [ -e /etc/issue.net ]; then
+		mv /etc/issue.net /etc/issue.net.orig
+	fi
+	if [ -e /etc/motd.tail ]; then
+		mv /etc/motd.tail /etc/motd.tail.orig
+	fi
+    ;;
+
+    abort-upgrade)
+    ;;
+
+    *)
+        echo "preinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

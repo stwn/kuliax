@@ -1,0 +1,27 @@
+#!/bin/sh
+# postrm script for kuliax-base-files
+
+set -e
+
+case "$1" in
+    purge|remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+	if [ -e /etc/issue.orig ]; then
+		mv /etc/issue.orig /etc/issue
+	fi
+	if [ -e /etc/issue.net.orig ]; then
+		mv /etc/issue.net.orig /etc/issue.net
+	fi
+	if [ -e /etc/motd.tail.orig ]; then
+		mv /etc/motd.tail.orig /etc/motd.tail
+	fi
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

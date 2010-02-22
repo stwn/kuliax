@@ -1,0 +1,6 @@
+kuliax-base-files (7.0-1) lumpia; urgency=low
+
+  * Initial release, based on some common files in Debian system
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Tue, 16 Feb 2010 17:44:25 +0700
+
