@@ -7,6 +7,7 @@ Standards-Version: 3.7.3
 
 Package: kuliax-base-files
 Architecture: all
+Replaces: base-files
 Depends: ${misc:Depends}
 Description: Kuliax base miscellaneous files
  This package contains several base miscellaneous files,
