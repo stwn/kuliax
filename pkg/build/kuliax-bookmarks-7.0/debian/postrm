@@ -1,0 +1,23 @@
+#!/bin/sh
+# postrm script for kuliax-bookmarks
+
+set -e
+
+TEMPL=/etc/iceweasel/profile/bookmarks.html
+
+case "$1" in
+    purge|remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+	if [ -e $TEMPL ]; then
+		mv $TEMPL.orig $TEMPL
+	fi
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

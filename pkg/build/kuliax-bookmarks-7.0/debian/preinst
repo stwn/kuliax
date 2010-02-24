@@ -1,0 +1,26 @@
+#!/bin/sh
+# preinst script for kuliax-bookmarks
+
+set -e
+
+TEMPL=/etc/iceweasel/profile/bookmarks.html
+
+case "$1" in
+    install|upgrade)
+	if [ -e $TEMPL ]; then
+		mv $TEMPL $TEMPL.orig
+	fi
+    ;;
+
+    abort-upgrade)
+    ;;
+
+    *)
+        echo "preinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

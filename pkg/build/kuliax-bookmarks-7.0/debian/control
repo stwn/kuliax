@@ -1,0 +1,14 @@
+Source: kuliax-bookmarks
+Section: web
+Priority: optional
+Maintainer: Iwan Setiawan <stwn@kuliax.org>
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.7.3
+
+Package: kuliax-bookmarks
+Architecture: all
+Replaces: iceweasel
+Depends: iceweasel
+Description: Kuliax 7.0 bookmarks template 
+ This package contains bookmarks template for Iceweasel:
+ Add-ons, Applications, Kuliax, and OpenCourses.
