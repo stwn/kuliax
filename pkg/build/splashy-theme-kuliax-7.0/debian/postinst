@@ -1,0 +1,23 @@
+#!/bin/sh
+# postinst script for splashy-theme-kuliax
+
+set -e
+
+case "$1" in
+    configure)
+	/sbin/splashy_config --set-theme kuliax
+	update-initramfs -u -k all
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

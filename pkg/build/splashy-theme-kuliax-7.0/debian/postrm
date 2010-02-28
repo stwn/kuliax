@@ -1,0 +1,20 @@
+#!/bin/sh
+# postrm script for splashy-theme-kuliax
+
+set -e
+
+case "$1" in
+    purge|remove|failed-upgrade|abort-install|abort-upgrade|disappear)
+	/sbin/splashy_config --set-theme default
+	update-initramfs -u -k all
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

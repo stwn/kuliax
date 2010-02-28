@@ -1,0 +1,13 @@
+Source: splashy-theme-kuliax
+Section: graphics
+Priority: optional
+Maintainer: Iwan Setiawan <stwn@kuliax.org>
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.7.3
+
+Package: splashy-theme-kuliax
+Architecture: all
+Depends: splashy
+Description: Splashy theme for Kuliax 7.0
+ This package contains a collection of Kuliax 7.0 theme files
+ for splashy, based on default theme from splashy package.
