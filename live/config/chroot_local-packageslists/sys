@@ -7,4 +7,6 @@ kuliax-archive-keyring
 kuliax-base-files
 lvm2
 # usplash
+splashy
+splashy-theme-kuliax
 xorg
