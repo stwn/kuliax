@@ -1,14 +1,14 @@
-                  0fWelcome to Debian GNU/Linux!07                                09F107
+                  0fWelcome to Kuliax!          07                                09F107
 
-This is a Debian {$LH_DISTRIBUTION} combined live and installation {$LH_MEDIA}.
-It was built on {$LH_DATE}.
+This is Kuliax 7.0, based on Debian {$LH_DISTRIBUTION} combined live
+and installation {$LH_MEDIA}. It was built on {$LH_DATE}.
 
 0fHELP INDEX07
 
 0fKEY    TOPIC07
 
 <09F107>   This page, the help index.
-<09F207>   Prerequisites for installing Debian.
+<09F207>   Prerequisites for installing Kuliax.
 <09F307>   Boot methods for special ways of using this {$LH_MEDIA}
 <09F407>   Additional boot methods; rescue mode.
 <09F507>   Special boot parameters, overview.
@@ -21,6 +21,5 @@ It was built on {$LH_DATE}.
 For F1-F9 type control and F then the digit 1-9
 For F10 type control and F then the digit 0
 
-
 
 Press F2 through F10 for details, or ENTER to 

@@ -1,22 +1,21 @@
-0fPREREQUISITES FOR USING DEBIAN07                                                09F207
+0fPREREQUISITES FOR USING KULIAX07                                                09F207
 
-You must have at least 64 megabytes of RAM to run this Debian Live system.
+You must have x86 800 MHz processor with at least 128 megabytes of RAM
+to run Kuliax Live system and/or to install it in your hard drive with 
+Kuliax installer.
 
-See the Live Manual or the FAQ for more information; both documents are
-available at the Debian Live web site, 0fhttp://debian-live.alioth.debian.org/07
+Read documentation which is available at Kuliax Project website,
+0fhttp:/kuliax.org/07 for more information.
 
 
-You must have at least 44 megabytes of RAM to use the Debian installer.
+If you want to install Kuliax, you should have space on your hard drive 
+to create a new disk partition of at least 2500 megabytes.
 
-You should have space on your hard disk to create a new disk partition
-of at least 500 megabytes to install the base system. You'll need more
-disk space to install additional packages, depending on what you wish
-to do with your new Debian system.
+You'll need more disk space to install additional packages, depending on 
+what you wish to do with your new Kuliax system.
 
-See the Installation Guide or the FAQ for more information; both
-documents are available at the Debian web site, 0fhttp://www.debian.org/07
+Thank you for choosing Kuliax!
 
-Thank you for choosing Debian!
 
 
 

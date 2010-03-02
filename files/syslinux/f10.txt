@@ -1,21 +1,20 @@
 0fCOPYRIGHTS AND WARRANTIES07                                                    09F1007
 
-Debian GNU/Linux is Copyright (C) 1993-2009 Software in the Public Interest,
-and others.
+Kuliax is Copyright (C) 2006-2010 Kuliax Project, and others.
 
-The Debian GNU/Linux system is freely redistributable. After installation,
-the exact distribution terms for each package are described in the
-corresponding file /usr/share/doc/0bpackagename07/copyright.
+Kuliax system is freely redistributable. After installation, the exact
+distribution terms for each package are described in the corresponding
+file /usr/share/doc/0bpackagename07/copyright.
 
-Debian GNU/Linux comes with 0fABSOLUTELY NO WARRANTY07, to the extent
+Kuliax comes with 0fABSOLUTELY NO WARRANTY07, to the extent
 permitted by applicable law.
 
 ---
 
-This Debian Live system was built with live-helper, version {$LH_VERSION}.
+This Kuliax Live system was built with live-helper, version {$LH_VERSION}.
 
-More information about the Debian Live project can be found at
-<http://debian-live.alioth.debian.org/>.
+More information about Kuliax Project can be found at
+<http://kuliax.org/>.
 
 
 
