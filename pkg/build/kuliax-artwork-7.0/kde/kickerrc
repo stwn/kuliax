@@ -28,7 +28,7 @@ FreeSpace2=0
 
 [General]
 Alignment=0
-Applets2=KMenuButton_1,DesktopButton_1,ServiceButton_1,ServiceButton_2,Applet_1,Applet_2,Applet_5,Applet_3,Applet_4
+Applets2=KMenuButton_1,DesktopButton_1,ServiceButton_1,ServiceButton_2,ServiceButton_3,ServiceButton_4,Applet_1,Applet_2,Applet_5,Applet_3,Applet_4
 AutoHideDelay=3
 AutoHidePanel=false
 AutoHideSwitch=false
@@ -65,6 +65,16 @@ FreeSpace2=0
 StorageId[$e]=kde-Home.desktop
 
 [ServiceButton_2]
+DesktopFile[$e]=/usr/share/applications/kde/konsole.desktop
+FreeSpace2=0
+StorageId[$e]=konsole.desktop
+
+[ServiceButton_3]
+DesktopFile[$e]=/usr/share/applications/openoffice.org-startcenter.desktop
+FreeSpace2=0
+StorageId[$e]=openoffice.org-startcenter.desktop
+
+[ServiceButton_4]
 DesktopFile[$e]=/usr/share/applications/iceweasel.desktop
 FreeSpace2=0
 StorageId[$e]=iceweasel.desktop

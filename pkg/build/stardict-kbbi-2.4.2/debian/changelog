@@ -1,3 +1,11 @@
+stardict-kbbi (2.4.2-0kuliax2) lumpia; urgency=low
+
+  * Update database from 0.02 to 0.03 and repackage orig.tar.gz
+  * Modify debian/control: fix Description
+  * Modify debian/copyright: fix Copyright and Debian packaging license
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Tue, 02 Mar 2010 05:44:29 +0700
+
 stardict-kbbi (2.4.2-0kuliax1) lumpia; urgency=low
 
   * Initial release

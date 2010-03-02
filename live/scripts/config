@@ -14,7 +14,9 @@ lh_config noautoconfig \
 	--categories "main contrib non-free" \
 	--distribution lenny \
 	-l en_US.UTF-8 --mode debian \
+	--bootstrap cdebootstrap \
 	--bootloader syslinux --initramfs live-initramfs --iso-application "Kuliax" \
+	--bootappend-live "quiet vga=791" --binary-indices disabled \
 	--iso-preparer "Kuliax developers with help of live-helper" \
 	--iso-publisher "Kuliax Project: http://kuliax.org/; kuliax@googlegroups.com" \
 	--iso-volume "Kuliax-$(date +%Y%m%d)" \
@@ -24,7 +26,7 @@ lh_config noautoconfig \
 	--mirror-chroot-security ${MIRROR} \
 	--mirror-binary ${MIRROR} \
 	--mirror-binary-security ${MIRROR} \
-	--packages-lists "acpi desktop devel engineering firmware games locale multimedia net office power printing rescue source statistics sys utils wireless" \
+	--packages-lists "acpi desktop devel engineering firmware games locale multimedia net office power printing rescue source statistics sys utils web wireless" \
 	--security disabled --syslinux-splash config/binary_syslinux/splash.rle --syslinux-timeout 5 --syslinux-menu disabled \
 	--win32-loader disabled --linux-packages linux-image-2.6.30-kuliax.2 \
 	${@}

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+KDMDEF=/etc/default/kdm.d
+
+mv $KDMDEF/15_kuliax /usr/share/kuliax-artwork/kde-profile/ 

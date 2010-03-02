@@ -1,3 +1,17 @@
+kuliax-artwork (7.0-0kuliax3) lumpia; urgency=low
+
+  * Modify debian/update-artwork: change default background for kdm
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Tue, 02 Mar 2010 09:17:00 +0700
+
+kuliax-artwork (7.0-0kuliax2) lumpia; urgency=low
+
+  * Add kde/kwinrc
+  * Modify kde/kickerrc: add some service buttons
+  * Modify debian/control: remove ${misc:Depends}
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Mon, 01 Mar 2010 21:09:58 +0700
+
 kuliax-artwork (7.0-0kuliax1) lumpia; urgency=low
 
   * Initial release, with some files modified from 
