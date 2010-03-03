@@ -1,5 +1,17 @@
 #!/bin/sh
 
-KDMDEF=/etc/default/kdm.d
+# autologin for live
+sed -i -e 's|#AutoLoginEnable=true|AutoLoginEnable=true|' /etc/kde3/kdm/kdmrc
+sed -i -e 's|#AutoLoginAgain=true|AutoLoginAgain=true|' /etc/kde3/kdm/kdmrc
+sed -i -e 's|#AutoLoginUser=fred|AutoLoginUser=lumpia|' /etc/kde3/kdm/kdmrc
 
-mv $KDMDEF/15_kuliax /usr/share/kuliax-artwork/kde-profile/ 
+# set crystalkuliax to default.kde
+rm /usr/share/icons/default.kde
+ln -s /usr/share/icons/crystalkuliax /usr/share/icons/default.kde
+
+# kde config skeleton for users
+mkdir -p /etc/skel/.kde/share/config
+cp -a /usr/share/kuliax-artwork/kde-profile/share/config/* /etc/skel/.kde/share/config/
+
+# remove mplayer.desktop
+rm /usr/share/applications/mplayer.desktop

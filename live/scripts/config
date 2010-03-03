@@ -16,7 +16,7 @@ lh_config noautoconfig \
 	-l en_US.UTF-8 --mode debian \
 	--bootstrap cdebootstrap \
 	--bootloader syslinux --initramfs live-initramfs --iso-application "Kuliax" \
-	--bootappend-live "quiet vga=791" --binary-indices disabled \
+	--bootappend-live "quiet" --binary-indices disabled \
 	--iso-preparer "Kuliax developers with help of live-helper" \
 	--iso-publisher "Kuliax Project: http://kuliax.org/; kuliax@googlegroups.com" \
 	--iso-volume "Kuliax-$(date +%Y%m%d)" \

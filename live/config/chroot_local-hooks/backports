@@ -11,3 +11,6 @@ openoffice.org-kde openoffice.org-math openoffice.org-style-crystal openoffice.o
 
 echo "Installing Pidgin 2.6..."
 apt-get -y -t lenny-backports install pidgin
+
+echo "Installing Geany 0.17..."
+apt-get -y -t lenny-backports install geany

@@ -6,10 +6,10 @@
 # deb http://ftp.debian.org/ unstable main contrib non-free
 # deb-src http://ftp.debian.org/ unstable main contrib non-free
 #
-# debian security updates
+#-debian security updates
 # deb http://security.debian.org/ stable/updates main contrib non-free
 #
-# debian lenny-backports
+#-debian lenny-backports
 # deb http://www.backports.org/debian lenny-backports main contrib non-free
 # deb-src http://www.backports.org/debian lenny-backports main contrib non-free
 
@@ -21,10 +21,10 @@
 # deb http://kambing.ui.ac.id/debian/ unstable main contrib non-free 
 # deb-src http://kambing.ui.ac.id/debian/ unstable main contrib non-free 
 #
-# debian security updates
+#-debian security updates
 # deb http://kambing.ui.ac.id/debian-security stable/updates main contrib non-free
 #
-# lenny-backports
+#-lenny-backports
 # deb http://kambing.ui.ac.id/debian-backports lenny-backports main contrib non-free
 # deb-src http://kambing.ui.ac.id/debian-backports lenny-backports main contrib non-free
 
@@ -36,7 +36,7 @@
 # deb http://kebo.vlsm.org/debian/ unstable main contrib non-free 
 # deb-src http://kebo.vlsm.org/debian/ unstable main contrib non-free 
 #
-# debian security updates
+#-debian security updates
 # deb http://kebo.vlsm.org/debian-security stable/updates main contrib non-free
 
 #-debian.indika.net.id a.k.a. cacing.vlsm.org
@@ -47,7 +47,7 @@
 # deb http://debian.indika.net.id/debian/ unstable main contrib non-free 
 # deb-src http://debian.indika.net.id/debian/ unstable main contrib non-free 
 #
-# debian security updates
+#-debian security updates
 # deb http://debian.indika.net.id/debian-security stable/updates main contrib non-free
 
 #-komo.vlsm.org
@@ -58,7 +58,7 @@
 # deb http://komo.vlsm.org/debian/ unstable main contrib non-free 
 # deb-src http://komo.vlsm.org/debian/ unstable main contrib non-free 
 #
-# debian security updates
+#-debian security updates
 # deb http://komo.vlsm.org/debian-security stable/updates main contrib non-free
 
 #-shol.vlsm.org
@@ -69,14 +69,14 @@
 # deb http://shol.vlsm.org/debian/ unstable main contrib non-free 
 # deb-src http://shol.vlsm.org/debian/ unstable main contrib non-free 
 #
-# debian security updates
+#-debian security updates
 # deb http://shol.vlsm.org/debian-security/ stable/updates main contrib non-free
 
 #-buaya.klas.or.id
 # deb http://buaya.klas.or.id/debian stable main contrib non-free
 # deb-src http://buaya.klas.or.id/debian stable main contrib non-free
 #
-# debian security updates
+#-debian security updates
 # deb http://buaya.klas.or.id/debian-security/ stable/updates main contrib non-free
 
 #-ftp.itb.ac.id
@@ -95,10 +95,10 @@
 # deb http://arsip.or.id/debian/ unstable main contrib non-free 
 # deb-src http://arsip.or.id/debian/ unstable main contrib non-free 
 #
-# debian security updates
+#-debian security updates
 # deb http://arsip.or.id/debian-security/ stable/updates main contrib non-free
 #
-# debian multimedia
+#-debian multimedia
 # deb http://arsip.or.id/debian-multimedia/ stable main
 # deb-src http://arsip.or.id/debian-multimedia/ stable main
 # deb http://arsip.or.id/debian-multimedia/ testing main
@@ -123,10 +123,10 @@
 # deb http://mugos.ums.ac.id/debian/ testing main contrib non-free
 # deb http://mugos.ums.ac.id/debian/ unstable main contrib non-free
 #
-# debian-security
+#-debian-security
 # deb http://mugos.ums.ac.id/debian-security/ stable/updates main contrib non-free
 #
-# lenny-backports
+#-lenny-backports
 # deb http://mugos.ums.ac.id/debian-backports/ lenny-backports stable main contrib non-free
 
 #-repo.undip.ac.id
@@ -144,7 +144,7 @@
 # deb http://mirror.unej.ac.id/debian/ testing main contrib non-free 
 # deb http://mirror.unej.ac.id/debian/ unstable main contrib non-free 
 #
-# debian-multimedia
+#-debian-multimedia
 # deb http://mirror.unej.ac.id/debian-multimedia/ stable main
 # deb-src http://mirror.unej.ac.id/debian-multimedia/ stable main
 # deb http://mirror.unej.ac.id/debian-multimedia/ testing main
