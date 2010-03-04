@@ -14,10 +14,21 @@ sed -i -e 's/Debian GNU\/Linux, kernel 2.6.30-kuliax.2-686/Kuliax 7.0, kernel 2.
 log "Copying sources.list"
 cp /cdrom/install/sources.list /target/etc/apt/
 
-USER=`ls /target/home`
+LIST=`ls /target/home`
 
-log "Copying ebook"
-cp -r /cdrom/ebook /target/home/$USER/
+for USER in $LIST
+do
+	if [ $USER = "stwn" ]; then
+		log "Copying ebook"
+		mkdir /target/home/$USER/ebooks
+		cp -r /cdrom/ebooks/* /target/home/$USER/ebooks/
+
+		#log "Copying kde profile for $USER"
+		#mkdir -p /target/home/$USER/.kde/share/config
+		#cp -r /target/usr/share/kuliax-artwork/kde-profile/share/config/* /target/home/$USER/.kde/share/config/
+		#rm /target/home/$USER/.kde/share/config/kpersonalizerrc
+	fi
+done
 
 log "Flushing filesystem buffers"
 sync
