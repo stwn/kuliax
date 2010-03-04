@@ -1,3 +1,9 @@
+kuliax-artwork (7.0-0kuliax4) lumpia; urgency=low
+
+  * Add kde/kpersonalizerrc
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Thu, 04 Mar 2010 11:41:19 +0700
+
 kuliax-artwork (7.0-0kuliax3) lumpia; urgency=low
 
   * Modify debian/update-artwork: change default background for kdm

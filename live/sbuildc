@@ -6,9 +6,10 @@
 DIST=Kuliax
 DATE=$(date +%Y%m%d)
 RESULT=images
+REL=$1
 
 echo "Cleaning my closet..."
-sudo lh_clean --all
+sudo lh_clean --all --purge
 rm -f $RESULT/$DIST*
 
 echo "Start building $DIST-$DATE with clean state..."
