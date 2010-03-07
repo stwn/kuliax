@@ -1,3 +1,7 @@
+#-kuliax
+# deb http://repo.ugm.ac.id/kuliax/ lumpia main non-free
+# deb-src http://repo.ugm.ac.id/kuliax/ lumpia main non-free
+#
 #-debian.org
 # deb http://ftp.debian.org/ stable main contrib non-free
 # deb-src http://ftp.debian.org/ stable main contrib non-free

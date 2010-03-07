@@ -13,10 +13,10 @@ lh_config noautoconfig \
 	-b iso \
 	--categories "main contrib non-free" \
 	--distribution lenny \
-	-l en_US.UTF-8 --mode debian \
+	-l en_US --mode debian \
 	--bootstrap cdebootstrap \
+	--binary-indices disabled \
 	--bootloader syslinux --initramfs live-initramfs --iso-application "Kuliax" \
-	--bootappend-live "quiet" --binary-indices disabled \
 	--iso-preparer "Kuliax developers with help of live-helper" \
 	--iso-publisher "Kuliax Project: http://kuliax.org/; kuliax@googlegroups.com" \
 	--iso-volume "Kuliax-$(date +%Y%m%d)" \
