@@ -22,11 +22,15 @@ do
 		log "Copying ebook"
 		mkdir /target/home/$USER/ebooks
 		cp -r /cdrom/ebooks/* /target/home/$USER/ebooks/
+		chown -R $USER /target/home/$USER/ebooks
 	else
 		log "Removing lumpia user"
 		rm -rf /target/home/lumpia
 	fi
 done
+
+log "Load rsyslog on boot"
+in-target update-rc.d rsyslog defaults
 
 log "Flushing filesystem buffers"
 sync

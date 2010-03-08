@@ -13,6 +13,8 @@ update-rc.d -f hpoj remove
 update-rc.d -f mysql-ndb remove
 update-rc.d -f mysql remove
 update-rc.d -f mysql-ndb-mgm remove
+update-rc.d -f network-manager remove
+update-rc.d -f network-manager-dispatcher remove
 update-rc.d -f rsyslog remove
 update-rc.d -f samba remove
 update-rc.d -f ssh remove

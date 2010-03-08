@@ -43,11 +43,11 @@ rm -rf /usr/share/info/*
 rm -rf /usr/share/lintian/*
 rm -rf /usr/share/linda/*
 
-cp -r /usr/share/zoneinfo/Asia/ /home/lumpia/
-cp -r /usr/share/zoneinfo/UTC /home/lumpia/
-rm -rf /usr/share/zoneinfo/*
-mv /home/lumpia/Asia/ /usr/share/zoneinfo/
-mv /home/lumpia/UTC /usr/share/zoneinfo/
+#cp -r /usr/share/zoneinfo/Asia/ /home/lumpia/
+#cp -r /usr/share/zoneinfo/UTC /home/lumpia/
+#rm -rf /usr/share/zoneinfo/*
+#mv /home/lumpia/Asia/ /usr/share/zoneinfo/
+#mv /home/lumpia/UTC /usr/share/zoneinfo/
 rm -rf /var/cache/man/*
 
 # Truncating logs

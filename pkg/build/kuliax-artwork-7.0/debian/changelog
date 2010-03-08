@@ -1,3 +1,9 @@
+kuliax-artwork (7.0-0kuliax5) lumpia; urgency=low
+
+  * Modify kde/konsolerc: change font to 9
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Mon, 08 Mar 2010 15:44:20 +0700
+
 kuliax-artwork (7.0-0kuliax4) lumpia; urgency=low
 
   * Add kde/kpersonalizerrc
