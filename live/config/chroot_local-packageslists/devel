@@ -13,9 +13,9 @@ linux-headers-2.6.30-kuliax.2-686
 linux-headers-2.6.30-kuliax.2-common
 linux-kbuild-2.6.30
 make
-mercurial
 mysql-server
 openjdk-6-jre
+openjdk-6-jdk
 php5-mysql
 sloccount
 sqlite
