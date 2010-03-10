@@ -1,3 +1,9 @@
+kuliax-bookmarks (7.0-2) lumpia; urgency=low
+
+  * Add bookmarks: Kateglo & iRBI
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Wed, 10 Mar 2010 15:36:03 +0700
+
 kuliax-bookmarks (7.0-1) lumpia; urgency=low
 
   * Initial release 
