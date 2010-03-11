@@ -1,3 +1,10 @@
+kuliax-artwork (7.0-0kuliax6) lumpia; urgency=low
+
+  * Add kde/ktaskbarrc
+  * Modify kde/konsolerc: change font to 10
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Thu, 11 Mar 2010 14:35:50 +0700
+
 kuliax-artwork (7.0-0kuliax5) lumpia; urgency=low
 
   * Modify kde/konsolerc: change font to 9
