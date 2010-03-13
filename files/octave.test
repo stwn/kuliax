@@ -1,0 +1,9 @@
+clg
+domain=[-3:0.2:3];
+range=[-5:0.2:5];
+[x,y]=meshgrid(domain,domain);
+r=sqrt(x.^2+y.^2)+0.00001;
+z=sin(pi*r)./(pi*r);
+title ('Sombrero')
+mesh(z)
+pause
