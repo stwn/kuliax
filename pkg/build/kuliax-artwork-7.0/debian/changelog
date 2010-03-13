@@ -1,3 +1,9 @@
+kuliax-artwork (7.0-0kuliax7) lumpia; urgency=low
+
+  * Add kde/yakuakerc
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Sun, 14 Mar 2010 03:59:48 +0700
+
 kuliax-artwork (7.0-0kuliax6) lumpia; urgency=low
 
   * Add kde/ktaskbarrc

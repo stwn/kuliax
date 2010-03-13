@@ -21,6 +21,7 @@ pciutils
 pcmciautils
 pmount
 psmisc
+rsync
 speedcrunch
 stardict
 stardict-kbbi
