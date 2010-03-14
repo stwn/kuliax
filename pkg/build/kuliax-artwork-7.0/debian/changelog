@@ -1,3 +1,9 @@
+kuliax-artwork (7.0-0kuliax8) lumpia; urgency=low
+
+  * Add kde/khotkeysrc
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Sun, 14 Mar 2010 11:45:23 +0700
+
 kuliax-artwork (7.0-0kuliax7) lumpia; urgency=low
 
   * Add kde/yakuakerc
