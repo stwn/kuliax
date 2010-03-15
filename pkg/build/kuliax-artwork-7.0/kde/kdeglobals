@@ -33,7 +33,7 @@ selectForeground=255,255,255
 taskbarFont=Sans Serif,9,-1,5,50,0,0,0,0,0
 toolBarFont=Sans Serif,9,-1,5,50,0,0,0,0,0
 visitedLinkColor=82,24,139
-widgetStyle=plastik
+widgetStyle=qtcurve
 windowBackground=255,255,255
 windowForeground=0,0,0
 
