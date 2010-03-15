@@ -1,3 +1,9 @@
+kuliax-artwork (7.0-0kuliax9) lumpia; urgency=low
+
+  * Modify debian/postinst: symlink changed to relative path
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Mon, 15 Mar 2010 10:43:44 +0700
+
 kuliax-artwork (7.0-0kuliax8) lumpia; urgency=low
 
   * Add kde/khotkeysrc

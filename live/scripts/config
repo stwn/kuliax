@@ -15,7 +15,7 @@ lh_config noautoconfig \
 	--distribution lenny \
 	-l en_US --mode debian \
 	--bootstrap cdebootstrap \
-	--binary-indices disabled \
+	--bootappend-live "quiet" --binary-indices disabled \
 	--bootloader syslinux --initramfs live-initramfs --iso-application "Kuliax" \
 	--iso-preparer "Kuliax developers with help of live-helper" \
 	--iso-publisher "Kuliax Project: http://kuliax.org/; kuliax@googlegroups.com" \

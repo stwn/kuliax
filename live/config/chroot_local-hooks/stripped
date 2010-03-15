@@ -30,11 +30,11 @@ find . -name *~ | xargs rm -f
 # rm -rf /usr/include/*
 # rm -rf /usr/share/groff/*
 
-cp -r /usr/share/doc/cnet/ /home/lumpia/
-cp -r /usr/share/doc/live-initramfs/ /home/lumpia/
-rm -rf /usr/share/doc/*
-mv /home/lumpia/cnet/ /usr/share/doc/
-mv /home/lumpia/live-initramfs/ /usr/share/doc/
+#cp -r /usr/share/doc/cnet/ /home/lumpia/
+#cp -r /usr/share/doc/live-initramfs/ /home/lumpia/
+#rm -rf /usr/share/doc/*
+#mv /home/lumpia/cnet/ /usr/share/doc/
+#mv /home/lumpia/live-initramfs/ /usr/share/doc/
 
 # rm -rf /usr/share/locale/*
 # rm -rf /usr/share/man/*
@@ -75,5 +75,5 @@ rm /etc/resolv.conf*
 echo "" > /etc/resolv.conf
 
 rm -rf /usr/src/*.deb
-rm /usr/src/linux-OLDVERSION*
+#rm /usr/src/linux-OLDVERSION*
 rm -rf /usr/src/modules/
