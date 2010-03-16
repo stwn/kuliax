@@ -1,0 +1,21 @@
+This package was debianized by Iwan Setiawan <stwn@kuliax.org> on
+Tue, 16 Mar 2010 14:58:27 +0700.
+
+It was downloaded from http://people.masterweb.net/steven/files/
+
+Upstream Author:
+
+    Steven Haryanto <steven@masterweb.net>
+    
+Copyright:
+
+    Copyright (C) 2008 Pusat Bahasa Departemen Pendidikan Nasional RI
+
+License:
+
+    Free to use and redistribute with attribution.
+    See http://steven.blogs.masterweb.net/2010/02/24/tesaurus-bahasa-\
+    indonesia-versi-stardict/.
+
+The Debian packaging is licensed under the GPL,
+see `/usr/share/common-licenses/GPL'.
