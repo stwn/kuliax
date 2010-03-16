@@ -1,0 +1,15 @@
+Source: stardict-ltis-id-su
+Section: text
+Priority: optional
+Maintainer: Iwan Setiawan <stwn@kuliax.org>
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.7.3
+Homepage: http://people.masterweb.net/steven/files/
+
+Package: stardict-ltis-id-su
+Architecture: all
+Depends: stardict (>= 3.0.1) | sdcv (>= 0.4.2) | stardict-gtk (>= 3.0.1) | qstardict, ${misc:Depends}
+Description: Indonesian to Sundanese dictionary for stardict
+ This is a stardict package of Indonesian to Sundanese dictionary
+ compiled by Steven Haryanto, from Loka Tarjamah Otomatis Indonesia-Sunda
+ (LTIS), tarjamah.sabilulungan.org.
