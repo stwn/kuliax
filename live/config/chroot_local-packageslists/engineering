@@ -4,5 +4,5 @@ gresistor
 kqemu-common
 ktechlab
 qemu
-qemulator
+#qemulator
 tkgate

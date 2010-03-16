@@ -12,11 +12,11 @@ openoffice.org-kde openoffice.org-math openoffice.org-style-crystal openoffice.o
 echo "Installing Pidgin 2.6..."
 apt-get -y -t lenny-backports install pidgin
 
-echo "Installing Geany 0.17..."
-apt-get -y -t lenny-backports install geany
+echo "Installing development tools..."
+apt-get -y -t lenny-backports install geany git-svn mercurial
 
-echo "Installing mercurial from backports..."
-apt-get -y -t lenny-backports install mercurial
+echo "Installing system and network tools..."
+apt-get -y -t lenny-backports install gnupg mysql-server nmap rsync rsyslog samba
 
 echo "Installing non-free firmware 0.17..."
 apt-get -y -t lenny-backports install firmware-iwlwifi firmware-ralink

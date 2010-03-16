@@ -1,5 +1,7 @@
 cupsys
-foomatic-db-gutenprint
+#foomatic-db-gutenprint
+foomatic-db
+foomatic-db-engine
 hpijs
 hplip
 hpoj

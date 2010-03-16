@@ -4,7 +4,7 @@ g++
 gcc
 geany
 glade
-gnu-smalltalk
+#gnu-smalltalk
 git-svn
 libapache2-mod-php5
 libc6-dev
@@ -20,6 +20,6 @@ php5-mysql
 sloccount
 sqlite
 sqlitebrowser
-swi-prolog
+#swi-prolog
 umbrello
 zenity

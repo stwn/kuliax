@@ -24,11 +24,11 @@ Pin: release o=Kuliax
 Pin-Priority: 400
 
 Package: *
-Pin: release a=lenny-backports
+Pin: release a=stable
 Pin-Priority: 300
 
 Package: *
-Pin: release a=stable
+Pin: release a=lenny-backports
 Pin-Priority: 200
 EOF
 

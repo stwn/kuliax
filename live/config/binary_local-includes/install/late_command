@@ -29,8 +29,11 @@ do
 	fi
 done
 
-log "Load rsyslog on boot"
+log "Activating rsyslog on boot"
 in-target update-rc.d rsyslog defaults
+
+log "Removing squashfs-tools"
+in-target apt-get remove --purge squashfs-tools
 
 log "Flushing filesystem buffers"
 sync
