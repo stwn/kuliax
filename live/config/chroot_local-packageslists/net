@@ -7,8 +7,9 @@ iceweasel
 iftop
 iptables
 kmail
+knemo
 knetworkconf
-kppp
+#kppp
 krdc
 #krfb
 libnspr4-0d
