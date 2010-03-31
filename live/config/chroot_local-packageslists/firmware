@@ -4,4 +4,5 @@ bluez-firmware
 #firmware-bnx2x
 #firmware-iwlwifi
 #firmware-ralink
+firmware-linux-free
 zd1211-firmware
