@@ -3,6 +3,6 @@ gpsim
 gresistor
 kqemu-common
 ktechlab
-qemu
+#qemu
 #qemulator
 tkgate

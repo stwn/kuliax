@@ -13,7 +13,7 @@ lh_config noautoconfig \
 	-b iso \
 	--categories "main contrib non-free" \
 	--distribution lenny \
-	-l en_US --mode debian \
+	-l en_US.UTF8 --mode debian \
 	--bootstrap cdebootstrap \
 	--bootappend-live "quiet" --binary-indices disabled \
 	--bootloader syslinux --initramfs live-initramfs --iso-application "Kuliax" \
@@ -28,5 +28,5 @@ lh_config noautoconfig \
 	--mirror-binary-security ${MIRROR} \
 	--packages-lists "acpi desktop devel engineering firmware games locale multimedia net office power printing rescue source statistics sys utils web wireless" \
 	--security disabled --syslinux-splash config/binary_syslinux/splash.rle --syslinux-timeout 5 --syslinux-menu disabled \
-	--win32-loader disabled --linux-packages linux-image-2.6.30-kuliax.2 \
+	--win32-loader disabled --linux-packages linux-image-2.6.32-kuliax.3 \
 	${@}

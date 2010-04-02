@@ -30,5 +30,5 @@ rdesktop
 samba
 sipcalc
 tcpdump
-wvdial
+#wvdial
 xulrunner-1.9.1

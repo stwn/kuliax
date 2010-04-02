@@ -3,20 +3,20 @@
 # hook script for dealing with source code and compilation 
 # 2009, 2010 Iwan Setiawan <stwn at kuliax dot org>
 
-KERNEL_VER=2.6.30-kuliax.2-686
+KERNEL_VER=2.6.32-kuliax.3-686
 
 echo "Executing module-assistant..."
 m-a -t -i update
 m-a -t -i prepare
 m-a a-i -t -l $KERNEL_VER \
 acerhk-source \
-acx100-source \
+#acx100-source \
 aufs-source \
 kqemu-source \
-lirc-modules-source \
+#lirc-modules-source \
 ndiswrapper-source \
-tp-smapi-source \
-virtualbox-ose-source
+tp-smapi-source
+# virtualbox-ose-source
 
 # we should add aufs-source cause we use our custom kernel
 # or initramfs couldn't union mount the extracted compressed filesystem

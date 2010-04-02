@@ -9,9 +9,9 @@ git-svn
 libapache2-mod-php5
 libc6-dev
 libstdc++6-4.3-dev
-linux-headers-2.6.30-kuliax.2-686
-linux-headers-2.6.30-kuliax.2-common
-linux-kbuild-2.6.30
+linux-headers-2.6.32-kuliax.3-686
+linux-headers-2.6.32-kuliax.3-common
+linux-kbuild-2.6.32
 make
 #mysql-server
 openjdk-6-jre
