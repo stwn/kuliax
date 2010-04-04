@@ -8,18 +8,25 @@ log () {
 
 log "Setting up GRUB splash for Kuliax"
 sed -i -e 's|AutoLoginEnable=true|#AutoLoginEnable=true|' /target/etc/kde3/kdm/kdmrc
-sed -i -e 's|//grub/splash.xpm.gz|/boot/grub/splash.xpm.gz|' /target/boot/grub/menu.lst
 sed -i -e 's|splash quiet|splash|g' /target/boot/grub/menu.lst
 # sed -i -e 's|Debian GNU\/Linux, kernel 2.6.30-kuliax.2-686|Kuliax 7.0, kernel 2.6.30-kuliax.2-686|g' /target/boot/grub/menu.lst
 
 log "Copying sources.list"
 cp /cdrom/install/sources.list /target/etc/apt/
 
+BOOT=`df -h | tr -s ' ' | sed '/boot/!d' | cut -d" " -f6`
+
+if [ "$BOOT" = "/target/boot" ]; then
+	continue
+else
+	sed -i -e 's|//grub/splash.xpm.gz|/boot/grub/splash.xpm.gz|' /target/boot/grub/menu.lst
+fi
+
 LIST=`ls /target/home`
 
 for USER in $LIST
 do
-	if [ $USER != "lumpia" ]; then
+	if [ "$USER" != "lumpia" ]; then
 		log "Copying ebooks"
 		mkdir /target/home/$USER/ebooks
 		cp -r /cdrom/ebooks/* /target/home/$USER/ebooks/
