@@ -5,6 +5,9 @@ sed -i -e 's|#AutoLoginEnable=true|AutoLoginEnable=true|' /etc/kde3/kdm/kdmrc
 sed -i -e 's|#AutoLoginAgain=true|AutoLoginAgain=true|' /etc/kde3/kdm/kdmrc
 sed -i -e 's|#AutoLoginUser=fred|AutoLoginUser=lumpia|' /etc/kde3/kdm/kdmrc
 
+# remove gresistor from menu Science
+sed -i -e 's|Utility;Science|Education;Science|' /usr/share/applications/gresistor.desktop
+
 # set crystalkuliax to default.kde
 rm /usr/share/icons/default.kde
 ln -s /usr/share/icons/crystalkuliax /usr/share/icons/default.kde
@@ -15,3 +18,6 @@ cp -a /usr/share/kuliax-artwork/kde-profile/share/config/* /etc/skel/.kde/share/
 
 # remove mplayer.desktop
 rm /usr/share/applications/mplayer.desktop
+
+# autoembed false for opening pdf files
+sed -i -e 's|X-KDE-AutoEmbed=true|X-KDE-AutoEmbed=false|' /usr/share/mimelnk/application/pdf.desktop

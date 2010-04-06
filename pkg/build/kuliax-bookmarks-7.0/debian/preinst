@@ -4,11 +4,13 @@
 set -e
 
 TEMPL=/etc/iceweasel/profile/bookmarks.html
+PREF=/etc/iceweasel/pref/iceweasel.js
 
 case "$1" in
     install|upgrade)
 	if [ -e $TEMPL ]; then
 		mv $TEMPL $TEMPL.orig
+		mv $PREF $PREF.orig
 	fi
     ;;
 

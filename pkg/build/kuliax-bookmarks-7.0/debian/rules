@@ -13,7 +13,8 @@ binary-indep: build install
 	dh_installchangelogs 
 	dh_installdocs
 	dh_installexamples
-	dh_install iceweasel/* /etc/iceweasel/profile
+	dh_install iceweasel/bookmarks.html /etc/iceweasel/profile
+	dh_install iceweasel/iceweasel.js /etc/iceweasel/pref
 	dh_installman
 	dh_link
 	dh_strip

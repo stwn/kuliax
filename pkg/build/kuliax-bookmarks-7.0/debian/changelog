@@ -1,3 +1,10 @@
+kuliax-bookmarks (7.0-3) lumpia; urgency=low
+
+  * Add Google Code University and Fix Kateglo bookmarks
+  * Add preferences: iceweasel.js 
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Tue, 06 Apr 2010 13:13:56 +0700
+
 kuliax-bookmarks (7.0-2) lumpia; urgency=low
 
   * Add bookmarks: Kateglo & iRBI
