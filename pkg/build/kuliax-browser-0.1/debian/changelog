@@ -1,0 +1,7 @@
+kuliax-browser (0.1-1) lumpia; urgency=low
+
+  * Initial release based on kuliax-bookmarks 7.0-3
+  * Fix bookmarks folder: "Bahasa Indonesia"
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Wed, 07 Apr 2010 06:19:43 +0700
+

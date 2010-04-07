@@ -1,0 +1,13 @@
+Source: kuliax-browser
+Section: web
+Priority: optional
+Maintainer: Iwan Setiawan <stwn@kuliax.org>
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.7.3
+
+Package: kuliax-browser
+Architecture: all
+Replaces: iceweasel
+Depends: iceweasel
+Description: Browser preferences and bookmarks template for Kuliax
+ This package contains browser preferences and bookmarks template.

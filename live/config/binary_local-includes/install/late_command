@@ -31,6 +31,10 @@ do
 		mkdir /target/home/$USER/ebooks
 		cp -r /cdrom/ebooks/* /target/home/$USER/ebooks/
 		chown -R $USER /target/home/$USER/ebooks
+		log "Adding $USER to /target/etc/sudoers"
+		chmod u+w /target/etc/sudoers
+		echo "$USER ALL=(ALL) ALL" /target/etc/sudoers 
+		chmod u-w /target/etc/sudoers
 	else
 		log "Removing lumpia user"
 		rm -rf /target/home/lumpia

@@ -1,0 +1,28 @@
+#!/bin/sh
+# preinst script for kuliax-browser
+
+set -e
+
+TEMPL=/etc/iceweasel/profile/bookmarks.html
+PREF=/etc/iceweasel/pref/iceweasel.js
+
+case "$1" in
+    install|upgrade)
+	if [ -e $TEMPL ]; then
+		mv $TEMPL $TEMPL.orig
+		mv $PREF $PREF.orig
+	fi
+    ;;
+
+    abort-upgrade)
+    ;;
+
+    *)
+        echo "preinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0
