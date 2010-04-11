@@ -5,6 +5,7 @@ MIRROR="http://localhost/debian/"
 lh_config noautoconfig \
 	--apt apt \
 	--apt-recommends disabled \
+	--apt-options "-y --force-yes" \
 	--debian-installer live \
 	-k 686 \
 	-a i386 \
@@ -27,6 +28,6 @@ lh_config noautoconfig \
 	--mirror-binary ${MIRROR} \
 	--mirror-binary-security ${MIRROR} \
 	--packages-lists "acpi desktop devel engineering firmware games locale multimedia net office power printing rescue source statistics sys utils web wireless" \
-	--security disabled --syslinux-splash config/binary_syslinux/splash.rle --syslinux-timeout 5 --syslinux-menu disabled \
+	--security disabled --syslinux-splash config/binary_syslinux/splash.rle --syslinux-timeout 5 --syslinux-menu enabled \
 	--win32-loader disabled --linux-packages linux-image-2.6.32-kuliax.3 \
 	${@}

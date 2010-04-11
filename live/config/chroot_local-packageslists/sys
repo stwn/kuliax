@@ -7,5 +7,7 @@ kdm
 kuliax-archive-keyring
 kuliax-base-files
 lvm2
-# usplash
+menu
+usplash
+upstart
 xorg

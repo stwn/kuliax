@@ -18,6 +18,12 @@ ndiswrapper-source \
 tp-smapi-source
 # virtualbox-ose-source
 
+m-a clean acerhk-source \
+aufs-source \
+kqemu-source \
+ndiswrapper-source \
+tp-smapi-source
+
 # we should add aufs-source cause we use our custom kernel
 # or initramfs couldn't union mount the extracted compressed filesystem
 
@@ -55,4 +61,4 @@ echo "Generating modules.dep..."
 depmod -a
 
 echo "Updating initramfs..."
-update-initramfs -u -k all
+update-initramfs -u -t -k all

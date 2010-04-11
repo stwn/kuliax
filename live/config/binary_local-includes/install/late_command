@@ -6,35 +6,37 @@ log () {
 	logger -t kuliax_late_cmd "$@"
 }
 
-log "Setting up GRUB splash for Kuliax"
-sed -i -e 's|AutoLoginEnable=true|#AutoLoginEnable=true|' /target/etc/kde3/kdm/kdmrc
-sed -i -e 's|splash quiet|splash|g' /target/boot/grub/menu.lst
-# sed -i -e 's|Debian GNU\/Linux, kernel 2.6.30-kuliax.2-686|Kuliax 7.0, kernel 2.6.30-kuliax.2-686|g' /target/boot/grub/menu.lst
-
-log "Copying sources.list"
-cp /cdrom/install/sources.list /target/etc/apt/
+log "Fixing GRUB splash and setting up suspend for Kuliax"
+SWP=`cat /target/etc/fstab | tr -s ' ' | sed '/swap/!d' | cut -d" " -f1`
+sed -i -e "s|quite splash|splash resume=$SWP|g" /target/boot/grub/menu.lst
 
 BOOT=`df -h | tr -s ' ' | sed '/boot/!d' | cut -d" " -f6`
-
 if [ "$BOOT" = "/target/boot" ]; then
 	continue
 else
 	sed -i -e 's|//grub/splash.xpm.gz|/boot/grub/splash.xpm.gz|' /target/boot/grub/menu.lst
 fi
 
-LIST=`ls /target/home`
+log "Copying sources.list"
+cp /cdrom/install/sources.list /target/etc/apt/
 
+log "Removing KDE autologin"
+sed -i -e "s|AutoLoginEnable=true|#AutoLoginEnable=true|" /target/etc/kde3/kdm/kdmrc
+
+log "Copying GTK profile for root"
+cp /target/etc/skel/.gtkrc-2.0-kde /target/root/
+echo "export GTK2_RC_FILES=$HOME/.gtkrc-2.0-kde" >> /target/root/.profile
+
+LIST=`ls /target/home`
 for USER in $LIST
 do
 	if [ "$USER" != "lumpia" ]; then
-		log "Copying ebooks"
-		mkdir /target/home/$USER/ebooks
-		cp -r /cdrom/ebooks/* /target/home/$USER/ebooks/
-		chown -R $USER /target/home/$USER/ebooks
 		log "Adding $USER to /target/etc/sudoers"
-		chmod u+w /target/etc/sudoers
-		echo "$USER ALL=(ALL) ALL" /target/etc/sudoers 
-		chmod u-w /target/etc/sudoers
+		cp /target/etc/sudoers /target/etc/sudoers.tmp
+		chmod u+w /target/etc/sudoers.tmp
+		echo "$USER ALL=(ALL) ALL" /target/etc/sudoers.tmp
+		chmod u-w /target/etc/sudoers.tmp
+		mv /target/etc/sudoers.tmp /target/etc/sudoers
 	else
 		log "Removing lumpia user"
 		rm -rf /target/home/lumpia
@@ -45,7 +47,7 @@ log "Activating rsyslog on boot"
 in-target update-rc.d rsyslog defaults
 
 log "Removing squashfs-tools"
-in-target apt-get remove --purge squashfs-tools
+in-target apt-get remove --purge -y squashfs-tools
 
 log "Flushing filesystem buffers"
 sync

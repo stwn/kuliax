@@ -1,0 +1,5 @@
+[startkde]
+commandline[$e]=
+logfile[$e]=
+presentation=1
+soundfile[$e]=/usr/share/sounds/KDE_Star_Ship_1.ogg

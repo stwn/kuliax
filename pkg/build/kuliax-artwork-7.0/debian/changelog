@@ -1,3 +1,10 @@
+kuliax-artwork (7.0-0kuliax12) lumpia; urgency=low
+
+  * Modify kde/{kdesktoprc, khotkeysrc}
+  * Add kde/knotify.eventsrc and syslinux/syslinux-7.0-640x480.svg
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Sun, 11 Apr 2010 10:55:13 +0700
+
 kuliax-artwork (7.0-0kuliax11) lumpia; urgency=low
 
   * Fix white line in left side of KDM background (Closes: #4)
