@@ -1,7 +1,7 @@
 cnet
 gpsim
 gresistor
-kqemu-common
+#kqemu-common
 ktechlab
 #qemu
 #qemulator

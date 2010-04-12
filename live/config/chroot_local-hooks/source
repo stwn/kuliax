@@ -14,14 +14,14 @@ acerhk-source \
 aufs-source \
 kqemu-source \
 #lirc-modules-source \
-ndiswrapper-source \
+#ndiswrapper-source \
 tp-smapi-source
 # virtualbox-ose-source
 
 m-a clean acerhk-source \
 aufs-source \
 kqemu-source \
-ndiswrapper-source \
+#ndiswrapper-source \
 tp-smapi-source
 
 # we should add aufs-source cause we use our custom kernel
@@ -36,7 +36,7 @@ acerhk-source \
 acx100-source \
 aufs-source \
 kqemu-source \
-ndiswrapper-source \
+#ndiswrapper-source \
 tp-smapi-source
 
 echo "Removing build tools for source modules..."
