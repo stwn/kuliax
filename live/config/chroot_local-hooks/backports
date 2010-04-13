@@ -19,4 +19,5 @@ echo "Installing system and network tools..."
 apt-get -y -t lenny-backports install gnupg mysql-server nmap rsync rsyslog samba
 
 echo "Installing non-free firmware 0.17..."
-apt-get -y -t lenny-backports install firmware-iwlwifi firmware-ralink firmware-ipw2x00
+apt-get -y -t lenny-backports install firmware-iwlwifi firmware-ralink
+#firmware-ipw2x00

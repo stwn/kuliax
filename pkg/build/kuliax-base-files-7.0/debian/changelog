@@ -1,3 +1,9 @@
+kuliax-base-files (7.0-3) lumpia; urgency=low
+
+  * Fix motd.tail 
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Tue, 13 Apr 2010 09:54:10 +0700
+
 kuliax-base-files (7.0-2) lumpia; urgency=low
 
   * Modify debian/control: add Replaces for base-files
