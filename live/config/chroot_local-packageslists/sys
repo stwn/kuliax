@@ -10,5 +10,6 @@ kuliax-base-files
 lvm2
 menu
 usplash
+usplash-theme-kuliax
 upstart
 xorg

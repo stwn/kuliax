@@ -42,7 +42,7 @@ change_kdm_theme() {
             # removed and before kdesktop insert the selected background.
 	    bgrc=/etc/kde3/kdm/backgroundrc
 	    if [ -f $bgrc ] ; then
-		$editini $bgrc 'Desktop0' Wallpaper wallpaper-7.0.svg
+		$editini $bgrc 'Desktop0' Wallpaper wallpaper.svg
 	    fi
 	fi
     else
@@ -63,7 +63,7 @@ restore_kdm_theme() {
 	    $editini $kdmrc 'X-*-Greeter' Theme $defaulttheme
 
 	    bgrc=/etc/kde3/kdm/backgroundrc
-	    if grep -q '^Wallpaper=wallpaper-7.0.svg' $bgrc ; then
+	    if grep -q '^Wallpaper=wallpaper.svg' $bgrc ; then
 		$editini $bgrc 'Desktop0' Wallpaper $defaultwallpaper
 	    fi
 	else

@@ -25,6 +25,7 @@ then
 
 	echo "Generating checksums..."
 	sha256sum $RESULT/$DIST-* > $RESULT/$DIST-$DATE.sha256
+	b-cd
 else
 	echo "No ISO image generated."
 fi
