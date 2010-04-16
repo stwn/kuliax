@@ -2,9 +2,13 @@
 
 set -e
 
+EDITINI=/usr/share/kuliax-artwork/edit-ini
+UPDATEART=/usr/share/kuliax-artwork/update-artwork
+
 case "$1" in
 	configure)
-	/usr/share/kuliax-artwork/update-artwork configure
+	chmod +x $EDITINI $UPDATEART
+	$UPDATEART configure
 	cd /boot/grub
 	ln -s splashimages/splash-kuliax.xpm.gz splash.xpm.gz
 	;;

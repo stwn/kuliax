@@ -1,3 +1,12 @@
+kuliax-artwork (7.0-0kuliax14) lumpia; urgency=low
+
+  * debian/copyright: Copyright small fixes
+  * debian/postinst: fix executable mode of update-artwork & edit-ini,
+    add variables
+  * Remove kde/khotkeysrc
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Fri, 16 Apr 2010 10:45:17 +0700
+
 kuliax-artwork (7.0-0kuliax13) lumpia; urgency=low
 
   * debian/update-artwork: change default wallpaper
