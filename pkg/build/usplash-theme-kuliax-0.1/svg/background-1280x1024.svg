@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg602"
+   sodipodi:version="0.32"
+   width="1280"
+   height="1024"
+   xml:space="preserve"
+   sodipodi:docbase="/mnt/test/kuliax-6.0/artworks/kuliax-artwork-0.1.2/grub"
+   sodipodi:docname="background-1280x1024.svg"
+   inkscape:version="0.46"
+   inkscape:export-filename="/home/kuliax/kuliax.png"
+   inkscape:export-xdpi="112.5"
+   inkscape:export-ydpi="112.5"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   version="1.0"><metadata
+   id="metadata2450"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs604"><radialGradient
+     gradientUnits="userSpaceOnUse"
+     gradientTransform="matrix(1.1852343,0,0,1.1854929,508.62872,146.15265)"
+     r="22.505156"
+     fy="43.885536"
+     fx="479.68094"
+     cy="43.885536"
+     cx="479.68094"
+     id="radialGradient4920"
+     xlink:href="#linearGradient876"
+     inkscape:collect="always" /><inkscape:perspective
+     sodipodi:type="inkscape:persp3d"
+     inkscape:vp_x="0 : 526.18109 : 1"
+     inkscape:vp_y="0 : 1000 : 0"
+     inkscape:vp_z="744.09448 : 526.18109 : 1"
+     inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+     id="perspective64" /><linearGradient
+     id="linearGradient850"><stop
+       style="stop-color:#ffd94d;stop-opacity:1;"
+       offset="0"
+       id="stop851" /><stop
+       style="stop-color:#8f5a00;stop-opacity:1;"
+       offset="1"
+       id="stop852" /></linearGradient><linearGradient
+     id="linearGradient823"><stop
+       style="stop-color:#ffffff;stop-opacity:0.102;"
+       offset="0"
+       id="stop824" /><stop
+       style="stop-color:#ffffff;stop-opacity:0;"
+       offset="1"
+       id="stop827" /></linearGradient><linearGradient
+     id="linearGradient917"><stop
+       style="stop-color:#ffffff;stop-opacity:1;"
+       offset="0"
+       id="stop918" /><stop
+       style="stop-color:#ffffff;stop-opacity:0;"
+       offset="1"
+       id="stop919" /></linearGradient><linearGradient
+     id="linearGradient913"><stop
+       style="stop-color:#ccea7a;stop-opacity:1;"
+       offset="0"
+       id="stop914" /><stop
+       style="stop-color:#ffffff;stop-opacity:1;"
+       offset="1"
+       id="stop915" /></linearGradient><linearGradient
+     id="linearGradient889"><stop
+       style="stop-color:#000000;stop-opacity:0.051;"
+       offset="0"
+       id="stop890" /><stop
+       style="stop-color:#000000;stop-opacity:0.1961;"
+       offset="1"
+       id="stop891" /></linearGradient><linearGradient
+     id="linearGradient885"><stop
+       style="stop-color:#ff9f00;stop-opacity:1;"
+       offset="0"
+       id="stop886" /><stop
+       style="stop-color:#ffc24a;stop-opacity:1;"
+       offset="1"
+       id="stop887" /></linearGradient><linearGradient
+     id="linearGradient882"><stop
+       style="stop-color:#ffda4d;stop-opacity:1;"
+       offset="0"
+       id="stop883" /><stop
+       style="stop-color:#d57a00;stop-opacity:1;"
+       offset="1"
+       id="stop884" /></linearGradient><linearGradient
+     id="linearGradient876"><stop
+       style="stop-color:#ffff7a;stop-opacity:1;"
+       offset="0"
+       id="stop877" /><stop
+       style="stop-color:#ff8d00;stop-opacity:1;"
+       offset="1"
+       id="stop878" /></linearGradient><linearGradient
+     id="linearGradient827"><stop
+       style="stop-color:#000000;stop-opacity:1;"
+       offset="0"
+       id="stop828" /><stop
+       style="stop-color:#826f37;stop-opacity:1;"
+       offset="1"
+       id="stop829" /></linearGradient><linearGradient
+     id="linearGradient824"><stop
+       style="stop-color:#e6e6e6;stop-opacity:1;"
+       offset="0"
+       id="stop825" /><stop
+       style="stop-color:#ffffff;stop-opacity:1;"
+       offset="1"
+       id="stop826" /></linearGradient><linearGradient
+     id="linearGradient770"><stop
+       style="stop-color:#007575;stop-opacity:1;"
+       offset="0"
+       id="stop771" /><stop
+       style="stop-color:#ffffff;stop-opacity:1;"
+       offset="1"
+       id="stop772" /></linearGradient><linearGradient
+     id="linearGradient766"><stop
+       style="stop-color:#000;stop-opacity:1;"
+       offset="0"
+       id="stop767" /><stop
+       style="stop-color:#fff;stop-opacity:1;"
+       offset="1"
+       id="stop768" /></linearGradient><linearGradient
+     xlink:href="#linearGradient823"
+     id="linearGradient769"
+     x1="-1.6636376e-08"
+     y1="1.1456427e-07"
+     x2="1"
+     y2="1.1456427e-07" /><radialGradient
+     xlink:href="#linearGradient882"
+     id="radialGradient854"
+     cx="0.49999994"
+     cy="0.50000024"
+     r="0.49999997"
+     fx="0.49999994"
+     fy="0.50000024" /><radialGradient
+     xlink:href="#linearGradient885"
+     id="radialGradient855"
+     cx="400.27728"
+     cy="234.38054"
+     r="57.514626"
+     fx="400.27728"
+     fy="234.38054"
+     gradientTransform="matrix(0.999923,0,0,1.000077,72,106)"
+     gradientUnits="userSpaceOnUse" /><radialGradient
+     xlink:href="#linearGradient889"
+     id="radialGradient856"
+     cx="401.48657"
+     cy="236.78456"
+     r="58.452129"
+     fx="401.48657"
+     fy="236.78456"
+     gradientTransform="matrix(0.999925,0,0,1.000075,72,106)"
+     gradientUnits="userSpaceOnUse" /><radialGradient
+     xlink:href="#linearGradient876"
+     id="radialGradient857"
+     cx="400.27728"
+     cy="234.38054"
+     r="57.514626"
+     fx="400.27728"
+     fy="234.38054"
+     gradientTransform="matrix(0.999923,0,0,1.000077,72,106)"
+     gradientUnits="userSpaceOnUse" /><linearGradient
+     xlink:href="#linearGradient913"
+     id="linearGradient858"
+     x1="0.47286817"
+     y1="5.2927044e-06"
+     x2="0.47286817"
+     y2="0.9765628" /><linearGradient
+     xlink:href="#linearGradient917"
+     id="linearGradient859"
+     x1="0.49781659"
+     y1="-6.2584877e-07"
+     x2="0.50218344"
+     y2="0.97916609" /><linearGradient
+     xlink:href="#linearGradient823"
+     id="linearGradient860" /><linearGradient
+     xlink:href="#linearGradient827"
+     id="linearGradient861" /><radialGradient
+     xlink:href="#linearGradient850"
+     id="radialGradient819"
+     cx="400.29263"
+     cy="235.24158"
+     r="58.447037"
+     fx="400.29263"
+     fy="235.24158"
+     gradientTransform="matrix(0.999857,0,0,1.000143,72,106)"
+     gradientUnits="userSpaceOnUse" /><radialGradient
+     xlink:href="#linearGradient917"
+     id="radialGradient821"
+     cx="0.27947599"
+     cy="0.032786947"
+     r="1.0156188"
+     fx="0.27947599"
+     fy="0.032786947" /><radialGradient
+     inkscape:collect="always"
+     xlink:href="#linearGradient876"
+     id="radialGradient2452"
+     cx="400.27795"
+     cy="234.38014"
+     fx="400.27795"
+     fy="234.38014"
+     r="56.264626"
+     gradientTransform="matrix(0.999922,0,0,1.000078,72,106)"
+     gradientUnits="userSpaceOnUse" /></defs><sodipodi:namedview
+   id="base"
+   showgrid="false"
+   snaptogrid="true"
+   inkscape:zoom="0.5"
+   inkscape:cx="453.79055"
+   inkscape:cy="448.35256"
+   inkscape:window-width="1434"
+   inkscape:window-height="825"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:current-layer="svg602"
+   units="pt"><inkscape:grid
+     id="GridFromPre046Settings"
+     type="xygrid"
+     originx="0px"
+     originy="0px"
+     spacingx="1mm"
+     spacingy="1mm"
+     color="#0000ff"
+     empcolor="#0000ff"
+     opacity="0.2"
+     empopacity="0.4"
+     empspacing="5"
+     units="mm"
+     visible="true"
+     enabled="true" /></sodipodi:namedview><rect
+   style="font-size:12px;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke-width:1"
+   id="rect871"
+   x="-0.42138076"
+   y="1.2766349"
+   width="1280"
+   height="1024"
+   inkscape:export-filename="/home/stwn/usplash-theme-kuliax-1/rgb/image_1440_900.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<g
+   id="g5708"
+   transform="translate(-532.17643,283.74724)"><path
+     inkscape:export-ydpi="72"
+     inkscape:export-xdpi="72"
+     inkscape:export-filename="/home/stwn/NEW/splash.png"
+     id="path992"
+     d="M 1117.8705,174.55432 L 1117.8705,221.951 M 1147.4936,174.55518 L 1117.8705,210.10172 M 1129.7197,198.25264 L 1147.4936,221.9512 M 1159.3425,186.40506 L 1159.3427,210.10299 C 1159.3425,216.02658 1165.2671,221.951 1171.1918,221.9512 C 1183.0411,221.9512 1183.0411,221.9512 1183.0411,210.10299 L 1183.0408,186.40506 M 1194.8901,174.55518 L 1194.8901,210.10299 C 1194.8901,216.02658 1200.8148,221.951 1206.7396,221.9512 M 1218.5885,192.32822 L 1218.5885,221.9512 M 1289.6837,186.40506 L 1265.9851,221.9512 M 1265.9851,186.40506 L 1289.6837,221.9512 M 1236.3624,186.40337 L 1242.2868,186.40506 C 1248.2114,186.40337 1254.1361,192.32822 1254.1361,198.25307 L 1254.1361,221.9512 M 1254.1361,198.25307 L 1242.2868,198.25307 C 1236.3624,198.25264 1230.4377,204.17729 1230.4377,210.10299 C 1230.4377,221.951 1230.4377,221.951 1242.2868,221.9512 L 1254.1361,221.9512 M 1218.5885,174.55432 L 1218.5885,180.47894"
+     style="font-size:12px;opacity:1;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:8.36026096;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" /><path
+     style="font-size:12px;fill:url(#radialGradient4920);fill-rule:evenodd"
+     d="M 1084.6746,199.31334 C 1089.1787,200.52834 1091.816,205.15125 1090.6308,209.59639 C 1089.6528,213.21173 1091.7863,216.88636 1095.372,217.83465 C 1098.9575,218.81258 1102.6317,216.67891 1103.6095,213.09321 C 1104.558,209.50748 1102.454,205.83285 1098.8389,204.88456 C 1094.3645,203.66955 1091.6975,199.07627 1092.9124,194.57189 C 1093.8606,190.98618 1091.7271,187.28191 1088.1417,186.33363 C 1084.5858,185.38534 1080.8816,187.51898 1079.9039,191.07508 C 1078.9556,194.6608 1081.0891,198.36507 1084.6746,199.31334 z M 1078.3037,190.6602 C 1079.5187,186.15581 1084.1413,183.51839 1088.586,184.70375 C 1092.2013,185.68168 1095.8757,183.54802 1096.8239,179.99193 C 1097.8018,176.37659 1095.6682,172.70194 1092.0826,171.72403 C 1088.4973,170.77572 1084.8228,172.90937 1083.8745,176.49511 C 1082.6596,180.96986 1078.0666,183.63693 1073.5626,182.42193 C 1069.9772,181.47363 1066.2731,183.60728 1065.3248,187.19301 C 1064.3764,190.7491 1066.51,194.45335 1070.0659,195.43127 C 1073.6515,196.37959 1077.3555,194.24591 1078.3037,190.6602 z M 1069.6511,197.03153 C 1065.1471,195.81655 1062.48,191.22323 1063.6951,186.74851 C 1064.6431,183.13314 1062.5393,179.45851 1058.9539,178.51022 C 1055.3387,177.5323 1051.694,179.66597 1050.7161,183.28129 C 1049.7679,186.83739 1051.8718,190.51202 1055.4868,191.48995 C 1059.9613,192.6753 1062.5985,197.29825 1061.4133,201.77299 C 1060.4355,205.35869 1062.5688,209.06298 1066.1545,210.01125 C 1069.7399,210.98918 1073.444,208.82587 1074.3923,205.2698 C 1075.37,201.68407 1073.2071,197.97982 1069.6511,197.03153 z M 1075.9924,205.71431 C 1074.8071,210.18905 1070.1845,212.85613 1065.7397,211.67075 C 1062.1244,210.69283 1058.45,212.82649 1057.5018,216.38257 C 1056.524,219.99794 1058.6575,223.67256 1062.243,224.62082 C 1065.8285,225.59878 1069.503,223.46514 1070.4512,219.87941 C 1071.666,215.40465 1076.2591,212.73758 1080.7632,213.95258 C 1084.3487,214.90088 1088.0526,212.76723 1089.001,209.18151 C 1089.9492,205.59577 1087.8155,201.92117 1084.2301,200.94324 C 1080.6743,199.99491 1076.9702,202.12858 1075.9924,205.71431 z"
+     id="path988"
+     inkscape:export-filename="/home/knoppix/WORK/bootsplash/bootsplash-kuliax-verbose-6.0.png"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180" /></g></svg>

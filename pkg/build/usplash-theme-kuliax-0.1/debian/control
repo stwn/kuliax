@@ -1,0 +1,13 @@
+Source: usplash-theme-kuliax
+Section: graphics
+Priority: optional
+Maintainer: Iwan Setiawan <stwn@kuliax.org>
+Build-Depends: debhelper (>= 7), libusplash-dev
+Standards-Version: 3.7.3
+
+Package: usplash-theme-kuliax
+Architecture: all
+Depends: ${shlibs:Depends}
+Provides: usplash-theme
+Description: Kuliax usplash theme
+ This package contains usplash theme for Kuliax.

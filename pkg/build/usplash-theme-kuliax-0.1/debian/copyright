@@ -1,0 +1,53 @@
+This package was debianized by Iwan Setiawan <stwn@kuliax.org> on
+Fri, 16 Apr 2010 07:07:32 +0700.
+
+Copyright:
+
+    The build system, progress bar base images, theme source code
+    based on canonical_linux_ubuntu.c, in Canonical Linux Ubuntu
+    Usplash theme source are under GPL-3:
+        Copyright (C) 2009 Esteban Torres <etorres2+public@gmail.com>
+
+    Fonts are in public domain, by Markus Kuhn.
+
+    Kuliax logo and base artwork:
+        Copyright (C) 2006 Kuliax Project
+
+    Kuliax artwork modification:
+        Copyright (C) 2010 Iwan Setiawan <stwn@kuliax.org>
+
+License:
+
+GPL-3
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+GPL-2
+    This package is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This package is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this package; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+
+On Debian systems, the complete text of the GNU General
+Public License can be found in `/usr/share/common-licenses/GPL'.
+
+The Debian packaging is licensed under the GPL, see above.

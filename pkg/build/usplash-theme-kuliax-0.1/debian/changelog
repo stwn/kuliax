@@ -1,0 +1,7 @@
+usplash-theme-kuliax (0.1-0kuliax1) lumpia; urgency=low
+
+  * Initial release (Closes: #5)
+  * Use usplash-theme-debian package for reference
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Fri, 16 Apr 2010 07:07:32 +0700
+

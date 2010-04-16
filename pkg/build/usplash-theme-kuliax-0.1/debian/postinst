@@ -1,0 +1,33 @@
+#!/bin/sh
+# postinst script for usplash-theme-kuliax
+
+set -e
+
+DIR=/usr/lib/usplash
+GENNAME=$DIR/usplash-artwork.so
+ALTERN=$DIR/kuliax-theme.so
+PRIO=50
+
+case "$1" in
+    configure)
+	update-alternatives --install $GENNAME usplash-artwork.so $ALTERN $PRIO 
+	if [ ! -L $GENNAME ]; then
+		ln -s $ALTERN $GENNAME
+	fi
+	update-alternatives --set usplash-artwork.so $ALTERN
+	update-initramfs -u -t
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0
+
