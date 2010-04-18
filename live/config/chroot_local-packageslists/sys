@@ -6,10 +6,10 @@ grub
 kdm
 ksysv
 kuliax-archive-keyring
-kuliax-base-files
+#kuliax-base-files
 lvm2
 menu
 usplash
 usplash-theme-kuliax
-upstart
+#upstart
 xorg
