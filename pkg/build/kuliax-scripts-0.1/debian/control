@@ -1,0 +1,12 @@
+Source: kuliax-scripts
+Section: misc
+Priority: optional
+Maintainer: Iwan Setiawan <stwn@kuliax.org>
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.7.3
+
+Package: kuliax-scripts
+Architecture: all
+Depends: sed
+Description: Simple scripts for Kuliax
+ This package contains a collection of simple scripts for Kuliax.

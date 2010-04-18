@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=AddSudo
+GenericName=Add user to sudoers
+Comment=Add user to sudoers
+Comment[id]=Menambahkan pengguna ke sudoers
+Exec=su-to-root -X -c /usr/sbin/addsudo
+Icon=password
+Terminal=false
+Type=Application
+Categories=System;

@@ -1,0 +1,25 @@
+#!/bin/sh
+# simple script to fix mimelnk
+# 2010 Iwan Setiawan <stwn@kuliax.org>
+
+SED="sed -i -e"
+
+# autoembed false for opening pdf files
+${SED} 's|X-KDE-AutoEmbed=true|X-KDE-AutoEmbed=false|' /usr/share/mimelnk/application/pdf.desktop
+
+# change icon for all presentation programs' desktop files
+OFFP=`grep -r Icon=presentation /usr/share/mimelnk/*| sed '/magicpoint.desktop/d' | cut -d":" -f1`
+for DSKTP in ${OFFP}
+do
+	${SED} 's|Icon=presentation|Icon=openofficeorg3-oasis-presentation|' ${DSKTP}
+done
+
+# remove mplayer.desktop, users should use smplayer instead or run mplayer in command line
+MPLAYER=/usr/share/applications/mplayer.desktop
+if [ -e ${MPLAYER} ]
+then
+	rm -f ${MPLAYER}
+fi
+
+# add ogg, ogv, and flv mimelnk for smplayer.desktop
+${SED} '/^MimeType/ {s|$|video/x-ogg;video/x-flv;application/ogg|}' /usr/share/applications/smplayer.desktop

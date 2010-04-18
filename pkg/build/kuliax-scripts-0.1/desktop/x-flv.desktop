@@ -1,0 +1,12 @@
+[Desktop Entry]
+Hidden=false
+Icon=video
+MimeType=video/x-flv
+Name=Flash Video
+Patterns=*.flv
+Type=MimeType
+X-KDE-AutoEmbed=false
+X-KDE-nsplugin=false
+Application=smplayer.desktop
+GenericServiceType=Application
+ServiceType=video/x-flv

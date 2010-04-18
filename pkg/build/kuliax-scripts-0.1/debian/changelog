@@ -1,0 +1,15 @@
+kuliax-scripts (0.1-2) lumpia; urgency=low
+
+  * Add addsudo script and desktop file 
+  * Clean up fix* scripts 
+  * desktop/: add nsplugin.desktop, small fixes of x-*.desktop
+  * debian/rules: add dh_install addsudo* and nsplugin*
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Sun, 18 Apr 2010 20:07:29 +0700
+
+kuliax-scripts (0.1-1) lumpia; urgency=low
+
+  * Initial release
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Tue, 13 Apr 2010 11:32:17 +0700
+

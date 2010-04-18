@@ -1,0 +1,10 @@
+#!/bin/sh
+# simple script to fix adduser.conf
+# 2010 Iwan Setiawan <stwn@kuliax.org>
+
+FILE="/etc/adduser.conf"
+SED="sed -i -e"
+
+echo "Fixing adduser.conf.."
+${SED} 's|#EXTRA_GROUPS=\"dialout cdrom floppy audio video plugdev users games\"|EXTRA_GROUPS=\"dialout cdrom floppy audio video plugdev netdev powerdev users\"|' ${FILE}
+${SED} 's|#ADD_EXTRA_GROUPS=1|ADD_EXTRA_GROUPS=1|' ${FILE}

@@ -1,0 +1,26 @@
+#!/bin/sh
+# simple script to add user to /etc/sudoers
+# 2010 Iwan Setiawan <stwn@kuliax.org>
+
+USER=`users`
+
+if [ `whoami` != "root" ]
+then
+	echo "You must be root to run this program."
+	zenity --warning --text "You must be root to run this program."
+else
+	IN=`grep ${USER} /etc/sudoers | cut -d' ' -f1`
+	if [ "${USER}" == "${IN}" ]
+	then
+		echo "${USER} is already in /etc/sudoers"
+		zenity --warning --text "You already on the list of sudoers!"
+		exit 0
+	fi
+	cp /etc/sudoers /etc/sudoers.orig
+	cp /etc/sudoers /etc/sudoers.tmp
+	chmod 0640 /etc/sudoers.tmp
+	echo "${USER} ALL=(ALL) ALL" >> /etc/sudoers.tmp
+	chmod 0440 /etc/sudoers.tmp
+	mv /etc/sudoers.tmp /etc/sudoers
+	zenity --info --text "From now on, you could run sudo!"
+fi

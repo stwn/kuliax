@@ -1,0 +1,12 @@
+[Desktop Entry]
+Hidden=false
+Icon=video
+MimeType=video/x-ogg
+Name=OGG stream with video
+Patterns=*.ogv
+Type=MimeType
+X-KDE-AutoEmbed=false
+X-KDE-nsplugin=false
+Application=smplayer.desktop
+GenericServiceType=Application
+ServiceType=video/x-ogg
