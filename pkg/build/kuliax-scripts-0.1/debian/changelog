@@ -1,3 +1,9 @@
+kuliax-scripts (0.1-3) lumpia; urgency=low
+
+  * Set InitialPreference to 0 in desktop/nsplugin.desktop 
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Mon, 19 Apr 2010 10:46:39 +0700
+
 kuliax-scripts (0.1-2) lumpia; urgency=low
 
   * Add addsudo script and desktop file 

@@ -1,0 +1,13 @@
+[video/x-flv - 1]
+AllowAsDefault=true
+Application=smplayer.desktop
+GenericServiceType=Application
+Preference=1
+ServiceType=video/x-flv
+
+[video/x-ogg - 1]
+AllowAsDefault=true
+Application=smplayer.desktop
+GenericServiceType=Application
+Preference=1
+ServiceType=video/x-ogg

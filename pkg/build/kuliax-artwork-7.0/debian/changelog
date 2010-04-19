@@ -1,3 +1,9 @@
+kuliax-artwork (7.0-0kuliax15) lumpia; urgency=low
+
+  * Add kde/profilerc 
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Mon, 19 Apr 2010 08:15:55 +0700
+
 kuliax-artwork (7.0-0kuliax14) lumpia; urgency=low
 
   * debian/copyright: Copyright small fixes
