@@ -3,6 +3,25 @@
 # 2010 Iwan Setiawan <stwn@kuliax.org>
 
 USER=`users`
+KDESURC="/usr/share/kuliax-artwork/kde-profile/share/config/kdesurc"
+
+addsudo()
+{
+	cp /etc/sudoers /etc/sudoers.orig
+	cp /etc/sudoers /etc/sudoers.tmp
+	chmod 0640 /etc/sudoers.tmp
+	echo "${USER} ALL=(ALL) ALL" >> /etc/sudoers.tmp
+	chmod 0440 /etc/sudoers.tmp
+	mv /etc/sudoers.tmp /etc/sudoers
+}
+
+kdesuconf()
+{
+cat << EOF > ${KDESURC}
+[super-user-command]
+super-user-command=sudo
+EOF
+}
 
 if [ `whoami` != "root" ]
 then
@@ -16,11 +35,10 @@ else
 		zenity --warning --text "You already on the list of sudoers!"
 		exit 0
 	fi
-	cp /etc/sudoers /etc/sudoers.orig
-	cp /etc/sudoers /etc/sudoers.tmp
-	chmod 0640 /etc/sudoers.tmp
-	echo "${USER} ALL=(ALL) ALL" >> /etc/sudoers.tmp
-	chmod 0440 /etc/sudoers.tmp
-	mv /etc/sudoers.tmp /etc/sudoers
+	addsudo
+	if [ ! -e ${KDESURC} ]
+	then
+		kdesuconf
+	fi
 	zenity --info --text "From now on, you could run sudo!"
 fi
