@@ -1,3 +1,9 @@
+kuliax-scripts (0.1-5) lumpia; urgency=low
+
+  * Modify addsudo: copy kdesurc to $HOME right away after kdesuconf 
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Thu, 22 Apr 2010 03:20:45 +0700
+
 kuliax-scripts (0.1-4) lumpia; urgency=low
 
   * Modify addsudo: clean up and add kdesurc creation

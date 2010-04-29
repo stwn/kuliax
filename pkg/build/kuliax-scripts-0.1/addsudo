@@ -4,6 +4,7 @@
 
 USER=`users`
 KDESURC="/usr/share/kuliax-artwork/kde-profile/share/config/kdesurc"
+KDESURCH="$HOME/.kde/share/config/kdesurc"
 
 addsudo()
 {
@@ -39,6 +40,7 @@ else
 	if [ ! -e ${KDESURC} ]
 	then
 		kdesuconf
+		cp ${KDESURC} ${KDESURCH}
 	fi
 	zenity --info --text "From now on, you could run sudo!"
 fi

@@ -1,0 +1,9 @@
+AllowDocking=true
+Labels=true
+Menubar=true
+Orientation=Horizontal
+Tickmarks=true
+TrayVolumeControl=true
+ValueStyle=None
+Visible=false
+startkdeRestore=true

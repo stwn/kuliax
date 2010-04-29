@@ -1,3 +1,9 @@
+kuliax-browser (0.1-2) lumpia; urgency=low
+
+  * Fix startup.homepage_welcome_url 
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Thu, 22 Apr 2010 03:07:43 +0700
+
 kuliax-browser (0.1-1) lumpia; urgency=low
 
   * Initial release based on kuliax-bookmarks 7.0-3

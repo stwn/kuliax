@@ -7,25 +7,33 @@ log ()
 	logger -t kuliax_late_cmd "$@"
 }
 
+SED="sed -i -e"
+
 log "Fixing GRUB splash and setting up suspend for Kuliax"
 SWP=`cat /target/etc/fstab | tr -s ' ' | sed '/swap/!d' | cut -d" " -f1`
-sed -i -e "s|quite splash|splash resume=${SWP}|g" /target/boot/grub/menu.lst
+${SED} "/^kernel/ {s|$| resume=${SWP}|g}" /target/boot/grub/menu.lst
 
 BOOT=`df -h | tr -s ' ' | sed '/boot/!d' | cut -d" " -f6`
-if [ "${BOOT}" = "/target/boot" ]; then
+if [ "${BOOT}" = "/target/boot" ]
+then
 	continue
 else
-	sed -i -e 's|//grub/splash.xpm.gz|/boot/grub/splash.xpm.gz|' /target/boot/grub/menu.lst
+	${SED} 's|//grub/splash.xpm.gz|/boot/grub/splash.xpm.gz|' /target/boot/grub/menu.lst
 fi
 
 log "Copying sources.list"
 cp /cdrom/install/sources.list /target/etc/apt/
 
 log "Removing KDE autologin"
-sed -i -e "s|AutoLoginEnable=true|#AutoLoginEnable=true|" /target/etc/kde3/kdm/kdmrc
+${SED} "s|AutoLoginEnable=true|#AutoLoginEnable=true|" /target/etc/kde3/kdm/kdmrc
 
 log "Removing sudo as default in KDE"
 rm /target/usr/share/kuliax-artwork/kde-profile/share/config/kdesurc
+USER=`ls /target/home/`
+for x in ${USER}
+do
+	rm /target/home/${x}/.kde/share/config/kdesurc
+done
 
 log "Copying GTK profile for root"
 cp /target/etc/skel/.gtkrc-2.0-kde /target/root/

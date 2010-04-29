@@ -1,0 +1,1 @@
+/live/image/README.txt
