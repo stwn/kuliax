@@ -13,6 +13,9 @@ log "Fixing GRUB splash and setting up suspend for Kuliax"
 SWP=`cat /target/etc/fstab | tr -s ' ' | sed '/swap/!d' | cut -d" " -f1`
 ${SED} "/^kernel/ {s|$| resume=${SWP}|g}" /target/boot/grub/menu.lst
 
+log "Fixing Kuliax single mode"
+${SED} "/^kernel/ {s|splash single|nosplash single|g}" /target/boot/grub/menu.lst
+
 BOOT=`df -h | tr -s ' ' | sed '/boot/!d' | cut -d" " -f6`
 if [ "${BOOT}" = "/target/boot" ]
 then
