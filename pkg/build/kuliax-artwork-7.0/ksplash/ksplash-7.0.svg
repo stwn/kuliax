@@ -490,7 +490,7 @@
    y="0.17786874"
    width="500"
    height="388.75"
-   inkscape:export-filename="/home/stwn/Kuliax/splash_top.png"
+   inkscape:export-filename="/media/devel/kuliax/pkg/build/kuliax-artwork-7.0/ksplash/kuliax/splash_top.png"
    inkscape:export-xdpi="72"
    inkscape:export-ydpi="72" /><path
    style="font-size:12px;fill:#ffffff;fill-opacity:0.1;fill-rule:evenodd;stroke:#ffffff;stroke-width:9.59313011;stroke-opacity:0.07999998"
@@ -524,21 +524,7 @@
 
 
 
-<text
-   xml:space="preserve"
-   style="font-size:15.92685223px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Charter;-inkscape-font-specification:Bitstream Charter Bold"
-   x="369.91699"
-   y="292.61438"
-   id="text2434"
-   sodipodi:linespacing="100%"
-   inkscape:export-filename="/home/stwn/NEW/splash.png"
-   inkscape:export-xdpi="72"
-   inkscape:export-ydpi="72"><tspan
-     sodipodi:role="line"
-     id="tspan2436"
-     x="369.91699"
-     y="292.61438"
-     style="font-size:15.92685223px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-family:Bitstream Charter;-inkscape-font-specification:Bitstream Charter Bold">7.0</tspan></text>
+
 
 
 
