@@ -2,6 +2,7 @@ amora-server
 ark
 bc
 bzip2
+dosfstools
 eject
 file
 fortunes-min
