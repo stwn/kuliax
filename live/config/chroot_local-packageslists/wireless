@@ -6,5 +6,6 @@ bluez-utils
 #ndiswrapper-utils-1.9
 network-manager-kde
 rt73-common
+usb-modeswitch
 wireless-tools
 wpasupplicant
