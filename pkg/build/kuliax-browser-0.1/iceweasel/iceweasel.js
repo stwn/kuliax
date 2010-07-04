@@ -27,4 +27,4 @@ pref("font.name.serif.x-western", "DejaVu Serif");
 pref("font.size.variable.x-western", 15);
 
 // Welcome URL
-// pref("startup.homepage_welcome_url","file:///usr/share/kuliax-releasenotes/index.html");
+pref("startup.homepage_welcome_url","about:");

@@ -1,3 +1,11 @@
+kuliax-browser (0.1-4) lumpia; urgency=low
+
+  * iceweasel/bookmarks.html: add amora 
+  * iceweasel/iceweasel.js: startup.homepage_welcome_url to about:
+  * debian/{preinst,postrm}: small clean up, add browserconfig*
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Sun, 04 Jul 2010 15:27:40 +0700
+
 kuliax-browser (0.1-3) lumpia; urgency=low
 
   * iceweasel/bookmarks.html: add cs.washington.edu, mitworld, 

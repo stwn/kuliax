@@ -3,14 +3,20 @@
 
 set -e
 
-TEMPL=/etc/iceweasel/profile/bookmarks.html
-PREF=/etc/iceweasel/pref/iceweasel.js
+TEMPL="/etc/iceweasel/profile/bookmarks.html"
+PREF="/etc/iceweasel/pref/iceweasel.js"
+BCONF="/usr/share/iceweasel/browserconfig.properties"
 
 case "$1" in
     purge|remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
-	if [ -e $TEMPL && $PREF ]; then
-		mv $TEMPL.orig $TEMPL
-		mv $PREF.orig $PREF
+	if [ -e ${TEMPL} && ${PREF} ]
+	then
+		mv ${TEMPL}.orig ${TEMPL}
+		mv ${PREF}.orig ${PREF}
+	fi
+	if [ -e ${BCONF} ]
+	then
+		mv ${BCONF}.orig ${BCONF}
 	fi
     ;;
 
