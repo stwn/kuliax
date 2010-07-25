@@ -1,3 +1,9 @@
+kuliax-artwork (7.0-0kuliax18) lumpia; urgency=low
+
+  * Add kde/knemorc 
+
+ -- Iwan Setiawan <stwn@kuliax.org>  Sat, 24 Jul 2010 05:47:53 +0700
+
 kuliax-artwork (7.0-0kuliax17) lumpia; urgency=low
 
   * Modify grub splash and ksplash
