@@ -1,0 +1,89 @@
+/* Tom's House CSS, modified by stwn@kuliax: July 26, 2010 */
+
+body, table {
+	font-size: 62.5%;
+	font-family: "Lucida Grande", Verdana, Arial, Sans-Serif;
+	background-color: #2b4872;
+	color: #000;
+	padding-top: 30px;
+}
+
+#header-space {
+	width: 600px;
+	padding: 5px 5px 5px 5px;
+	border: 1px solid #999;
+	border-bottom: none;
+	float: none;
+	background-color: #ffffff;
+}
+
+#header {
+	font-size: 1.75em;
+	font-weight: bold;
+	border: none;
+	width: 600px;
+	padding: 5px 5px 5px 15px;
+	text-align: left;
+}
+
+#links-space {
+	width: 600px;
+	padding: 5px 5px 5px 5px;
+	border: 1px solid #999;
+	border-bottom: none;
+	border-top: none;
+	float: none;
+	font-size: 1.2em;
+	text-align: right;
+	background-color: #ffffff;
+}
+
+#content-space {
+	background-color: #ffffff;
+	width: 600px;
+	padding: 5px 5px 5px 5px;
+	border: 1px solid #999;
+	border-bottom: none;
+	float: none;
+	font-size: 1.2em
+}
+
+.news-header {
+	font-size: 1.1em;
+	font-weight: bolder;
+	padding-left: 15px;
+	padding-bottom: 2px;
+	border-bottom: 1px dotted #333;
+	text-align:left;
+}
+
+.entry {
+	text-align: left;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 15px;
+}
+
+#foot-space {
+	width: 600px;
+	padding: 5px 5px 5px 5px;
+	border: 1px solid #999;
+	float: none;
+	font-size: 1em;
+	text-align: right;
+	background-color: #ffffff;
+}
+
+a {
+	color: #002255;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #2b4872;
+	text-decoration: underline;
+}
+
+a:visited {
+	color: #2b4872;
+}
