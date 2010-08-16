@@ -1,0 +1,8 @@
+#!/bin/sh
+# simple script to run when user logged in for the first time
+
+if [ ! -f ${HOME}/.kuliax ]
+then
+        touch ${HOME}/.kuliax
+        konqueror --profile simplebrowser /usr/share/kuliax/firstrun.html &
+fi

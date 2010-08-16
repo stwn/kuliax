@@ -62,6 +62,7 @@ body, table {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	padding-left: 15px;
+	padding-right: 15px;
 }
 
 #foot-space {
@@ -70,7 +71,7 @@ body, table {
 	border: 1px solid #999;
 	float: none;
 	font-size: 1em;
-	text-align: right;
+	text-align: center;
 	background-color: #ffffff;
 }
 

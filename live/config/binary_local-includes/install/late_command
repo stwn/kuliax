@@ -10,11 +10,12 @@ log ()
 SED="sed -i -e"
 
 log "Fixing GRUB splash and setting up suspend for Kuliax"
-SWP=`cat /target/etc/fstab | tr -s ' ' | sed '/swap/!d' | cut -d" " -f1`
-${SED} "/^kernel/ {s|$| resume=${SWP}|g}" /target/boot/grub/menu.lst
+SWP=`cat /target/etc/fstab | tr -s ' ' | sed '/swap/!d' | cut -d" " -f1 | sed 's/\//\\//g' | head -n1`
+log "SWP=${SWP}"
+${SED} "/vmlinuz-2.6.32-kuliax/ {s|quiet|quiet\ resume=${SWP}|g}" /target/boot/grub/menu.lst
 
 log "Fixing Kuliax single mode"
-${SED} "/^kernel/ {s|splash single|nosplash single|g}" /target/boot/grub/menu.lst
+${SED} '/vmlinuz-2.6.32-kuliax/s/splash single/nosplash single/' /target/boot/grub/menu.lst
 
 BOOT=`df -h | tr -s ' ' | sed '/boot/!d' | cut -d" " -f6`
 if [ "${BOOT}" = "/target/boot" ]
@@ -30,23 +31,27 @@ cp /cdrom/install/sources.list /target/etc/apt/
 log "Removing KDE autologin"
 ${SED} "s|AutoLoginEnable=true|#AutoLoginEnable=true|" /target/etc/kde3/kdm/kdmrc
 
-log "Removing sudo as default in KDE"
+log "Removing sudo as default in KDE and add firstrun"
 rm /target/usr/share/kuliax-artwork/kde-profile/share/config/kdesurc
 USER=`ls /target/home/`
 for x in ${USER}
 do
 	rm /target/home/${x}/.kde/share/config/kdesurc
+	in-target ln -s /usr/share/kuliax/firstrun /home/${x}/.kde/Autostart/firstrun
 done
 
 log "Copying GTK profile for root"
 cp /target/etc/skel/.gtkrc-2.0-kde /target/root/
-echo "export GTK2_RC_FILES=$HOME/.gtkrc-2.0-kde" >> /target/root/.profile
+echo "export GTK2_RC_FILES=/root/.gtkrc-2.0-kde" >> /target/root/.profile
 
 log "Activating rsyslog on boot"
 in-target update-rc.d rsyslog defaults
 
 log "Removing squashfs-tools"
 in-target apt-get remove --purge -y squashfs-tools
+
+log "Syncing hardware to system clock"
+in-target hwclock --hctosys
 
 log "Flushing filesystem buffers"
 sync
